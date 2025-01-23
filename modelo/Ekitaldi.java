@@ -9,6 +9,7 @@ public class Ekitaldi {
 	
 	
 	
+	
 	public Ekitaldi() {
 		this.kode = "";
 		this.izena = "";

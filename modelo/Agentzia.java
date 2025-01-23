@@ -4,6 +4,7 @@ public class Agentzia {
 
 	private String kodea;
 	private String izena;
+	private String pasahitz;
 	private String logo;
 	private String markakolore;
 	private String langkop;
@@ -28,6 +29,16 @@ public class Agentzia {
 		this.markakolore = markakolore;
 		this.langkop = langkop;
 		this.agmota = agmota;
+	}
+	
+	public boolean login(String izena, String pasahitz) {
+		boolean error;
+		if (izena == this.izena && pasahitz == this.pasahitz) {
+			error = false;
+		}else {
+			error = true;
+		}
+		return error;
 	}
 	
 	public String getKodea() {

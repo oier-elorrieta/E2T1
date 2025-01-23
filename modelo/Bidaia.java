@@ -12,10 +12,10 @@ public class Bidaia {
 	private String agkode;
 	private String desk;
 	private String bidmota;
-	private String hdata;
+	private String hasidata;
 	private String adata;
 	private int iraupena;
-	private String helmugakode;
+	private String herrihelmugakode;
 	
 	
 	
@@ -26,13 +26,13 @@ public class Bidaia {
 		this.agkode = "";
 		this.desk = "";
 		this.bidmota = "";
-		this.hdata = "";
+		this.hasidata = "";
 		this.adata = "";
 		this.iraupena = 0;
-		this.helmugakode = "";
+		this.herrihelmugakode = "";
 	}
 	
-	public Bidaia(String kode, String izena, String agkode, String desk, String bidmota, String hdata, String adata,
+	public Bidaia(String kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
 			int iraupena, String helmugakode) {
 		
 		this.kode = kode;
@@ -40,21 +40,21 @@ public class Bidaia {
 		this.agkode = agkode;
 		this.desk = desk;
 		this.bidmota = bidmota;
-		this.hdata = hdata;
-		this.adata = adata;
+		this.hasidata = hasidata;
+		this.adata = amaidata;
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
 		long daysBetween = 0;
 
 		try {
-		    LocalDate hdatakalk = LocalDate.parse(hdata, dtf);
-		    LocalDate adatakalk = LocalDate.parse(adata, dtf);
-		    daysBetween = Duration.between(hdatakalk, adatakalk).toDays();
+		    LocalDate hasidatakalk = LocalDate.parse(hasidata, dtf);
+		    LocalDate amaidatakalk = LocalDate.parse(amaidata, dtf);
+		    daysBetween = Duration.between(hasidatakalk, amaidatakalk).toDays();
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 		this.iraupena = (int) daysBetween;
 		
-		this.helmugakode = helmugakode;
+		this.herrihelmugakode = helmugakode;
 	}
 	public String getKode() {
 		return kode;
@@ -87,10 +87,10 @@ public class Bidaia {
 		this.bidmota = bidmota;
 	}
 	public String getHdata() {
-		return hdata;
+		return hasidata;
 	}
 	public void setHdata(String hdata) {
-		this.hdata = hdata;
+		this.hasidata = hdata;
 	}
 	public String getAdata() {
 		return adata;
@@ -105,17 +105,17 @@ public class Bidaia {
 		this.iraupena = iraupena;
 	}
 	public String getHelmugakode() {
-		return helmugakode;
+		return herrihelmugakode;
 	}
 	public void setHelmugakode(String helmugakode) {
-		this.helmugakode = helmugakode;
+		this.herrihelmugakode = helmugakode;
 	}
 	
 	@Override
 	public String toString() {
 		return "Bidaia [kode=" + kode + ", izena=" + izena + ", agkode=" + agkode + ", desk=" + desk + ", bidmota="
-				+ bidmota + ", hdata=" + hdata + ", adata=" + adata + ", iraupena=" + iraupena + ", helmugakode="
-				+ helmugakode + "]";
+				+ bidmota + ", hdata=" + hasidata + ", adata=" + adata + ", iraupena=" + iraupena + ", helmugakode="
+				+ herrihelmugakode + "]";
 	}
 	
 	

@@ -10,9 +10,23 @@ public class Herrialde {
 	
 	
 	public Herrialde() {
-		
+		// select egin db eginda dagoenean
 		
 	}
+	
+
+	public String[] getInfoHerri(String kodherri) {
+		
+		for(int i = 0; i < herrialdearray.size(); i++) {
+			if(this.herrialdearray.get(i)[0].equals(kodherri)) {
+			infoherri = this.herrialdearray.get(i);
+			}
+		}
+		return infoherri;
+	}
+
+
+
 
 	public ArrayList<String[]> getHerrialdearray() {
 		return herrialdearray;
