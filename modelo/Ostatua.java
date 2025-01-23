@@ -2,7 +2,7 @@ package modelo;
 
 public class Ostatua {
 
-	private String ekikode;
+	private String ekikod;
 	private String izena;
 	private String hiria;
 	private double prezio;
@@ -12,13 +12,8 @@ public class Ostatua {
 	
 	
 	
-	
-	
-	
-	
-	
 	public Ostatua() {
-		this.ekikode = "";
+		this.ekikod = "";
 		this.izena = "";
 		this.hiria = "";
 		this.prezio = 0.0;
@@ -29,7 +24,7 @@ public class Ostatua {
 		
 	public Ostatua(String ekikode, String izena, String hiria, double prezio, String sardata, String irtdata,
 			String logelamotakod) {
-		this.ekikode = ekikode;
+		this.ekikod = ekikode;
 		this.izena = izena;
 		this.hiria = hiria;
 		this.prezio = prezio;
@@ -39,10 +34,10 @@ public class Ostatua {
 	}
 	
 	public String getEkikode() {
-		return ekikode;
+		return ekikod;
 	}
 	public void setEkikode(String ekikode) {
-		this.ekikode = ekikode;
+		this.ekikod = ekikode;
 	}
 	public String getIzena() {
 		return izena;
@@ -82,7 +77,7 @@ public class Ostatua {
 	}
 	@Override
 	public String toString() {
-		return "Ostatua [ekikode=" + ekikode + ", izena=" + izena + ", hiria=" + hiria + ", prezio=" + prezio
+		return "Ostatua [ekikode=" + ekikod + ", izena=" + izena + ", hiria=" + hiria + ", prezio=" + prezio
 				+ ", sardata=" + sardata + ", irtdata=" + irtdata + ", logelamotakod=" + logelamotakod + "]";
 	}
 	

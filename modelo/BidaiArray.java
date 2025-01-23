@@ -4,6 +4,16 @@ import java.util.ArrayList;
 
 public class BidaiArray {
 
-	private ArrayList<String[]> bidaiak = new ArrayList<String[]>();
-	private String[] infobidai = new String[1];
+	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
+
+	
+	
+	public ArrayList<Bidai> getBidaiak() {
+		return bidaiak;
+	}
+
+	public void addBidaiak(Bidai bidaiberri) {
+		bidaiak.add(bidaiberri);
+	}
+	
 }

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Bidaia {
+public class Bidai {
 
 	private String kode;
 	private String izena;
@@ -19,7 +19,7 @@ public class Bidaia {
 	
 	
 	
-	public Bidaia() {
+	public Bidai() {
 		
 		this.kode = "";
 		this.izena = "";
@@ -32,7 +32,7 @@ public class Bidaia {
 		this.herrihelmugakode = "";
 	}
 	
-	public Bidaia(String kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
+	public Bidai(String kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
 			int iraupena, String helmugakode) {
 		
 		this.kode = kode;
