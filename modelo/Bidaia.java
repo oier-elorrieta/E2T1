@@ -1,5 +1,10 @@
 package modelo;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Bidaia {
 
 	private String kode;
@@ -37,7 +42,18 @@ public class Bidaia {
 		this.bidmota = bidmota;
 		this.hdata = hdata;
 		this.adata = adata;
-		this.iraupena = iraupena;
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
+		long daysBetween = 0;
+
+		try {
+		    LocalDate hdatakalk = LocalDate.parse(hdata, dtf);
+		    LocalDate adatakalk = LocalDate.parse(adata, dtf);
+		    daysBetween = Duration.between(hdatakalk, adatakalk).toDays();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		this.iraupena = (int) daysBetween;
+		
 		this.helmugakode = helmugakode;
 	}
 	public String getKode() {

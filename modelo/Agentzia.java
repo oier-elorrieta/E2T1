@@ -6,7 +6,7 @@ public class Agentzia {
 	private String izena;
 	private String logo;
 	private String markakolore;
-	private int langkop;
+	private String langkop;
 	private String agmota;
 	
 	
@@ -17,11 +17,11 @@ public class Agentzia {
 		this.izena = "";
 		this.logo = "";
 		this.markakolore = "";
-		this.langkop = 0;
+		this.langkop = "";
 		this.agmota = "";
 	}
 	
-	public Agentzia(String kodea, String izena, String logo, String markakolore, int langkop, String agmota) {
+	public Agentzia(String kodea, String izena, String logo, String markakolore, String langkop, String agmota) {
 		this.kodea = kodea;
 		this.izena = izena;
 		this.logo = logo;
@@ -54,10 +54,10 @@ public class Agentzia {
 	public void setMarkakolore(String markakolore) {
 		this.markakolore = markakolore;
 	}
-	public int getLangkop() {
+	public String getLangkop() {
 		return langkop;
 	}
-	public void setLangkop(int langkop) {
+	public void setLangkop(String langkop) {
 		this.langkop = langkop;
 	}
 	public String getAgmota() {
