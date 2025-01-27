@@ -22,6 +22,10 @@ public class Bidai {
 	
 	
 	
+	public void sartuEkitaldia(Ekitaldi ekiberri) {
+		ekitaldiak.add(ekiberri);
+	}
+	
 	
 	
 	public Bidai(String kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
@@ -48,6 +52,55 @@ public class Bidai {
 		
 		this.herrihelmuga = helmugakode;
 	}
+	
+	
+	
+	
+	public String getZerbez() {
+		return zerbez;
+	}
+
+
+	public void setZerbez(String zerbez) {
+		this.zerbez = zerbez;
+	}
+
+
+	public String getHasidata() {
+		return hasidata;
+	}
+
+
+	public void setHasidata(String hasidata) {
+		this.hasidata = hasidata;
+	}
+
+
+	public String getAmaidata() {
+		return amaidata;
+	}
+
+
+	public void setAmaidata(String amaidata) {
+		this.amaidata = amaidata;
+	}
+
+
+	public String getHerrihelmuga() {
+		return herrihelmuga;
+	}
+
+
+	public void setHerrihelmuga(String herrihelmuga) {
+		this.herrihelmuga = herrihelmuga;
+	}
+
+
+	public ArrayList<Ekitaldi> getEkitaldiak() {
+		return ekitaldiak;
+	}
+
+
 	public String getKode() {
 		return kode;
 	}

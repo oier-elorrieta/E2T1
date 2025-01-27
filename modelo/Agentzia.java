@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Agentzia {
 
 	private String kodea;
@@ -9,9 +11,14 @@ public class Agentzia {
 	private String markakolore;
 	private String langkop;
 	private String agmota;
+	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
 	
 	
-	
+	public void erakutsiBidaiak() {
+		for (int i = 0; i < bidaiak.size(); i++) {
+			
+		}
+	}
 	
 	public Agentzia() {
 		this.kodea = "";
@@ -41,6 +48,25 @@ public class Agentzia {
 		return error;
 	}
 	
+	
+	
+	
+	public String getPasahitz() {
+		return pasahitz;
+	}
+
+	public void setPasahitz(String pasahitz) {
+		this.pasahitz = pasahitz;
+	}
+
+	public ArrayList<Bidai> getBidaiak() {
+		return bidaiak;
+	}
+
+	public void sartuBidaia(Bidai bidaiberria) {
+		bidaiak.add(bidaiberria);
+	}
+
 	public String getKodea() {
 		return kodea;
 	}

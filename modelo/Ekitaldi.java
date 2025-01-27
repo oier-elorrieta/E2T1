@@ -243,7 +243,7 @@ public class Ekitaldi {
 				+ ", jardata=" + jardata + ", jarprezio=" + jarprezio + "]";
 	}
 
-	public String toStringJoaneko() {
+	public String toStringJoan() {
 		return "Ekitaldi [ekikode=" + ekikode + ", izena=" + izena + ", bidaikode=" + bidaikode + ", hkode=" + hkode
 				+ ", airelinea=" + airelinea + ", jatairportkod=" + jatairportkod + ", helairportkod=" + helairportkod
 				+ ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata=" + irtdata + ", hprezio=" + hprezio
