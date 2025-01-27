@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Bidai {
 
@@ -11,26 +12,17 @@ public class Bidai {
 	private String izena;
 	private String agkode;
 	private String desk;
+	private String zerbez;
 	private String bidmota;
 	private String hasidata;
-	private String adata;
+	private String amaidata;
 	private int iraupena;
-	private String herrihelmugakode;
+	private String herrihelmuga;
+	private ArrayList<Ekitaldi> ekitaldiak;
 	
 	
 	
-	public Bidai() {
-		
-		this.kode = "";
-		this.izena = "";
-		this.agkode = "";
-		this.desk = "";
-		this.bidmota = "";
-		this.hasidata = "";
-		this.adata = "";
-		this.iraupena = 0;
-		this.herrihelmugakode = "";
-	}
+	
 	
 	public Bidai(String kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
 			int iraupena, String helmugakode) {
@@ -41,7 +33,7 @@ public class Bidai {
 		this.desk = desk;
 		this.bidmota = bidmota;
 		this.hasidata = hasidata;
-		this.adata = amaidata;
+		this.amaidata = amaidata;
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
 		long daysBetween = 0;
 
@@ -54,7 +46,7 @@ public class Bidai {
 		}
 		this.iraupena = (int) daysBetween;
 		
-		this.herrihelmugakode = helmugakode;
+		this.herrihelmuga = helmugakode;
 	}
 	public String getKode() {
 		return kode;
@@ -93,10 +85,10 @@ public class Bidai {
 		this.hasidata = hdata;
 	}
 	public String getAdata() {
-		return adata;
+		return amaidata;
 	}
 	public void setAdata(String adata) {
-		this.adata = adata;
+		this.amaidata = adata;
 	}
 	public int getIraupena() {
 		return iraupena;
@@ -105,17 +97,17 @@ public class Bidai {
 		this.iraupena = iraupena;
 	}
 	public String getHelmugakode() {
-		return herrihelmugakode;
+		return herrihelmuga;
 	}
 	public void setHelmugakode(String helmugakode) {
-		this.herrihelmugakode = helmugakode;
+		this.herrihelmuga = helmugakode;
 	}
 	
 	@Override
 	public String toString() {
 		return "Bidaia [kode=" + kode + ", izena=" + izena + ", agkode=" + agkode + ", desk=" + desk + ", bidmota="
-				+ bidmota + ", hdata=" + hasidata + ", adata=" + adata + ", iraupena=" + iraupena + ", helmugakode="
-				+ herrihelmugakode + "]";
+				+ bidmota + ", hdata=" + hasidata + ", adata=" + amaidata + ", iraupena=" + iraupena + ", helmugakode="
+				+ herrihelmuga + "]";
 	}
 	
 	

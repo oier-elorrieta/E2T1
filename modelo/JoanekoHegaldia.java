@@ -2,10 +2,11 @@ package modelo;
 
 public class JoanekoHegaldia {
 	
+	private String ekikode;
 	private String kode;
 	private String airelinea;
-	private String hasiairportkod;
-	private String amaiairportkod;
+	private String jatairportkod;
+	private String helairportkod;
 	private double iraupena;
 	private String irtordu;
 	private String irtdata;
@@ -15,8 +16,8 @@ public class JoanekoHegaldia {
 	public JoanekoHegaldia() {
 		this.kode = "";
 		this.airelinea = "";
-		this.hasiairportkod = "";
-		this.amaiairportkod = "";
+		this.jatairportkod = "";
+		this.helairportkod = "";
 		this.iraupena = 0.0;
 		this.irtordu = "";
 		this.irtdata = "";
@@ -27,8 +28,8 @@ public class JoanekoHegaldia {
 			String irtordu, String irtdata, double prezio) {
 		this.kode = kode;
 		this.airelinea = airelinea;
-		this.hasiairportkod = hasiairport;
-		this.amaiairportkod = amaiairport;
+		this.jatairportkod = hasiairport;
+		this.helairportkod = amaiairport;
 		this.iraupena = iraupena;
 		this.irtordu = irtordu;
 		this.irtdata = irtdata;
@@ -50,16 +51,16 @@ public class JoanekoHegaldia {
 		this.airelinea = airelinea;
 	}
 	public String getHasiairport() {
-		return hasiairportkod;
+		return jatairportkod;
 	}
 	public void setHasiairport(String hasiairport) {
-		this.hasiairportkod = hasiairport;
+		this.jatairportkod = hasiairport;
 	}
 	public String getAmaiairport() {
-		return amaiairportkod;
+		return helairportkod;
 	}
 	public void setAmaiairport(String amaiairport) {
-		this.amaiairportkod = amaiairport;
+		this.helairportkod = amaiairport;
 	}
 	public double getIraupena() {
 		return iraupena;
@@ -87,8 +88,8 @@ public class JoanekoHegaldia {
 	}
 	@Override
 	public String toString() {
-		return "JoanekoHegaldia [kode=" + kode + ", airelinea=" + airelinea + ", hasiairport=" + hasiairportkod
-				+ ", amaiairport=" + amaiairportkod + ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata="
+		return "JoanekoHegaldia [kode=" + kode + ", airelinea=" + airelinea + ", hasiairport=" + jatairportkod
+				+ ", amaiairport=" + helairportkod + ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata="
 				+ irtdata + ", prezio=" + prezio + "]";
 	}
 	

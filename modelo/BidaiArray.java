@@ -7,6 +7,10 @@ public class BidaiArray {
 	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
 
 	
+	public void ekitaldiSartu(Ekitaldi eki) {
+		
+		
+	}
 	
 	public ArrayList<Bidai> getBidaiak() {
 		return bidaiak;
