@@ -12,13 +12,7 @@ public class Agentzia {
 	private String langkop;
 	private String agmota;
 	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
-	
-	
-	public void erakutsiBidaiak() {
-		for (int i = 0; i < bidaiak.size(); i++) {
-			
-		}
-	}
+	//lkkl
 	
 	public Agentzia() {
 		this.kodea = "";
