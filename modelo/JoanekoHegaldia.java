@@ -4,8 +4,8 @@ public class JoanekoHegaldia {
 	
 	private String kode;
 	private String airelinea;
-	private String hasiairport;
-	private String amaiairport;
+	private String hasiairportkod;
+	private String amaiairportkod;
 	private double iraupena;
 	private String irtordu;
 	private String irtdata;
@@ -15,8 +15,8 @@ public class JoanekoHegaldia {
 	public JoanekoHegaldia() {
 		this.kode = "";
 		this.airelinea = "";
-		this.hasiairport = "";
-		this.amaiairport = "";
+		this.hasiairportkod = "";
+		this.amaiairportkod = "";
 		this.iraupena = 0.0;
 		this.irtordu = "";
 		this.irtdata = "";
@@ -27,8 +27,8 @@ public class JoanekoHegaldia {
 			String irtordu, String irtdata, double prezio) {
 		this.kode = kode;
 		this.airelinea = airelinea;
-		this.hasiairport = hasiairport;
-		this.amaiairport = amaiairport;
+		this.hasiairportkod = hasiairport;
+		this.amaiairportkod = amaiairport;
 		this.iraupena = iraupena;
 		this.irtordu = irtordu;
 		this.irtdata = irtdata;
@@ -50,16 +50,16 @@ public class JoanekoHegaldia {
 		this.airelinea = airelinea;
 	}
 	public String getHasiairport() {
-		return hasiairport;
+		return hasiairportkod;
 	}
 	public void setHasiairport(String hasiairport) {
-		this.hasiairport = hasiairport;
+		this.hasiairportkod = hasiairport;
 	}
 	public String getAmaiairport() {
-		return amaiairport;
+		return amaiairportkod;
 	}
 	public void setAmaiairport(String amaiairport) {
-		this.amaiairport = amaiairport;
+		this.amaiairportkod = amaiairport;
 	}
 	public double getIraupena() {
 		return iraupena;
@@ -87,8 +87,8 @@ public class JoanekoHegaldia {
 	}
 	@Override
 	public String toString() {
-		return "JoanekoHegaldia [kode=" + kode + ", airelinea=" + airelinea + ", hasiairport=" + hasiairport
-				+ ", amaiairport=" + amaiairport + ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata="
+		return "JoanekoHegaldia [kode=" + kode + ", airelinea=" + airelinea + ", hasiairport=" + hasiairportkod
+				+ ", amaiairport=" + amaiairportkod + ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata="
 				+ irtdata + ", prezio=" + prezio + "]";
 	}
 	

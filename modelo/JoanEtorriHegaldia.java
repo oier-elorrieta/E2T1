@@ -4,8 +4,8 @@ public class JoanEtorriHegaldia {
 	
 	private String kode;
 	private String airelinea;
-	private String hasiairport;
-	private String amaiairport;
+	private String hasiairportkod;
+	private String amaiairportkod;
 	private double iraupena;
 	private String irtordu;
 	private String irtdata;
@@ -14,6 +14,8 @@ public class JoanEtorriHegaldia {
 	
 	private String bkode;
 	private String bairelinea;
+	private String bhasiairportkod;
+	private String bamaiairportkod;
 	private double bprezio;
 	private double preziototala = prezio + bprezio;
 	private double biraupena;
@@ -27,8 +29,8 @@ public class JoanEtorriHegaldia {
 	public JoanEtorriHegaldia() {
 		this.kode = "";
 		this.airelinea = "";
-		this.hasiairport = "";
-		this.amaiairport = "";
+		this.hasiairportkod = "";
+		this.amaiairportkod = "";
 		this.iraupena = 0.0;
 		this.irtordu = "";
 		this.irtdata = "";
@@ -46,8 +48,8 @@ public class JoanEtorriHegaldia {
 			double preziototala, double biraupena, String birtordu, String birtdata) {
 		this.kode = kode;
 		this.airelinea = airelinea;
-		this.hasiairport = hasiairport;
-		this.amaiairport = amaiairport;
+		this.hasiairportkod = hasiairport;
+		this.amaiairportkod = amaiairport;
 		this.iraupena = iraupena;
 		this.irtordu = irtordu;
 		this.irtdata = irtdata;
@@ -73,16 +75,16 @@ public class JoanEtorriHegaldia {
 		this.airelinea = airelinea;
 	}
 	public String getHasiairport() {
-		return hasiairport;
+		return hasiairportkod;
 	}
 	public void setHasiairport(String hasiairport) {
-		this.hasiairport = hasiairport;
+		this.hasiairportkod = hasiairport;
 	}
 	public String getAmaiairport() {
-		return amaiairport;
+		return amaiairportkod;
 	}
 	public void setAmaiairport(String amaiairport) {
-		this.amaiairport = amaiairport;
+		this.amaiairportkod = amaiairport;
 	}
 	public double getIraupena() {
 		return iraupena;
@@ -152,8 +154,8 @@ public class JoanEtorriHegaldia {
 	}
 	@Override
 	public String toString() {
-		return "JoanEtorriHegaldia [kode=" + kode + ", airelinea=" + airelinea + ", hasiairport=" + hasiairport
-				+ ", amaiairport=" + amaiairport + ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata="
+		return "JoanEtorriHegaldia [kode=" + kode + ", airelinea=" + airelinea + ", hasiairport=" + hasiairportkod
+				+ ", amaiairport=" + amaiairportkod + ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata="
 				+ irtdata + ", prezio=" + prezio + ", bkode=" + bkode + ", bairelinea=" + bairelinea + ", bprezio="
 				+ bprezio + ", preziototala=" + preziototala + ", biraupena=" + biraupena + ", birtordu=" + birtordu
 				+ ", birtdata=" + birtdata + "]";
