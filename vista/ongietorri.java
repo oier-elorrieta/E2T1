@@ -49,18 +49,13 @@ public class ongietorri {
 		frame.getContentPane().setLayout(null);
 		
 		
-		ImageIcon img01 = new ImageIcon(getClass().getResource("/linea"));
-		
-		JLabel lbl = new JLabel(img01);
-		lbl.setFont(new Font("Tahoma", Font.BOLD, 51));
-		lbl.setBounds(485, 334, 286, 35);
-		frame.getContentPane().add(lbl);
-		
+
 		JButton OGbtn = new JButton("Ongi Etori!!!");
 		OGbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			}
+						login.pantalla();	
+						frame.setVisible(false);
+		}
 		});
 		OGbtn.setBounds(375, 225, 500, 200);
 		OGbtn.setBackground(new Color(255, 255, 255));

@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+
+import controlador.metodoak;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,21 +18,26 @@ import java.awt.image.ImageProducer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class login {
 
 	private JFrame frame;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_2;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JTextField erabiltzailetxtf;
+	private JTextField pasahitzatxtf;
+	private JButton btnsaiohasi;
+	private JButton btnagberri;
+	private JLabel lblLogIn;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void pantalla() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -59,44 +67,80 @@ public class login {
 		
 				
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(100, 100, 1250, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.add(new JLabel(new ImageIcon("pasaporte.jpg")));
+		
+		
+		
+		
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(325, 200, 600, 250);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		
 		lblNewLabel_2 = new JLabel("Pasahitza");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_2.setBounds(110, 118, 105, 14);
 		panel.add(lblNewLabel_2);
 		
 		lblNewLabel = new JLabel("Erabiltzailea");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(110, 53, 105, 14);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(345, 52, 151, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		erabiltzailetxtf = new JTextField();
+		erabiltzailetxtf.setBounds(345, 52, 151, 20);
+		panel.add(erabiltzailetxtf);
+		erabiltzailetxtf.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(345, 117, 151, 20);
-		panel.add(textField_1);
+		pasahitzatxtf = new JTextField();
+		pasahitzatxtf.setColumns(10);
+		pasahitzatxtf.setBounds(345, 117, 151, 20);
+		panel.add(pasahitzatxtf);
 		
-		btnNewButton = new JButton("Saioa Hasi");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(102, 176, 113, 23);
-		panel.add(btnNewButton);
+		btnsaiohasi = new JButton("Saioa Hasi");
+		btnsaiohasi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String erabiltzaile = erabiltzailetxtf.getText();
+				String pasahitza = pasahitzatxtf.getText();
+				boolean error = metodoak.saioaKonprobatu(erabiltzaile, pasahitza);
+				if(error == false) {
+					//siguiente pantalla
+				}else {
+					
+				}
+			}
+		});
+		btnsaiohasi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnsaiohasi.setBounds(102, 176, 113, 23);
+		btnsaiohasi.setFocusPainted(false);
+		btnsaiohasi.setBackground(new Color(240, 240, 240));
+		panel.add(btnsaiohasi);
 		
-		btnNewButton_1 = new JButton("Agentzia Berria");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_1.setBounds(345, 176, 151, 23);
-		panel.add(btnNewButton_1);
+		btnagberri = new JButton("Agentzia Berria");
+		btnagberri.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				agentziasortu.pantalla();
+				frame.setVisible(false);
+			}
+		});
+		btnagberri.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnagberri.setBounds(345, 176, 151, 23);
+		btnagberri.setFocusPainted(false);
+		btnagberri.setBackground(new Color(240, 240, 240));
+		panel.add(btnagberri);
+		
+		lblLogIn = new JLabel("LOG IN");
+		lblLogIn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogIn.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblLogIn.setBounds(325, 136, 600, 53);
+		frame.getContentPane().add(lblLogIn);
+		
+	
 	}
 }
