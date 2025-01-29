@@ -20,7 +20,6 @@ public class Bidai {
 	private ArrayList<Ekitaldi> ekitaldiak;
 	
 	
-	
 	public void sartuEkitaldia(Ekitaldi ekiberri) {
 		ekitaldiak.add(ekiberri);
 	}

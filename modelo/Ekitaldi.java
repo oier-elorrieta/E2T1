@@ -9,7 +9,6 @@ public class Ekitaldi {
 	
 //----------OSTATUA--------------
 	
-
 	private String hotizena;
 	private String hiria;
 	private double osprezio;
@@ -56,6 +55,77 @@ public class Ekitaldi {
 	
 	
 	
+	public Ekitaldi(String ekikode, String izena, String bidaikode, String hiria, double osprezio, String hotizena,
+			String ossardata, String osirtdata, String logelamotakod) {
+		this.ekikode = ekikode;
+		this.izena = izena;
+		this.bidaikode = bidaikode;
+		this.hiria = hiria;
+		this.osprezio = osprezio;
+		this.hotizena = hotizena;
+		this.ossardata = ossardata;
+		this.osirtdata = osirtdata;
+		this.logelamotakod = logelamotakod;
+		
+
+	}
+	
+	
+	public Ekitaldi(String ekikode, String izena, String bidaikode, String jardesk, String jardata, double jarprezio) {
+		this.ekikode = ekikode;
+		this.izena = izena;
+		this.bidaikode = bidaikode;
+		this.jardesk = jardesk;
+		this.jardata = jardata;
+		this.jarprezio = jarprezio;
+	}
+	
+	
+
+
+	public Ekitaldi(String ekikode, String izena, String hkode, String airelinea, String jatairportkod,
+			String helairportkod, double iraupena, String irtordu, String irtdata, double hprezio) {
+		this.ekikode = ekikode;
+		this.izena = izena;
+		this.hkode = hkode;
+		this.airelinea = airelinea;
+		this.jatairportkod = jatairportkod;
+		this.helairportkod = helairportkod;
+		this.iraupena = iraupena;
+		this.irtordu = irtordu;
+		this.irtdata = irtdata;
+		this.hprezio = hprezio;
+	}
+	
+
+
+	public Ekitaldi(String ekikode, String izena, String bidaikode, String hkode, String airelinea,
+			String jatairportkod, String helairportkod, double iraupena, String irtordu, String irtdata, double hprezio,
+			String bkode, String bairelinea, String bhasiairportkod, String bamaiairportkod, double bprezio,
+			double preziototala, double biraupena, String birtordu, String birtdata) {
+		this.ekikode = ekikode;
+		this.izena = izena;
+		this.bidaikode = bidaikode;
+		this.hkode = hkode;
+		this.airelinea = airelinea;
+		this.jatairportkod = jatairportkod;
+		this.helairportkod = helairportkod;
+		this.iraupena = iraupena;
+		this.irtordu = irtordu;
+		this.irtdata = irtdata;
+		this.hprezio = hprezio;
+		this.bkode = bkode;
+		this.bairelinea = bairelinea;
+		this.bhasiairportkod = bhasiairportkod;
+		this.bamaiairportkod = bamaiairportkod;
+		this.bprezio = bprezio;
+		this.preziototala = preziototala;
+		this.biraupena = biraupena;
+		this.birtordu = birtordu;
+		this.birtdata = birtdata;
+	}
+
+
 	public String getEkikode() {
 		return ekikode;
 	}

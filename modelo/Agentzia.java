@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 public class Agentzia {
 
-	private String kodea;
+	private String agkode;
 	private String izena;
+	private String erabiltzaile;
 	private String pasahitz;
 	private String logo;
 	private String markakolore;
 	private String langkop;
 	private String agmota;
 	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
-	//lkkl
+	
 	
 	public Agentzia() {
-		this.kodea = "";
+		this.agkode = "";
 		this.izena = "";
 		this.logo = "";
 		this.markakolore = "";
@@ -24,7 +25,7 @@ public class Agentzia {
 	}
 	
 	public Agentzia(String kodea, String izena, String logo, String markakolore, String langkop, String agmota) {
-		this.kodea = kodea;
+		this.agkode = kodea;
 		this.izena = izena;
 		this.logo = logo;
 		this.markakolore = markakolore;
@@ -32,9 +33,9 @@ public class Agentzia {
 		this.agmota = agmota;
 	}
 	
-	public boolean login(String izena, String pasahitz) {
+	public boolean login(String erabiltzaile, String pasahitz) {
 		boolean error;
-		if (izena == this.izena && pasahitz == this.pasahitz) {
+		if (erabiltzaile == this.erabiltzaile && pasahitz == this.pasahitz) {
 			error = false;
 		}else {
 			error = true;
@@ -62,10 +63,10 @@ public class Agentzia {
 	}
 
 	public String getKodea() {
-		return kodea;
+		return agkode;
 	}
 	public void setKodea(String kodea) {
-		this.kodea = kodea;
+		this.agkode = kodea;
 	}
 	public String getIzena() {
 		return izena;
@@ -100,7 +101,7 @@ public class Agentzia {
 	
 	@Override
 	public String toString() {
-		return "Agentzia [kodea=" + kodea + ", izena=" + izena + ", logo=" + logo + ", markakolore=" + markakolore
+		return "Agentzia [kodea=" + agkode + ", izena=" + izena + ", logo=" + logo + ", markakolore=" + markakolore
 				+ ", langkop=" + langkop + ", agmota=" + agmota + "]";
 	}
 	
