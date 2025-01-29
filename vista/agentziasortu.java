@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -27,11 +28,11 @@ import javax.swing.JSpinner;
 public class agentziasortu {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField agizntxtf;
 	private JTextField koloretxtf;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField logotxtf;
+	private JTextField erabiltzailetxtf;
+	private JPasswordField pasahitzatxtf;
 
 	/**
 	 * Launch the application.
@@ -96,10 +97,10 @@ public class agentziasortu {
 		lblNewLabel_4.setBounds(10, 240, 146, 30);
 		panel.add(lblNewLabel_4);
 		
-		textField = new JTextField();
-		textField.setBounds(306, 20, 225, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		agizntxtf = new JTextField();
+		agizntxtf.setBounds(306, 20, 225, 20);
+		panel.add(agizntxtf);
+		agizntxtf.setColumns(10);
 		
 		koloretxtf = new JTextField();
 		koloretxtf.setText("#FFFFFF");
@@ -113,26 +114,24 @@ public class agentziasortu {
 		panelkolore.setBounds(480, 78, 51, 21);
 		panel.add(panelkolore);
 		
-		JComboBox langbox = new JComboBox();
-		String[] langilekopbox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" };
-		langbox = new JComboBox<String>(langilekopbox);
+		
+		String[] langarraypbox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" };
+		final JComboBox langbox = new JComboBox(langarraypbox);
 		langbox.setMaximumRowCount(4);
 		langbox.setBounds(306, 138, 124, 22);
 		panel.add(langbox);
 		
 		
-		
-		JComboBox motabox = new JComboBox();
 		String[] motaarraybox = new String[] { "", "Bidaiak", "Zerbitzuak"};
-		motabox = new JComboBox<String>(motaarraybox);
+		final JComboBox motabox = new JComboBox(motaarraybox);
 		motabox.setMaximumRowCount(3);
 		motabox.setBounds(306, 195, 124, 22);
 		panel.add(motabox);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(306, 249, 225, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		logotxtf = new JTextField();
+		logotxtf.setBounds(306, 249, 225, 20);
+		panel.add(logotxtf);
+		logotxtf.setColumns(10);
 		
 		JLabel lblNewLabel_4_1 = new JLabel("Erabiltzailea");
 		lblNewLabel_4_1.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -144,20 +143,22 @@ public class agentziasortu {
 		lblNewLabel_4_1_1.setBounds(306, 300, 146, 30);
 		panel.add(lblNewLabel_4_1_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(10, 341, 146, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		erabiltzailetxtf = new JTextField();
+		erabiltzailetxtf.setBounds(10, 341, 146, 20);
+		panel.add(erabiltzailetxtf);
+		erabiltzailetxtf.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(306, 341, 146, 20);
-		panel.add(textField_3);
+		pasahitzatxtf = new JPasswordField();
+		pasahitzatxtf.setColumns(10);
+		pasahitzatxtf.setBounds(306, 341, 146, 20);
+		panel.add(pasahitzatxtf);
 		
 		JButton btnatzera = new JButton("<<< ATZERA");
 		btnatzera.setHorizontalAlignment(SwingConstants.LEADING);
 		btnatzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				login.pantalla();
+				frame.setVisible(false);
 			}
 		});
 		btnatzera.setBounds(10, 416, 115, 23);
@@ -171,7 +172,14 @@ public class agentziasortu {
 		btngorde.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btngorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Agentzia ag = new Agentzia();
+				final int langindex = langbox.getSelectedIndex();
+				final int motaindex  = motabox.getSelectedIndex();
+				kodeakBilatuAgentzia(langarraypbox[langindex], motaarraybox[motaindex]);
+				//egin metodoak klasean;
+				Agentzia ag = new Agentzia("AG001", agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(),    ,    , erabiltzailetxtf.getText(), pasahitzatxtf.getText() );
+				System.out.println(ag.toString());
+				login.pantalla();
+				frame.setVisible(false);
 			}
 		});
 		btngorde.setBounds(306, 416, 99, 23);

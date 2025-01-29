@@ -22,15 +22,19 @@ public class Agentzia {
 		this.markakolore = "";
 		this.langkop = "";
 		this.agmota = "";
+		this.erabiltzaile = "";
+		this.pasahitz="";
 	}
 	
-	public Agentzia(String kodea, String izena, String logo, String markakolore, String langkop, String agmota) {
+	public Agentzia(String kodea, String izena, String logo, String markakolore, String langkop, String agmota, String erabiltzaile, String pasahitz) {
 		this.agkode = kodea;
 		this.izena = izena;
 		this.logo = logo;
 		this.markakolore = markakolore;
 		this.langkop = langkop;
 		this.agmota = agmota;
+		this.erabiltzaile =erabiltzaile;
+		this.pasahitz=pasahitz;
 	}
 	
 	public boolean login(String erabiltzaile, String pasahitz) {
@@ -46,6 +50,14 @@ public class Agentzia {
 	
 	
 	
+	public String getErabiltzaile() {
+		return erabiltzaile;
+	}
+
+	public void setErabiltzaile(String erabiltzaile) {
+		this.erabiltzaile = erabiltzaile;
+	}
+
 	public String getPasahitz() {
 		return pasahitz;
 	}
