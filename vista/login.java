@@ -110,7 +110,7 @@ public class login {
 				String pasahitza = pasahitzatxtf.getText();
 				boolean error = metodoak.saioaKonprobatu(erabiltzaile, pasahitza);
 				if(error == false) {
-					//siguiente pantalla
+					daturegistro.pantalla();
 				}else {
 					
 				}

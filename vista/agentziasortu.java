@@ -31,7 +31,7 @@ public class agentziasortu {
 
 	private JFrame frame;
 	private JTextField agizntxtf;
-	private JTextField koloretxtf;
+	private static JTextField koloretxtf;
 	private JTextField logotxtf;
 	private JTextField erabiltzailetxtf;
 	private JPasswordField pasahitzatxtf;
@@ -200,9 +200,10 @@ public class agentziasortu {
 			public void actionPerformed(ActionEvent e) {
 				 int langindex = langbox.getSelectedIndex();
 				 int motaindex  = motabox.getSelectedIndex();
-				//kodeakBilatuAgentzia(langarraypbox[langindex], motaarraybox[motaindex]);
+				//kodeakBilatuAgentzia(langarraypbox[langindex]);
+				//kodeakBilatuAgentzia(motaarraybox[motaindex]);
 				//egin metodoak klasean;
-				//Agentzia ag = new Agentzia("AG001", agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(),    ,    , erabiltzailetxtf.getText(), pasahitzatxtf.getText() );
+				Agentzia ag = new Agentzia(0, agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(), ""   ,  ""  , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
 				//System.out.println(ag.toString());
 				login.pantalla();
 				frame.setVisible(false);
@@ -225,5 +226,10 @@ public class agentziasortu {
 		frame.getContentPane().add(lblAgentziaBerria);
 		;
 			
+	}
+	
+	
+	public static String koloreHartu() {
+		return koloretxtf.getText();
 	}
 }

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class Registroa {
+public class daturegistro {
 
 	private JFrame frame;
 
@@ -19,7 +19,7 @@ public class Registroa {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Registroa window = new Registroa();
+					daturegistro window = new daturegistro();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,7 +31,7 @@ public class Registroa {
 	/**
 	 * Create the application.
 	 */
-	public Registroa() {
+	public daturegistro() {
 		initialize();
 	}
 
@@ -47,30 +47,16 @@ public class Registroa {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		koloretxtf.getDocument().addDocumentListener(new DocumentListener() {
-            
-            public void insertUpdate(DocumentEvent e) {
-                actualizarColor();
-            }
-            public void removeUpdate(DocumentEvent e) {
-                actualizarColor();
-            }
-            public void changedUpdate(DocumentEvent e) {
-                actualizarColor();
-            }
-            private void actualizarColor() {
-                String hexColor = koloretxtf.getText().trim();
-                try {
-                    // Convertir el color hexadecimal a un objeto Color
-                    Color color = Color.decode(hexColor);
-                    // Establecer el color de fondo del txtColorPicker
-                    panel.setBackground(color);
-                } catch (NumberFormatException ex) {
-                    
-                	panel.setBackground(Color.WHITE);
-                }
-            }
-        });
+		;
+		String hexColor = agentziasortu.koloreHartu().trim();
+		try {
+			Color color = Color.decode(hexColor);
+			panel.setBackground(color);
+		} catch (NumberFormatException ex) {            
+			panel.setBackground(Color.WHITE);
+        }
+                
+        
 		
 		panel.setBounds(10, 11, 1214, 689);
 		frame.getContentPane().add(panel);
