@@ -17,6 +17,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import controlador.metodoak;
 import modelo.Agentzia;
 
 import javax.swing.JComboBox;
@@ -200,11 +201,8 @@ public class agentziasortu {
 			public void actionPerformed(ActionEvent e) {
 				 int langindex = langbox.getSelectedIndex();
 				 int motaindex  = motabox.getSelectedIndex();
-				//kodeakBilatuAgentzia(langarraypbox[langindex]);
-				//kodeakBilatuAgentzia(motaarraybox[motaindex]);
-				//egin metodoak klasean;
-				Agentzia ag = new Agentzia(0, agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(), ""   ,  ""  , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
-				//System.out.println(ag.toString());
+				Agentzia ag = new Agentzia(0, agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(), metodoak.langKopAgentziBilatu(langindex)   ,  metodoak.agentziaMotaBilatu(motaindex) , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
+				metodoak.agentziaberri(ag);
 				login.pantalla();
 				frame.setVisible(false);
 			}

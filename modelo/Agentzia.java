@@ -13,7 +13,6 @@ public class Agentzia {
 	private String langkop;
 	private String agmota;
 	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
-	private int kk;
 	
 	public Agentzia() {
 		this.agkode = 0;
