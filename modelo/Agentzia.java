@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Agentzia {
 
-	private String agkode;
+	private int agkode;
 	private String izena;
 	private String erabiltzaile;
 	private String pasahitz;
@@ -16,7 +16,7 @@ public class Agentzia {
 	
 	
 	public Agentzia() {
-		this.agkode = "";
+		this.agkode = 0;
 		this.izena = "";
 		this.logo = "";
 		this.markakolore = "";
@@ -26,7 +26,7 @@ public class Agentzia {
 		this.pasahitz="";
 	}
 	
-	public Agentzia(String kodea, String izena, String logo, String markakolore, String langkop, String agmota, String erabiltzaile, String pasahitz) {
+	public Agentzia(int kodea, String izena, String logo, String markakolore, String langkop, String agmota, String erabiltzaile, String pasahitz) {
 		this.agkode = kodea;
 		this.izena = izena;
 		this.logo = logo;
@@ -74,10 +74,10 @@ public class Agentzia {
 		bidaiak.add(bidaiberria);
 	}
 
-	public String getKodea() {
+	public int getKodea() {
 		return agkode;
 	}
-	public void setKodea(String kodea) {
+	public void setKodea(int kodea) {
 		this.agkode = kodea;
 	}
 	public String getIzena() {

@@ -2,7 +2,7 @@ package modelo;
 
 public class Ekitaldi {
 
-	private String ekikode;
+	private int ekikode;
 	private String izena;
 	private String bidaikode;
 	
@@ -24,7 +24,7 @@ public class Ekitaldi {
 	
 	
 //--------JOANEKO--HEGALDIA----
-	private String hkode;
+	private int hkode;
 	private String airelinea;
 	private String jatairportkod;
 	private String helairportkod;
@@ -37,7 +37,7 @@ public class Ekitaldi {
 	
 //------JOAN-ETORRI-------
 	
-	private String bkode;
+	private int bkode;
 	private String bairelinea;
 	private String bhasiairportkod;
 	private String bamaiairportkod;
@@ -47,15 +47,10 @@ public class Ekitaldi {
 	private String birtordu;
 	private String birtdata;
 	
+		
 	
 	
-	
-	
-	
-	
-	
-	
-	public Ekitaldi(String ekikode, String izena, String bidaikode, String hiria, double osprezio, String hotizena,
+	public Ekitaldi(int ekikode, String izena, String bidaikode, String hiria, double osprezio, String hotizena,
 			String ossardata, String osirtdata, String logelamotakod) {
 		this.ekikode = ekikode;
 		this.izena = izena;
@@ -71,7 +66,7 @@ public class Ekitaldi {
 	}
 	
 	
-	public Ekitaldi(String ekikode, String izena, String bidaikode, String jardesk, String jardata, double jarprezio) {
+	public Ekitaldi(int ekikode, String izena, String bidaikode, String jardesk, String jardata, double jarprezio) {
 		this.ekikode = ekikode;
 		this.izena = izena;
 		this.bidaikode = bidaikode;
@@ -83,7 +78,7 @@ public class Ekitaldi {
 	
 
 
-	public Ekitaldi(String ekikode, String izena, String hkode, String airelinea, String jatairportkod,
+	public Ekitaldi(int ekikode, String izena, int hkode, String airelinea, String jatairportkod,
 			String helairportkod, double iraupena, String irtordu, String irtdata, double hprezio) {
 		this.ekikode = ekikode;
 		this.izena = izena;
@@ -99,9 +94,9 @@ public class Ekitaldi {
 	
 
 
-	public Ekitaldi(String ekikode, String izena, String bidaikode, String hkode, String airelinea,
+	public Ekitaldi(int ekikode, String izena, String bidaikode, int hkode, String airelinea,
 			String jatairportkod, String helairportkod, double iraupena, String irtordu, String irtdata, double hprezio,
-			String bkode, String bairelinea, String bhasiairportkod, String bamaiairportkod, double bprezio,
+			int bkode, String bairelinea, String bhasiairportkod, String bamaiairportkod, double bprezio,
 			double preziototala, double biraupena, String birtordu, String birtdata) {
 		this.ekikode = ekikode;
 		this.izena = izena;
@@ -126,10 +121,10 @@ public class Ekitaldi {
 	}
 
 
-	public String getEkikode() {
+	public int getEkikode() {
 		return ekikode;
 	}
-	public void setEkikode(String ekikode) {
+	public void setEkikode(int ekikode) {
 		this.ekikode = ekikode;
 	}
 	public String getIzena() {
@@ -198,10 +193,10 @@ public class Ekitaldi {
 	public void setJarprezio(double jarprezio) {
 		this.jarprezio = jarprezio;
 	}
-	public String getHkode() {
+	public int getHkode() {
 		return hkode;
 	}
-	public void setHkode(String hkode) {
+	public void setHkode(int hkode) {
 		this.hkode = hkode;
 	}
 	public String getAirelinea() {
@@ -246,10 +241,10 @@ public class Ekitaldi {
 	public void setHprezio(double hprezio) {
 		this.hprezio = hprezio;
 	}
-	public String getBkode() {
+	public int getBkode() {
 		return bkode;
 	}
-	public void setBkode(String bkode) {
+	public void setBkode(int bkode) {
 		this.bkode = bkode;
 	}
 	public String getBairelinea() {

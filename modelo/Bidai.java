@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Bidai {
 
-	private String kode;
+	private int kode;
 	private String izena;
 	private String agkode;
 	private String desk;
@@ -26,7 +26,7 @@ public class Bidai {
 	
 	
 	
-	public Bidai(String kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
+	public Bidai(int kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
 			int iraupena, String helmugakode) {
 		
 		this.kode = kode;
@@ -99,10 +99,10 @@ public class Bidai {
 	}
 
 
-	public String getKode() {
+	public int getKode() {
 		return kode;
 	}
-	public void setKode(String kode) {
+	public void setKode(int kode) {
 		this.kode = kode;
 	}
 	public String getIzena() {

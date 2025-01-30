@@ -115,8 +115,8 @@ public class agentziasortu {
 		panel.add(panelkolore);
 		
 		
-		String[] langarraypbox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" };
-		final JComboBox langbox = new JComboBox(langarraypbox);
+		String[] langarraybox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" }; // select kode from langilekop where izena = langarraypbox[langindex] ----- select kode from langilekop where kode = L + langindex
+		final JComboBox langbox = new JComboBox(langarraybox);
 		langbox.setMaximumRowCount(4);
 		langbox.setBounds(306, 138, 124, 22);
 		panel.add(langbox);
@@ -174,10 +174,10 @@ public class agentziasortu {
 			public void actionPerformed(ActionEvent e) {
 				final int langindex = langbox.getSelectedIndex();
 				final int motaindex  = motabox.getSelectedIndex();
-				kodeakBilatuAgentzia(langarraypbox[langindex], motaarraybox[motaindex]);
+				//kodeakBilatuAgentzia(langarraypbox[langindex], motaarraybox[motaindex]);
 				//egin metodoak klasean;
-				Agentzia ag = new Agentzia("AG001", agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(),    ,    , erabiltzailetxtf.getText(), pasahitzatxtf.getText() );
-				System.out.println(ag.toString());
+				//Agentzia ag = new Agentzia("AG001", agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(),    ,    , erabiltzailetxtf.getText(), pasahitzatxtf.getText() );
+				//System.out.println(ag.toString());
 				login.pantalla();
 				frame.setVisible(false);
 			}

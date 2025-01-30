@@ -2,21 +2,21 @@ package modelo;
 
 public class Hiria {
 
-	private String kode;
+	private int kode;
 	private String izena;
 	
 	
-	public Hiria(String kode, String izena) {
+	public Hiria(int kode, String izena) {
 		super();
 		this.kode = kode;
 		this.izena = izena;
 	}
 	
 	
-	public String getKode() {
+	public int getKode() {
 		return kode;
 	}
-	public void setKode(String kode) {
+	public void setKode(int kode) {
 		this.kode = kode;
 	}
 	public String getIzena() {
