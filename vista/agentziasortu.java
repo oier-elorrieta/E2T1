@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import modelo.Agentzia;
 
@@ -113,6 +115,30 @@ public class agentziasortu {
 		panelkolore.setBackground(Color.decode(koloretxtf.getText()));
 		panelkolore.setBounds(480, 78, 51, 21);
 		panel.add(panelkolore);
+		koloretxtf.getDocument().addDocumentListener(new DocumentListener() {
+            
+            public void insertUpdate(DocumentEvent e) {
+                actualizarColor();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                actualizarColor();
+            }
+            public void changedUpdate(DocumentEvent e) {
+                actualizarColor();
+            }
+            private void actualizarColor() {
+                String hexColor = koloretxtf.getText().trim();
+                try {
+                    // Convertir el color hexadecimal a un objeto Color
+                    Color color = Color.decode(hexColor);
+                    // Establecer el color de fondo del txtColorPicker
+                    panelkolore.setBackground(color);
+                } catch (NumberFormatException ex) {
+                    
+                    panelkolore.setBackground(Color.WHITE);
+                }
+            }
+        });
 		
 		
 		String[] langarraybox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" }; // select kode from langilekop where izena = langarraypbox[langindex] ----- select kode from langilekop where kode = L + langindex
@@ -172,8 +198,8 @@ public class agentziasortu {
 		btngorde.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btngorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final int langindex = langbox.getSelectedIndex();
-				final int motaindex  = motabox.getSelectedIndex();
+				 int langindex = langbox.getSelectedIndex();
+				 int motaindex  = motabox.getSelectedIndex();
 				//kodeakBilatuAgentzia(langarraypbox[langindex], motaarraybox[motaindex]);
 				//egin metodoak klasean;
 				//Agentzia ag = new Agentzia("AG001", agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(),    ,    , erabiltzailetxtf.getText(), pasahitzatxtf.getText() );
