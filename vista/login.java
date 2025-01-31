@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
 import controlador.metodoak;
+import modelo.Agentzia;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -110,7 +111,9 @@ public class login {
 				String pasahitza = pasahitzatxtf.getText();
 				boolean error = metodoak.saioaKonprobatu(erabiltzaile, pasahitza);
 				if(error == false) {
-					daturegistro.pantalla();
+					Agentzia ag = metodoak.agentziaKargatuBD(erabiltzaile, pasahitza);
+					daturegistro.pantalla(ag);
+					frame.setVisible(false);
 				}else {
 					
 				}

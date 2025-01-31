@@ -25,8 +25,7 @@ public class Agentzia {
 		this.pasahitz="";
 	}
 	
-	public Agentzia(int kodea, String izena, String logo, String markakolore, String langkop, String agmota, String erabiltzaile, String pasahitz) {
-		this.agkode = kodea;
+	public Agentzia( String izena, String logo, String markakolore, String langkop, String agmota, String erabiltzaile, String pasahitz) {
 		this.izena = izena;
 		this.logo = logo;
 		this.markakolore = markakolore;

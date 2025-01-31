@@ -51,7 +51,7 @@ public class metodoak {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
             Statement sentencia = conexion.createStatement();
-            String sql = "insert into agentzia values ('" + ag.getKodea()+ "' , '" + ag.getIzena()+ "' , '" + ag.getLogo() + "' , '" + ag.getMarkakolore() + "' , '" + ag.getErabiltzaile()  + "' , '" + ag.getPasahitz() + "' , '" + ag.getAgmota() + "' , '" + ag.getLangkop() + "')";
+            String sql = "insert into agentzia(izena, logoa , markaren_kolorea, erabiltzailea, pasahitza, agentzia_mota_kodea, langile_kopurua_kodea) values ( '" + ag.getIzena()+ "' , '" + ag.getLogo() + "' , '" + ag.getMarkakolore() + "' , '" + ag.getErabiltzaile()  + "' , '" + ag.getPasahitz() + "' , '" + ag.getAgmota() + "' , '" + ag.getLangkop() + "')";
 			sentencia.executeUpdate(sql);
             
             sentencia.close();
@@ -76,7 +76,7 @@ public class metodoak {
           
            while(result.next()) {
            	
-           	resultado = result.getString(langindex);
+           	resultado = result.getString(1);
 	          
 	
 	            }
@@ -107,7 +107,35 @@ public class metodoak {
           
            while(result.next()) {
            	
-           	resultado = result.getString(motaindex);
+           	resultado = result.getString(1);
+	          
+	
+	            }
+           	
+          
+           result.close();
+           sentencia.close();
+           conexion.close();
+       } catch (ClassNotFoundException e) {
+           System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+       } catch (SQLException e) {
+           System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+       }
+		return resultado;
+	}
+	
+	public static String koloreaHartu(Agentzia ag) {
+		String resultado = "";
+		try {
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+           Statement sentencia = conexion.createStatement();
+           String sql = "SELECT markaren_kolorea from agentzia where erabiltzaile = '"+ ag.getErabiltzaile() + "';";
+           ResultSet result = sentencia.executeQuery(sql);
+          
+           while(result.next()) {
+           	
+           	resultado = result.getString(1);
 	          
 	
 	            }
@@ -124,5 +152,39 @@ public class metodoak {
 		return resultado;
 	}
 
+	
+	public static Agentzia agentziaKargatuBD(String erabiltzailea, String pasahitza) {
+		Agentzia ag = new Agentzia();
+		try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT * from agentzia where erabiltzailea = '" + erabiltzailea + "' and pasahitza = '" + pasahitza + "';";
+            ResultSet result = sentencia.executeQuery(sql);
+            
+            while(result.next()) {
+            	
+	            
+	            ag.setAgmota(result.getString(1));
+            	ag.setErabiltzaile(result.getString(2));
+            	ag.setKodea(result.getInt(3));
+            	ag.setIzena(result.getString(4));
+            	ag.setLangkop(result.getString(5));
+            	ag.setLogo(result.getString(6));
+            	ag.setMarkakolore(result.getString(7));
+            	ag.setPasahitz(result.getString(8));
+            }
+
+            result.close();
+            sentencia.close();
+            conexion.close();
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+        }
+		return ag;
+	}
 	
 }
