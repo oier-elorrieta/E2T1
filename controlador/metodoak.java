@@ -46,7 +46,7 @@ public class metodoak {
 	
 	
 	public static void agentziaberri(Agentzia ag) {
-		boolean error = true;
+		
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
@@ -164,7 +164,6 @@ public class metodoak {
             
             while(result.next()) {
             	
-	            
 	            ag.setAgmota(result.getString(1));
             	ag.setErabiltzaile(result.getString(2));
             	ag.setKodea(result.getInt(3));
