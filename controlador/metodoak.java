@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import modelo.Agentzia;
+import modelo.Bidai;
 
 public class metodoak {
 
@@ -130,13 +131,13 @@ public class metodoak {
            Class.forName("com.mysql.cj.jdbc.Driver");
            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
            Statement sentencia = conexion.createStatement();
-           String sql = "SELECT markaren_kolorea from agentzia where erabiltzaile = '"+ ag.getErabiltzaile() + "';";
+           String sql = "SELECT markaren_kolorea from agentzia where erabiltzailea = '"+ ag.getErabiltzaile() + "';";
            ResultSet result = sentencia.executeQuery(sql);
           
            while(result.next()) {
            	
            	resultado = result.getString(1);
-	          
+	        
 	
 	            }
            	
@@ -164,14 +165,21 @@ public class metodoak {
             
             while(result.next()) {
             	
-	            ag.setAgmota(result.getString(1));
-            	ag.setErabiltzaile(result.getString(2));
-            	ag.setKodea(result.getInt(3));
-            	ag.setIzena(result.getString(4));
-            	ag.setLangkop(result.getString(5));
-            	ag.setLogo(result.getString(6));
-            	ag.setMarkakolore(result.getString(7));
-            	ag.setPasahitz(result.getString(8));
+            	
+	            
+            	
+            	ag.setKodea(result.getInt(1));
+            	ag.setIzena(result.getString(2));
+            	ag.setLogo(result.getString(3));
+            	ag.setMarkakolore(result.getString(4));
+            	ag.setErabiltzaile(result.getString(5));
+            	ag.setPasahitz(result.getString(6));
+            	ag.setAgmota(result.getString(7));
+            	ag.setLangkop(result.getString(8));
+            	
+            	
+            	
+            	
             }
 
             result.close();
@@ -182,8 +190,39 @@ public class metodoak {
             System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
         } catch (SQLException e) {
             System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+            System.out.println(ag.getLogo());
         }
 		return ag;
+	}
+	
+	public static Bidai bidaiKargatuDB(Agentzia ag) {
+		try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT * from bidaiak where agentzia_kodea = '" + ag.getKodea()+ "';";
+            ResultSet result = sentencia.executeQuery(sql);
+            
+            while(result.next()) {
+            	
+            	
+	            
+            	
+            	Bidai bidaia = new Bidai();
+            	ag.sartuBidaia(bidaia);
+            }
+
+            result.close();
+            sentencia.close();
+            conexion.close();
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+          
+        }
+		return bidaia;
 	}
 	
 }

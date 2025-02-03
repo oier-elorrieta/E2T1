@@ -63,7 +63,7 @@ public class daturegistro {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		;
+		
 		String hexColor = metodoak.koloreaHartu(ag).trim();
 		try {
 			Color color = Color.decode(hexColor);
@@ -90,11 +90,11 @@ public class daturegistro {
 		lblBidaiak.setBounds(50, 11, 159, 48);
 		panel.add(lblBidaiak);
 		
-		JLabel lblBidaiak_1 = new JLabel("BIDAIAK");
-		lblBidaiak_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBidaiak_1.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBidaiak_1.setBounds(50, 342, 170, 48);
-		panel.add(lblBidaiak_1);
+		JLabel lblEkitaldi = new JLabel("EKITALDIAK");
+		lblEkitaldi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEkitaldi.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblEkitaldi.setBounds(50, 342, 211, 48);
+		panel.add(lblEkitaldi);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(50, 400, 780, 250);
@@ -105,9 +105,10 @@ public class daturegistro {
 			new Object[][] {
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column", "New column"
+				"Ekitaldiaren Izena", "Ekitaldi Mota", "Data", "Prezioa (\u20AC)"
 			}
 		));
+		ekiJTable.getColumnModel().getColumn(0).setPreferredWidth(112);
 		scrollPane.setViewportView(ekiJTable);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -119,17 +120,27 @@ public class daturegistro {
 			new Object[][] {
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column"
+				"Bidaiak", "Mota", "Egunak", "Hasierako data", "Amaireako data", "Herrialde"
 			}
 		));
+		bidaiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
+		bidaiJTable.getColumnModel().getColumn(4).setPreferredWidth(94);
 		scrollPane_1.setViewportView(bidaiJTable);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(840, 71, 107, 30);
-		panel.add(btnNewButton);
+		JButton btnBidaiBerri = new JButton("BIDAIA BERRIA");
+		btnBidaiBerri.setBounds(840, 67, 135, 30);
+		panel.add(btnBidaiBerri);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(840, 403, 107, 30);
+		JButton btnNewButton_1 = new JButton("EKITALDI BERRIA");
+		btnNewButton_1.setBounds(840, 403, 135, 30);
 		panel.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("New button");
+		btnNewButton_1_1.setBounds(840, 648, 135, 30);
+		panel.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_1_1 = new JButton("Deskonektatu");
+		btnNewButton_1_1_1.setBounds(1069, 648, 135, 30);
+		panel.add(btnNewButton_1_1_1);
 	}
 }

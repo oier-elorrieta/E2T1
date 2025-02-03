@@ -74,10 +74,6 @@ public class login {
 		frame.getContentPane().setLayout(null);
 		
 		
-		
-		
-		
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(325, 200, 600, 250);
 		frame.getContentPane().add(panel);
@@ -104,6 +100,15 @@ public class login {
 		pasahitzatxtf.setBounds(345, 117, 151, 20);
 		panel.add(pasahitzatxtf);
 		
+		JLabel lblErrorLogin = new JLabel("Ez dira aurkitu sartu dituzun datuak, mesedez saiatu berriro.");
+		lblErrorLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblErrorLogin.setVisible(false);
+		lblErrorLogin.setForeground(new Color(255, 0, 0));
+		lblErrorLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErrorLogin.setBounds(325, 461, 600, 14);
+		frame.getContentPane().add(lblErrorLogin);
+		
+		
 		btnsaiohasi = new JButton("Saioa Hasi");
 		btnsaiohasi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -115,7 +120,7 @@ public class login {
 					daturegistro.pantalla(ag);
 					frame.setVisible(false);
 				}else {
-					
+					lblErrorLogin.setVisible(true);
 				}
 			}
 		});
@@ -143,6 +148,7 @@ public class login {
 		lblLogIn.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblLogIn.setBounds(325, 136, 600, 53);
 		frame.getContentPane().add(lblLogIn);
+		
 		
 	
 	}

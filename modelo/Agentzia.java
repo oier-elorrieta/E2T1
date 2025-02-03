@@ -35,6 +35,9 @@ public class Agentzia {
 		this.pasahitz=pasahitz;
 	}
 	
+
+	
+	
 	public boolean login(String erabiltzaile, String pasahitz) {
 		boolean error;
 		if (erabiltzaile == this.erabiltzaile && pasahitz == this.pasahitz) {
@@ -68,8 +71,8 @@ public class Agentzia {
 		return bidaiak;
 	}
 
-	public void sartuBidaia(Bidai bidaiberria) {
-		bidaiak.add(bidaiberria);
+	public void sartuBidaia(Bidai bidai) {
+		bidaiak.add(bidai);
 	}
 
 	public int getKodea() {
