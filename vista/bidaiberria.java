@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
+import controlador.metodoak;
+import modelo.Bidai;
+
 public class bidaiberria {
 
 	private JFrame frame;
@@ -135,12 +138,9 @@ public class bidaiberria {
 	        btngorde.setFont(new Font("Tahoma", Font.PLAIN, 12));
 	        btngorde.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	                // int langindex = langbox.getSelectedIndex();
-	                // int motaindex  = motabox.getSelectedIndex();
-	            //    Agentzia ag = new Agentzia( bidaiIzentxtf.getText(), logotxtf.getText(), koloretxtf.getText(), metodoak.langKopAgentziBilatu(langindex)   ,  metodoak.agentziaMotaBilatu(motaindex) , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
-	                //metodoak.agentziaberri(ag);
-	                //login.pantalla();
-	                frame.setVisible(false);
+	            
+	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(), ag.getKodea(), textField.getText(), textField_1.getText(), );
+	            	metodoak.bidaiGordeDB(null);
 	            }
 	        });
 	        btngorde.setBounds(306, 416, 99, 23);
