@@ -67,6 +67,11 @@ public class Agentzia {
 		this.pasahitz = pasahitz;
 	}
 
+		
+	public void setBidaiak(ArrayList<Bidai> bidaiak) {
+		this.bidaiak = bidaiak;
+	}
+
 	public ArrayList<Bidai> getBidaiak() {
 		return bidaiak;
 	}

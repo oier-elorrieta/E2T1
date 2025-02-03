@@ -13,6 +13,8 @@ import javax.swing.event.DocumentListener;
 
 import controlador.metodoak;
 import modelo.Agentzia;
+import modelo.Bidai;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
@@ -20,12 +22,16 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class daturegistro {
 
 	private JFrame frame;
 	private JTable ekiJTable;
 	private JTable bidaiJTable;
+
 
 	/**
 	 * Launch the application.
@@ -55,6 +61,7 @@ public class daturegistro {
 	 * @param ag 
 	 */
 	private void initialize(Agentzia ag) {
+		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(100, 100, 1250, 750);
@@ -100,14 +107,15 @@ public class daturegistro {
 		scrollPane.setBounds(50, 400, 780, 250);
 		panel.add(scrollPane);
 		
-		ekiJTable = new JTable();
-		ekiJTable.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Ekitaldiaren Izena", "Ekitaldi Mota", "Data", "Prezioa (\u20AC)"
-			}
-		));
+		
+		DefaultTableModel modeleki = new DefaultTableModel();
+		modeleki.addColumn("Ekitaldiaren Izena");
+		modeleki.addColumn("Ekitaldi Mota");
+	    modeleki.addColumn("Data");
+	    modeleki.addColumn("Prezioa €");
+	    ekiJTable = new JTable(modeleki);
+	    ekiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
+		ekiJTable.getColumnModel().getColumn(3).setPreferredWidth(94);
 		ekiJTable.getColumnModel().getColumn(0).setPreferredWidth(112);
 		scrollPane.setViewportView(ekiJTable);
 		
@@ -115,19 +123,26 @@ public class daturegistro {
 		scrollPane_1.setBounds(50, 68, 780, 250);
 		panel.add(scrollPane_1);
 		
-		bidaiJTable = new JTable();
-		bidaiJTable.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Bidaiak", "Mota", "Egunak", "Hasierako data", "Amaireako data", "Herrialde"
-			}
-		));
+		
+		DefaultTableModel model = new DefaultTableModel();
+	    model.addColumn("Bidaiak");
+	    model.addColumn("Mota");
+	    model.addColumn("Egunak");
+	    model.addColumn("Hasierako data");
+	    model.addColumn("Amaireako data");
+	    model.addColumn("Herrialde");
+	    bidaiJTable = new JTable(model);
 		bidaiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
 		bidaiJTable.getColumnModel().getColumn(4).setPreferredWidth(94);
 		scrollPane_1.setViewportView(bidaiJTable);
 		
 		JButton btnBidaiBerri = new JButton("BIDAIA BERRIA");
+		btnBidaiBerri.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				bidaiberria.pantalla();
+			}
+		});
 		btnBidaiBerri.setBounds(840, 67, 135, 30);
 		panel.add(btnBidaiBerri);
 		
@@ -142,5 +157,17 @@ public class daturegistro {
 		JButton btnNewButton_1_1_1 = new JButton("Deskonektatu");
 		btnNewButton_1_1_1.setBounds(1069, 648, 135, 30);
 		panel.add(btnNewButton_1_1_1);
+		metodoak.bidaiKargatuDB(ag);
+		datuakKargatu(bidaiJTable, model, ag);
+	}
+	
+	
+	public void datuakKargatu(JTable bidaiJTable, DefaultTableModel model, Agentzia ag) {
+		model = (DefaultTableModel) bidaiJTable.getModel();
+		ArrayList<Bidai> bidaiak = ag.getBidaiak();
+        for(int i = 0; i < bidaiak.size(); i++) {
+		Bidai b = bidaiak.get(i);
+		model.addRow(new Object[]{ b.getIzena() , b.getBidmota() , b.getIraupena() , b.getHasidata() , b.getAmaidata() , b.getHerrihelmuga() });
+        }
 	}
 }

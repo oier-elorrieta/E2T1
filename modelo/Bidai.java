@@ -9,7 +9,7 @@ public class Bidai {
 
 	private int kode;
 	private String izena;
-	private String agkode;
+	private int agkode;
 	private String desk;
 	private String zerbez;
 	private String bidmota;
@@ -26,8 +26,8 @@ public class Bidai {
 	
 	
 	
-	public Bidai(int kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
-			int iraupena, String helmugakode) {
+	public Bidai(int kode, String izena, int agkode, String desk, String bidmota, String hasidata, String amaidata,
+			String helmugakode) {
 		
 		this.kode = kode;
 		this.izena = izena;
@@ -111,10 +111,10 @@ public class Bidai {
 	public void setIzena(String izena) {
 		this.izena = izena;
 	}
-	public String getAgkode() {
+	public int getAgkode() {
 		return agkode;
 	}
-	public void setAgkode(String agkode) {
+	public void setAgkode(int agkode) {
 		this.agkode = agkode;
 	}
 	public String getDesk() {

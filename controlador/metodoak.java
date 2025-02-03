@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import modelo.Agentzia;
 import modelo.Bidai;
@@ -195,7 +196,8 @@ public class metodoak {
 		return ag;
 	}
 	
-	public static Bidai bidaiKargatuDB(Agentzia ag) {
+	public static ArrayList<Bidai> bidaiKargatuDB(Agentzia ag) {
+		Bidai bidaia = null;
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
@@ -204,14 +206,13 @@ public class metodoak {
             ResultSet result = sentencia.executeQuery(sql);
             
             while(result.next()) {
-            	
-            	
-	            
-            	
-            	Bidai bidaia = new Bidai();
-            	ag.sartuBidaia(bidaia);
+            	while(result.getString(2) != null) {
+            		bidaia = new Bidai(result.getInt(1), result.getString(2), ag.getKodea(), result.getString(3), result.getString(7), result.getString(4), result.getString(5), result.getString(9));
+                	ag.sartuBidaia(bidaia);
+            	}
+            
             }
-
+            
             result.close();
             sentencia.close();
             conexion.close();
@@ -222,7 +223,7 @@ public class metodoak {
             System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
           
         }
-		return bidaia;
+		return ag.getBidaiak();
 	}
 	
 }
