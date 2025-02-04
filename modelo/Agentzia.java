@@ -35,21 +35,6 @@ public class Agentzia {
 		this.pasahitz=pasahitz;
 	}
 	
-
-	
-	
-	public boolean login(String erabiltzaile, String pasahitz) {
-		boolean error;
-		if (erabiltzaile == this.erabiltzaile && pasahitz == this.pasahitz) {
-			error = false;
-		}else {
-			error = true;
-		}
-		return error;
-	}
-	
-	
-	
 	
 	public String getErabiltzaile() {
 		return erabiltzaile;

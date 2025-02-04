@@ -17,7 +17,7 @@ public class Bidai {
 	private String amaidata;
 	private int iraupena;
 	private String herrihelmuga;
-	private ArrayList<Ekitaldi> ekitaldiak;
+	private ArrayList<Ekitaldi> ekitaldiak = new ArrayList();
 	
 	
 	public void sartuEkitaldia(Ekitaldi ekiberri) {
