@@ -24,18 +24,20 @@ public class Bidai {
 		ekitaldiak.add(ekiberri);
 	}
 	
-	
-	
-	public Bidai(int kode, String izena, int agkode, String desk, String bidmota, String hasidata, String amaidata,
+	public Bidai(int kode, String izena, int agkode, String desk, String zerbez, String bidmota, String hasidata, String amaidata,
 			String helmugakode) {
 		
 		this.kode = kode;
 		this.izena = izena;
 		this.agkode = agkode;
 		this.desk = desk;
+		this.zerbez = zerbez;
 		this.bidmota = bidmota;
 		this.hasidata = hasidata;
 		this.amaidata = amaidata;
+		this.herrihelmuga = helmugakode;
+		
+		/*
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
 		long daysBetween = 0;
 
@@ -47,8 +49,37 @@ public class Bidai {
 		    e.printStackTrace();
 		}
 		this.iraupena = (int) daysBetween;
+		*/
+	
+	}
+	
+	public Bidai(String izena, int agkode, String desk, String zerbez, String bidmota, String hasidata, String amaidata,
+			String helmugakode) {
 		
+		this.kode = 0;
+		this.izena = izena;
+		this.agkode = agkode;
+		this.desk = desk;
+		this.zerbez = zerbez;
+		this.bidmota = bidmota;
+		this.hasidata = hasidata;
+		this.amaidata = amaidata;
 		this.herrihelmuga = helmugakode;
+		
+		/*
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
+		long daysBetween = 0;
+
+		try {
+		    LocalDate hasidatakalk = LocalDate.parse(hasidata, dtf);
+		    LocalDate amaidatakalk = LocalDate.parse(amaidata, dtf);
+		    daysBetween = Duration.between(hasidatakalk, amaidatakalk).toDays();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		this.iraupena = (int) daysBetween;
+		*/
+	
 	}
 	
 	

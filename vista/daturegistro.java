@@ -63,6 +63,7 @@ public class daturegistro {
 	private void initialize(Agentzia ag) {
 		
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(100, 100, 1250, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,7 +141,7 @@ public class daturegistro {
 		btnBidaiBerri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				bidaiberria.pantalla();
+				bidaiberria.pantalla(ag);
 			}
 		});
 		btnBidaiBerri.setBounds(840, 67, 135, 30);
@@ -150,11 +151,21 @@ public class daturegistro {
 		btnNewButton_1.setBounds(840, 403, 135, 30);
 		panel.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("New button");
+		JButton btnNewButton_1_1 = new JButton("ESKAINTZA SORTU");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1_1.setBounds(840, 648, 135, 30);
 		panel.add(btnNewButton_1_1);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Deskonektatu");
+		JButton btnNewButton_1_1_1 = new JButton("DESKONEKTATU");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ongietorri.main(null);
+				frame.setVisible(false);
+			}
+		});
 		btnNewButton_1_1_1.setBounds(1069, 648, 135, 30);
 		panel.add(btnNewButton_1_1_1);
 		metodoak.bidaiKargatuDB(ag);

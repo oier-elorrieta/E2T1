@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import controlador.metodoak;
+import modelo.Agentzia;
 import modelo.Bidai;
 
 public class bidaiberria {
@@ -25,13 +27,13 @@ public class bidaiberria {
 	private JFrame frame;
 	private JTextField bidaiIzentxtf;
 	private JTextField logotxtf;
-	private JTextField textField;
+	private JTextField desktxtf;
 	
-	public static void pantalla() {
+	public static void pantalla(Agentzia ag) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					bidaiberria window = new bidaiberria();
+					bidaiberria window = new bidaiberria(ag);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,14 +45,14 @@ public class bidaiberria {
 	/**
 	 * Create the application.
 	 */
-	public bidaiberria() {
-		initialize();
+	public bidaiberria(Agentzia ag) {
+		initialize(ag);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Agentzia ag) {
 		    
 		    
 		    
@@ -123,64 +125,58 @@ public class bidaiberria {
 	        btnatzera.setHorizontalAlignment(SwingConstants.LEADING);
 	        btnatzera.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	                //login.pantalla();
+	               daturegistro.pantalla(ag);
 	                frame.setVisible(false);
 	            }
 	        });
-	btnatzera.setBounds(10, 416, 115, 23);
+	btnatzera.setBounds(10, 417, 115, 23);
 	        btnatzera.setFocusPainted(false);
 	        
 	        btnatzera.setBackground(new Color(240, 240, 240));
 	        panel.add(btnatzera);
 	        
+	        JTextField zerbEztxtf = new JTextField();
+	        zerbEztxtf.setColumns(10);
+	        zerbEztxtf.setBounds(306, 285, 225, 80);
+	        panel.add(zerbEztxtf);  
 	        
-	        JButton btngorde = new JButton("GORDE");
-	        btngorde.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	        btngorde.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	            
-	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(), ag.getKodea(), textField.getText(), textField_1.getText(), );
-	            	metodoak.bidaiGordeDB(null);
-	            }
-	        });
-	        btngorde.setBounds(306, 416, 99, 23);
-	        btngorde.setFocusPainted(false);
+	        String[] bidmotaarray = new String[] {"B1", "B2"}; 
+	        JComboBox bidaiMotaBox = new JComboBox(bidmotaarray);
+	        bidaiMotaBox.setMaximumRowCount(4);
+	        bidaiMotaBox.setBounds(306, 48, 124, 22);
+	        panel.add(bidaiMotaBox);
 	        
-	        btngorde.setBackground(new Color(240, 240, 240));
-	        panel.add(btngorde);
+	       
 	        
-	        JComboBox langbox_1 = new JComboBox(new Object[]{});
-	        langbox_1.setMaximumRowCount(4);
-	        langbox_1.setBounds(306, 48, 124, 22);
-	        panel.add(langbox_1);
+	      
 	        
-	        JFormattedTextField formattedTextField = new JFormattedTextField();
-	        formattedTextField.setBounds(306, 81, 124, 20);
-	        panel.add(formattedTextField);
+	        JFormattedTextField bidaiHasitxtf = new JFormattedTextField();
+	        bidaiHasitxtf.setBounds(306, 81, 124, 20);
+	        panel.add(bidaiHasitxtf);
 	        
-	        JFormattedTextField formattedTextField_1 = new JFormattedTextField();
-	        formattedTextField_1.setBounds(306, 112, 124, 20);
-	        panel.add(formattedTextField_1);
+	        JFormattedTextField bidaiAmaitxtf = new JFormattedTextField();
+	        bidaiAmaitxtf.setBounds(306, 112, 124, 20);
+	        panel.add(bidaiAmaitxtf);
 	        
-	        JComboBox langbox_1_1 = new JComboBox(new Object[]{});
-	        langbox_1_1.setMaximumRowCount(4);
-	        langbox_1_1.setBounds(306, 166, 124, 22);
-	        panel.add(langbox_1_1);
+	        
+	        String[] herriarray = new String []{"AR", "AT", "BE"};
+	        
+	        JComboBox herrialdeaBox = new JComboBox(herriarray);
+	        herrialdeaBox.setMaximumRowCount(4);
+	        herrialdeaBox.setBounds(306, 166, 124, 22);
+	        panel.add(herrialdeaBox);
 	        
 	        JLabel lblDeskribapena = new JLabel("Deskribapena");
 	        lblDeskribapena.setFont(new Font("Tahoma", Font.BOLD, 18));
 	        lblDeskribapena.setBounds(10, 244, 146, 30);
 	        panel.add(lblDeskribapena);
 	        
-	        textField = new JTextField();
-	        textField.setBounds(10, 285, 225, 80);
-	        panel.add(textField);
-	        textField.setColumns(10);
+	        desktxtf = new JTextField();
+	        desktxtf.setBounds(10, 285, 225, 80);
+	        panel.add(desktxtf);
+	        desktxtf.setColumns(10);
 	        
-	        JTextField textField_1 = new JTextField();
-	        textField_1.setColumns(10);
-	        textField_1.setBounds(306, 285, 225, 80);
-	        panel.add(textField_1);
+	        
 	        
 	        JLabel lblKanpoanGeratzenDiren = new JLabel("Kanpoan Geratzen");
 	        lblKanpoanGeratzenDiren.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -200,7 +196,22 @@ public class bidaiberria {
 	        frame.getContentPane().add(lblBidaiaBerria);
 	       
 	            
-	
+	        JButton btngorde = new JButton("GORDE");
+	        btngorde.setFont(new Font("Tahoma", Font.PLAIN, 12));
+	        btngorde.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            
+	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(),ag.getKodea(), desktxtf.getText(), zerbEztxtf.getText(), bidmotaarray[bidaiMotaBox.getSelectedIndex()], bidaiHasitxtf.getText(), bidaiAmaitxtf.getText(), herriarray[herrialdeaBox.getSelectedIndex()]);
+	            	ag.sartuBidaia(bidaia); // gorde arraylistean
+	            	metodoak.bidaiGordeDB(ag, bidaia); // gorde DBan
+	            	
+	            }
+	        });
+	        btngorde.setBounds(306, 416, 99, 23);
+	        btngorde.setFocusPainted(false);
+	        
+	        btngorde.setBackground(new Color(240, 240, 240));
+	        panel.add(btngorde);
 		    
 	}
 

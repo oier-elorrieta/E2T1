@@ -206,10 +206,10 @@ public class metodoak {
             ResultSet result = sentencia.executeQuery(sql);
             
             while(result.next()) {
-            	while(result.getString(2) != null) {
-            		bidaia = new Bidai(result.getInt(1), result.getString(2), ag.getKodea(), result.getString(3), result.getString(7), result.getString(4), result.getString(5), result.getString(9));
+            	
+            		bidaia = new Bidai(result.getInt(1), result.getString(2), ag.getKodea(), result.getString(3), result.getString(6), result.getString(7), result.getString(4), result.getString(5), result.getString(9));
                 	ag.sartuBidaia(bidaia);
-            	}
+            	
             
             }
             
@@ -226,13 +226,13 @@ public class metodoak {
 		return ag.getBidaiak();
 	}
 	
-public static void bidaiGordeDB(Agentzia ag) {
+public static void bidaiGordeDB(Agentzia ag, Bidai bidaia) {
 		
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
             Statement sentencia = conexion.createStatement();
-            String sql = "insert into bidaia values ( '" +  "' , '" + ag.getLogo() + "' , '" + ag.getMarkakolore() + "' , '" + ag.getErabiltzaile()  + "' , '" + ag.getPasahitz() + "' , '" + ag.getAgmota() + "' , '" + ag.getLangkop() + "')";
+            String sql = "insert into bidaiak (izena, deskribapena, hasiera_data, amaiera_data, ez_barne_zerbitzuak, bidaia_mota_kodea, agentzia_kodea, herrialdeak_kodea) values ( '" + bidaia.getIzena()+ "' , '" + bidaia.getDesk() + "' , '" + bidaia.getHasidata() + "' , '" + bidaia.getAmaidata()  + "' , '" + bidaia.getZerbez() + "' , '" + bidaia.getBidmota() + "' , '" + bidaia.getAgkode()+ "' , '" + bidaia.getHelmugakode()+ "')";
 			sentencia.executeUpdate(sql);
             
             sentencia.close();
@@ -245,5 +245,6 @@ public static void bidaiGordeDB(Agentzia ag) {
         }
 		
 	}
+
 	
 }

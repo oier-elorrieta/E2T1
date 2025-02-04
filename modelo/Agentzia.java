@@ -76,8 +76,8 @@ public class Agentzia {
 		return bidaiak;
 	}
 
-	public void sartuBidaia(Bidai bidai) {
-		bidaiak.add(bidai);
+	public void sartuBidaia(Bidai bidaia) {
+		bidaiak.add(bidaia);
 	}
 
 	public int getKodea() {
