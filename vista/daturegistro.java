@@ -135,6 +135,8 @@ public class daturegistro {
 	    bidaiJTable = new JTable(model);
 		bidaiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
 		bidaiJTable.getColumnModel().getColumn(4).setPreferredWidth(94);
+		bidaiJTable.getCellSelectionEnabled();
+		bidaiJTable.getRowSelectionAllowed();
 		scrollPane_1.setViewportView(bidaiJTable);
 		
 		JButton btnBidaiBerri = new JButton("BIDAIA BERRIA");
@@ -147,9 +149,36 @@ public class daturegistro {
 		btnBidaiBerri.setBounds(840, 67, 135, 30);
 		panel.add(btnBidaiBerri);
 		
-		JButton btnNewButton_1 = new JButton("EKITALDI BERRIA");
-		btnNewButton_1.setBounds(840, 403, 135, 30);
-		panel.add(btnNewButton_1);
+		JButton btnekiberri = new JButton("EKITALDI BERRIA");
+		btnekiberri.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ekitaldiaukeratu.pantalla();
+			}
+		});
+		btnekiberri.setBounds(840, 403, 135, 30);
+		panel.add(btnekiberri);
+		
+		btnekiberri.addActionListener(new DocumentListener() {
+            
+            public void insertUpdate(DocumentEvent e) {
+                actualizarColor();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                actualizarColor();
+            }
+            public void changedUpdate(DocumentEvent e) {
+                actualizarColor();
+            }
+            private void actualizarColor() {
+                String hexColor = koloretxtf.getText().trim();
+                try {
+                    // Convertir el color hexadecimal a un objeto Color
+                    Color color = Color.decode(hexColor);
+                    // Establecer el color de fondo del txtColorPicker
+                    panelkolore.setBackground(color);
+                    btnkolorea.setBackground(color);
+                } catch (NumberFormatException ex) {
 		
 		JButton btnNewButton_1_1 = new JButton("ESKAINTZA SORTU");
 		btnNewButton_1_1.addActionListener(new ActionListener() {

@@ -160,8 +160,12 @@ public class Bidai {
 	public void setBidmota(String bidmota) {
 		this.bidmota = bidmota;
 	}
-
 	
+	public int getIraupena() {
+		return iraupena;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Bidaia [kode=" + kode + ", izena=" + izena + ", agkode=" + agkode + ", desk=" + desk + ", bidmota="

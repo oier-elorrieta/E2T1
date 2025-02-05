@@ -1,12 +1,11 @@
 package JUnitTest;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import modelo.Agentzia;
 import modelo.Aireportu;
@@ -14,19 +13,36 @@ import modelo.Bidai;
 import modelo.Ekitaldi;
 import modelo.Hiria;
 
-class pojotest {
+
+
+public class pojotest {
+
+	private static Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
+	
+	
+	@Before
+	public void setUp() {
+		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
+	}
+	
 
 	
 	//AGENTZIA------------------------------------------------------------
 	@Test
+	public void getTestAg() {
+		assertEquals("Javi", ag.getIzena());
+	}
+	
+	
+	
+	@Test
 	public void getTestAgizn() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
+	
 		assertEquals("Javi", ag.getIzena());
 	}
 	
 	@Test
 	public void getTestAglogo() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
 		assertEquals("foto", ag.getLogo());
 	}
 	
@@ -34,7 +50,7 @@ class pojotest {
 	
 	@Test
 	public void getTestAgkolor() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
+
 		assertEquals("#FFFFFF", ag.getMarkakolore());
 	}
 	
@@ -42,7 +58,7 @@ class pojotest {
 	
 	@Test
 	public void getTestAglangkop() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
+
 		assertEquals("L1", ag.getLangkop());
 	}
 	
@@ -50,7 +66,7 @@ class pojotest {
 	
 	@Test
 	public void getTestAgmota() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
+
 		assertEquals("A1", ag.getAgmota());
 	}
 	
@@ -58,69 +74,60 @@ class pojotest {
 	
 	@Test
 	public void getTestAgerabil() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
+
 		assertEquals("aa", ag.getErabiltzaile());
 	}
 
 	
 	@Test
 	public void getTestAgpasahitz() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
 		assertEquals("bb", ag.getPasahitz());
 	}
 
 	@Test
 	public void setTestAgkod() {
-		Agentzia ag = new Agentzia();
 		ag.setKodea(12);
 		assertEquals(12, ag.getKodea());
 	}
 
 	@Test
 	public void setTestAgizn() {
-		Agentzia ag = new Agentzia();
 		ag.setIzena("Javi");
 		assertEquals("Javi", ag.getIzena());
 	}
 	
 	@Test
 	public void setTestAglogo() {
-		Agentzia ag = new Agentzia();
 		ag.setLogo("foto");
 		assertEquals("foto", ag.getLogo());
 	}
 	
 	@Test
 	public void setTestAgkolore() {
-		Agentzia ag = new Agentzia();
 		ag.setMarkakolore("#FFFFFF");
 		assertEquals("#FFFFFF", ag.getMarkakolore());
 	}
 	
 	@Test
 	public void setTestAglangkop() {
-		Agentzia ag = new Agentzia();
 		ag.setLangkop("L1");
 		assertEquals("L1", ag.getLangkop());
 	}
 	
 	@Test
 	public void setTestAgmota() {
-		Agentzia ag = new Agentzia();
 		ag.setAgmota("A1");
 		assertEquals("A1", ag.getAgmota());
 	}
 	
 	@Test
 	public void setTestAgerabil() {
-		Agentzia ag = new Agentzia();
 		ag.setErabiltzaile("aa");
 		assertEquals("aa", ag.getErabiltzaile());
 	}
 	
 	@Test
 	public void setTestAgpasahitz() {
-		Agentzia ag = new Agentzia();
 		ag.setPasahitz("bb");
 		assertEquals("bb", ag.getPasahitz());
 	}
@@ -128,7 +135,6 @@ class pojotest {
 	@Test
 	public void sartubidTestAg() {
 		Bidai bid = new Bidai(1, "a", 2, "desk", "zerbez", "mota", "", "", "");
-		Agentzia ag = new Agentzia();
 		ag.sartuBidaia(bid);
 		Bidai[] bidarray = new Bidai[] {bid};
 		assertArrayEquals(bidarray, ag.getBidaiak().toArray());
@@ -136,7 +142,6 @@ class pojotest {
 	
 	@Test
 	public void setbidaiTestAg() {
-		Agentzia ag = new Agentzia();
 		ArrayList<Bidai> bidaiak = new ArrayList();
 		ag.setBidaiak(bidaiak);
 		assertArrayEquals(bidaiak.toArray() , ag.getBidaiak().toArray());
@@ -146,7 +151,6 @@ class pojotest {
 	
 	@Test
 	public void toStringTestAg() {
-		Agentzia ag = new Agentzia("Javi", "foto", "#FFFFFF", "L1", "A1", "aa", "bb");
 		int agkode = ag.getKodea();
 		String izena = ag.getIzena();
 		String logo = ag.getLogo();
@@ -558,4 +562,5 @@ class pojotest {
 			assertEquals("Hiria [kode=" + 1 + ", izena=" + "a" + "]", hi.toString());
 		
 	}
+
 }

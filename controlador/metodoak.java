@@ -232,7 +232,7 @@ public static void bidaiGordeDB(Agentzia ag, Bidai bidaia) {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
             Statement sentencia = conexion.createStatement();
-            String sql = "insert into bidaiak (izena, deskribapena, hasiera_data, amaiera_data, ez_barne_zerbitzuak, bidaia_mota_kodea, agentzia_kodea, herrialdeak_kodea) values ( '" + bidaia.getIzena()+ "' , '" + bidaia.getDesk() + "' , '" + bidaia.getHasidata() + "' , '" + bidaia.getAmaidata()  + "' , '" + bidaia.getZerbez() + "' , '" + bidaia.getBidmota() + "' , '" + bidaia.getAgkode()+ "' , '" + bidaia.getHelmugakode()+ "')";
+            String sql = "insert into bidaiak (izena, deskribapena, hasiera_data, amaiera_data, ez_barne_zerbitzuak, bidaia_mota_kodea, agentzia_kodea, herrialdeak_kodea) values ( '" + bidaia.getIzena()+ "' , '" + bidaia.getDesk() + "' , '" + bidaia.getHasidata() + "' , '" + bidaia.getAmaidata()  + "' , '" + bidaia.getZerbez() + "' , '" + bidaia.getBidmota() + "' , '" + bidaia.getAgkode()+ "' , '" + bidaia.getHerrihelmuga()+ "')";
 			sentencia.executeUpdate(sql);
             
             sentencia.close();
