@@ -1,11 +1,12 @@
 package JUnitTest;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import modelo.Agentzia;
 import modelo.Aireportu;
@@ -13,17 +14,8 @@ import modelo.Bidai;
 import modelo.Ekitaldi;
 import modelo.Hiria;
 
-public class pojotest {
+class pojotest {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-	
-	
 	
 	//AGENTZIA------------------------------------------------------------
 	@Test
@@ -566,5 +558,4 @@ public class pojotest {
 			assertEquals("Hiria [kode=" + 1 + ", izena=" + "a" + "]", hi.toString());
 		
 	}
-	
 }

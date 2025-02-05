@@ -274,9 +274,6 @@ public class Ekitaldi {
 	public double getPreziototala() {
 		return preziototala;
 	}
-	public void setPreziototala(double preziototala) {
-		this.preziototala = preziototala;
-	}
 	public double getBiraupena() {
 		return biraupena;
 	}

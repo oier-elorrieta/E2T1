@@ -160,30 +160,7 @@ public class Bidai {
 	public void setBidmota(String bidmota) {
 		this.bidmota = bidmota;
 	}
-	public String getHdata() {
-		return hasidata;
-	}
-	public void setHdata(String hdata) {
-		this.hasidata = hdata;
-	}
-	public String getAdata() {
-		return amaidata;
-	}
-	public void setAdata(String adata) {
-		this.amaidata = adata;
-	}
-	public int getIraupena() {
-		return iraupena;
-	}
-	public void setIraupena(int iraupena) {
-		this.iraupena = iraupena;
-	}
-	public String getHelmugakode() {
-		return herrihelmuga;
-	}
-	public void setHelmugakode(String helmugakode) {
-		this.herrihelmuga = helmugakode;
-	}
+
 	
 	@Override
 	public String toString() {
