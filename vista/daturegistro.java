@@ -25,6 +25,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class daturegistro {
 
@@ -124,6 +126,16 @@ public class daturegistro {
 		scrollPane_1.setBounds(50, 68, 780, 250);
 		panel.add(scrollPane_1);
 		
+		JButton btnekiberri = new JButton("EKITALDI BERRIA");
+		btnekiberri.setEnabled(false);
+		btnekiberri.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ekitaldiaukeratu.pantalla();
+			}
+		});
+		btnekiberri.setBounds(840, 403, 135, 30);
+		panel.add(btnekiberri);
 		
 		DefaultTableModel model = new DefaultTableModel();
 	    model.addColumn("Bidaiak");
@@ -133,10 +145,17 @@ public class daturegistro {
 	    model.addColumn("Amaireako data");
 	    model.addColumn("Herrialde");
 	    bidaiJTable = new JTable(model);
+	    bidaiJTable.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		btnekiberri.setEnabled(true);
+	    	}
+	    });
 		bidaiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
 		bidaiJTable.getColumnModel().getColumn(4).setPreferredWidth(94);
 		bidaiJTable.getCellSelectionEnabled();
 		bidaiJTable.getRowSelectionAllowed();
+		
 		scrollPane_1.setViewportView(bidaiJTable);
 		
 		JButton btnBidaiBerri = new JButton("BIDAIA BERRIA");
@@ -149,36 +168,8 @@ public class daturegistro {
 		btnBidaiBerri.setBounds(840, 67, 135, 30);
 		panel.add(btnBidaiBerri);
 		
-		JButton btnekiberri = new JButton("EKITALDI BERRIA");
-		btnekiberri.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				ekitaldiaukeratu.pantalla();
-			}
-		});
-		btnekiberri.setBounds(840, 403, 135, 30);
-		panel.add(btnekiberri);
 		
-		btnekiberri.addActionListener(new DocumentListener() {
-            
-            public void insertUpdate(DocumentEvent e) {
-                actualizarColor();
-            }
-            public void removeUpdate(DocumentEvent e) {
-                actualizarColor();
-            }
-            public void changedUpdate(DocumentEvent e) {
-                actualizarColor();
-            }
-            private void actualizarColor() {
-                String hexColor = koloretxtf.getText().trim();
-                try {
-                    // Convertir el color hexadecimal a un objeto Color
-                    Color color = Color.decode(hexColor);
-                    // Establecer el color de fondo del txtColorPicker
-                    panelkolore.setBackground(color);
-                    btnkolorea.setBackground(color);
-                } catch (NumberFormatException ex) {
+		
 		
 		JButton btnNewButton_1_1 = new JButton("ESKAINTZA SORTU");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
