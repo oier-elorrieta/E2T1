@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import modelo.Agentzia;
 import modelo.Bidai;
+import modelo.Ekitaldi;
 
 public class metodoak {
 
@@ -198,29 +199,52 @@ public class metodoak {
 	
 	public static ArrayList<Bidai> bidaiKargatuDB(Agentzia ag) {
 		Bidai bidaia = null;
+		Ekitaldi eki = null;
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
             Statement sentencia = conexion.createStatement();
             String sql = "SELECT * from bidaiak where agentzia_kodea = '" + ag.getKodea()+ "';";
             ResultSet result = sentencia.executeQuery(sql);
+           
             
             while(result.next()) {
             	
             		bidaia = new Bidai(result.getInt(1), result.getString(2), ag.getKodea(), result.getString(3), result.getString(6), result.getString(7), result.getString(4), result.getString(5), result.getString(9));
-                	ag.sartuBidaia(bidaia);
-            	
-            
+            		String sqleki = "SELECT * from ekitaldiak eki join ostatua os on eki.id_ekitaldia = os.id_ostatua join Jarduerak jar on eki.id_ekitaldia = jar.id_jarduera join joaneko_hegaldia jo on eki.id_ekitaldia = jo.id_hegaldia join joan_etorriko_hegaldia joet on eki.id_ekitaldia = joet.id_hegaldia where eki.id_bidaia = '" + result.getInt(1)+"';";
+            		ResultSet resulteki = sentencia.executeQuery(sqleki);
+            		while(resulteki.next()) {
+	            		if(resulteki.getInt(4) != 0) {//ostatua da?
+	            			// eki = new Ekitaldi(resulteki.getInt(4), sqleki, sqleki, sqleki, sqleki, 0);
+	            			System.out.println("aaaaaaaa");
+	            		}else if(resulteki.getInt(11) != 0) {//jarduera da?
+	            			
+	            		}else if (resulteki.getInt(25) != 0) {//joan etorrikoa da?
+	            			
+	            		}else if(resulteki.getInt(16) != 0){ //joanekoa da?
+	            			
+	            		}
+            		
+            		}
+            		sqleki = "SELECT * from ekitaldiak eki join ostatua os on eki.id_ekitaldia = os.id_ostatua join Jarduerak jar on eki.id_ekitaldia = jar.id_jarduera join joaneko_hegaldia jo on eki.id_ekitaldia = jo.id_hegaldia join joan_etorriko_hegaldia joet on eki.id_ekitaldia = joet.id_hegaldia where eki.id_bidaia = '" + result.getInt(1)+"';";
+            		resulteki = sentencia.executeQuery(sqleki);
+            		            		
+            		ag.sartuBidaia(bidaia);
+            		resulteki.close();
+           
             }
             
-            result.close();
+            
             sentencia.close();
             conexion.close();
-
+            result.close();
+           
         } catch (ClassNotFoundException e) {
             System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
         } catch (SQLException e) {
             System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+            System.out.println(e.getLocalizedMessage());
+            System.out.println(e.getSQLState());
           
         }
 		return ag.getBidaiak();
