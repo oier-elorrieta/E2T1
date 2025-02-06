@@ -176,14 +176,14 @@ public class agentziasortu {
         btnkolorea.setBounds(0, 0, 51, 21);
         panelkolore.add(btnkolorea);
         
-		String[] langarraybox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" }; // select kode from langilekop where izena = langarraypbox[langindex] ----- select kode from langilekop where kode = L + langindex
+		String[] langarraybox = metodoak.langileKopurua();
 		final JComboBox langbox = new JComboBox(langarraybox);
 		langbox.setMaximumRowCount(4);
 		langbox.setBounds(306, 138, 124, 22);
 		panel.add(langbox);
 		
 		
-		String[] motaarraybox = new String[] { "", "Bidaiak", "Zerbitzuak"};
+		String[] motaarraybox = metodoak.agentziaMota();
 		final JComboBox motabox = new JComboBox(motaarraybox);
 		motabox.setMaximumRowCount(3);
 		motabox.setBounds(306, 195, 124, 22);

@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
@@ -95,7 +97,7 @@ public class login {
 		panel.add(erabiltzailetxtf);
 		erabiltzailetxtf.setColumns(10);
 		
-		pasahitzatxtf = new JTextField();
+		pasahitzatxtf = new JPasswordField();
 		pasahitzatxtf.setColumns(10);
 		pasahitzatxtf.setBounds(345, 117, 151, 20);
 		panel.add(pasahitzatxtf);

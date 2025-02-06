@@ -2,6 +2,7 @@ package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,7 +48,76 @@ public class metodoak {
 		return error;
 	}
 	
-	
+	public static String[] langileKopurua() {
+        String[] deskboxarray = new String[4];
+        try {
+            // Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecemos la conexion con la BD
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+
+            // Preparamos la consultaç
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT deskribapena FROM lang_kopurua";
+            ResultSet result = sentencia.executeQuery(sql);
+
+            // Recorremos el resultado para visualizar cada fla
+            // Se hace un bucle mientras haya registros y se van visualizando
+            deskboxarray[0] = "";
+            int i = 1;
+            while (result.next()) {
+                deskboxarray [i] = result.getString(1);
+                i++;
+            }
+
+            result.close(); // Cerrar ResultSet
+            sentencia.close(); // Cerrar Statement
+            conexion.close(); // Cerrar conexion
+
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return deskboxarray;
+    }
+    
+    
+    public static String[] agentziaMota() {
+        String[] deskboxarray = new String[4];
+        try {
+            // Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecemos la conexion con la BD
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+
+            // Preparamos la consultaç
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT deskribapena FROM agentzia_motak";
+            ResultSet result = sentencia.executeQuery(sql);
+
+            // Recorremos el resultado para visualizar cada fla
+            // Se hace un bucle mientras haya registros y se van visualizando
+            deskboxarray[0] = "";
+            int i = 1;
+            while (result.next()) {
+                deskboxarray [i] = result.getString(1);
+                i++;
+            }
+
+            result.close(); // Cerrar ResultSet
+            sentencia.close(); // Cerrar Statement
+            conexion.close(); // Cerrar conexion
+
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return deskboxarray;
+    }
 	public static void agentziaberri(Agentzia ag) {
 		
 		try {
@@ -206,18 +276,25 @@ public class metodoak {
             Statement sentencia = conexion.createStatement();
             String sql = "SELECT * from bidaiak where agentzia_kodea = '" + ag.getKodea()+ "';";
             ResultSet result = sentencia.executeQuery(sql);
+            ResultSet resulteki = null;            
            
             
             while(result.next()) {
             	
             		bidaia = new Bidai(result.getInt(1), result.getString(2), ag.getKodea(), result.getString(3), result.getString(6), result.getString(7), result.getString(4), result.getString(5), result.getString(9));
-            		String sqleki = "SELECT * from ekitaldiak eki join ostatua os on eki.id_ekitaldia = os.id_ostatua join Jarduerak jar on eki.id_ekitaldia = jar.id_jarduera join joaneko_hegaldia jo on eki.id_ekitaldia = jo.id_hegaldia join joan_etorriko_hegaldia joet on eki.id_ekitaldia = joet.id_hegaldia where eki.id_bidaia = '" + result.getInt(1)+"';";
-            		ResultSet resulteki = sentencia.executeQuery(sqleki);
+            		String sqleki = "SELECT * from ekitaldiak eki left outer join ostatua os on eki.id_ekitaldia = os.id_ostatua left outer join Jarduerak jar on eki.id_ekitaldia = jar.id_jarduera left outer join joaneko_hegaldia jo on eki.id_ekitaldia = jo.id_hegaldia left outer join joan_etorriko_hegaldia joet on eki.id_ekitaldia = joet.id_hegaldia where eki.id_bidaia = '" + result.getInt(1)+"';";
+
+            		PreparedStatement preparedStatement = conexion.prepareStatement(sqleki);
+    	            resulteki = preparedStatement.executeQuery();
+                 	
+            		
             		while(resulteki.next()) {
+            	      			
 	            		if(resulteki.getInt(4) != 0) {//ostatua da?
-	            			// eki = new Ekitaldi(resulteki.getInt(4), sqleki, sqleki, sqleki, sqleki, 0);
-	            			System.out.println("aaaaaaaa");
+	            			eki = new Ekitaldi(resulteki.getInt(4), resulteki.getString(2), resulteki.getString(3), sqleki, 0, sqleki, sqleki, sqleki, sqleki);
+
 	            		}else if(resulteki.getInt(11) != 0) {//jarduera da?
+	            			eki = new Ekitaldi(resulteki.getInt(11), resulteki.getString(2), resulteki.getString(3), sqleki, sqleki, 0);
 	            			
 	            		}else if (resulteki.getInt(25) != 0) {//joan etorrikoa da?
 	            			
@@ -225,16 +302,17 @@ public class metodoak {
 	            			
 	            		}
             		
-            		}
-            		sqleki = "SELECT * from ekitaldiak eki join ostatua os on eki.id_ekitaldia = os.id_ostatua join Jarduerak jar on eki.id_ekitaldia = jar.id_jarduera join joaneko_hegaldia jo on eki.id_ekitaldia = jo.id_hegaldia join joan_etorriko_hegaldia joet on eki.id_ekitaldia = joet.id_hegaldia where eki.id_bidaia = '" + result.getInt(1)+"';";
-            		resulteki = sentencia.executeQuery(sqleki);
-            		            		
+            		}            		
+            		
+            		
+            		                    
+                    
             		ag.sartuBidaia(bidaia);
-            		resulteki.close();
+
            
             }
             
-            
+            resulteki.close();
             sentencia.close();
             conexion.close();
             result.close();
