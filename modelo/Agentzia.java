@@ -13,6 +13,7 @@ public class Agentzia {
 	private String langkop;
 	private String agmota;
 	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
+	private int selectedindx;
 	
 	public Agentzia() {
 		this.agkode = 0;
@@ -36,6 +37,14 @@ public class Agentzia {
 	}
 	
 	
+	public int getSelectedindx() {
+		return selectedindx;
+	}
+
+	public void setSelectedindx(int selectedindx) {
+		this.selectedindx = selectedindx;
+	}
+
 	public String getErabiltzaile() {
 		return erabiltzaile;
 	}

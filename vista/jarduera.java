@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import modelo.Agentzia;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -27,12 +30,13 @@ public class jarduera {
 
 	/**
 	 * Launch the application.
+	 * @param ag 
 	 */
-	public static void pantalla() {
+	public static void pantalla(Agentzia ag) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					jarduera window = new jarduera();
+					jarduera window = new jarduera(ag);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,15 +47,17 @@ public class jarduera {
 
 	/**
 	 * Create the application.
+	 * @param ag 
 	 */
-	public jarduera() {
-		initialize();
+	public jarduera(Agentzia ag) {
+		initialize(ag);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @param ag 
 	 */
-	private void initialize() {
+	private void initialize(Agentzia ag) {
 
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
@@ -68,7 +74,7 @@ public class jarduera {
 		btnatzera.setHorizontalAlignment(SwingConstants.LEADING);
 		btnatzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ekitaldiaukeratu.pantalla();
+				ekitaldiaukeratu.pantalla(ag);
 				frame.setVisible(false);
 			}
 		});

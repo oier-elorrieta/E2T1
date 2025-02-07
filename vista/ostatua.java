@@ -15,6 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import controlador.metodoak;
+import modelo.Agentzia;
+import modelo.Bidai;
+import modelo.Ekitaldi;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -29,11 +35,11 @@ public class ostatua {
 	/**
 	 * Launch the application.
 	 */
-	public static void pantalla() {
+	public static void pantalla(Agentzia ag) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ostatua window = new ostatua();
+					ostatua window = new ostatua(ag);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,14 +51,14 @@ public class ostatua {
 	/**
 	 * Create the application.
 	 */
-	public ostatua() {
-		initialize();
+	public ostatua(Agentzia ag) {
+		initialize(ag);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Agentzia ag) {
 
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
@@ -69,7 +75,7 @@ public class ostatua {
 		btnatzera.setHorizontalAlignment(SwingConstants.LEADING);
 		btnatzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ekitaldiaukeratu.pantalla();
+				ekitaldiaukeratu.pantalla(ag);
 				frame.setVisible(false);
 			}
 		});
@@ -145,6 +151,14 @@ public class ostatua {
 		panel.add(ostatuSarreraDatatxtf);
 		
 		JButton btnGorde = new JButton("GORDE");
+		btnGorde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			Ekitaldi eki = new Ekitaldi(0, "Ostatua", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), hiriatxtf.getText(), Integer.parseInt(PrezioOstatuatxtf.getText()), ekitaldiIzentxtf.getText(), ostatuSarreraDatatxtf.getText(), ostatuIrteeraDatatxtf.getText(), null);
+			ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki);
+			metodoak.ostatuaGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
+			}
+		});
 		btnGorde.setFocusPainted(false);
 		btnGorde.setBackground(UIManager.getColor("Button.background"));
 		btnGorde.setBounds(314, 238, 115, 23);

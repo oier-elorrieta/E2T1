@@ -291,15 +291,15 @@ public class metodoak {
             		while(resulteki.next()) {
             	      			
 	            		if(resulteki.getInt(4) != 0) {//ostatua da?
-	            			eki = new Ekitaldi(resulteki.getInt(4), resulteki.getString(2), resulteki.getString(3), sqleki, 0, sqleki, sqleki, sqleki, sqleki);
+	            			eki = new Ekitaldi(resulteki.getInt(4), resulteki.getString(2), resulteki.getString(3), resulteki.getString(6), resulteki.getInt(7), resulteki.getString(5), resulteki.getString(8), resulteki.getString(9), resulteki.getString(10));
 
 	            		}else if(resulteki.getInt(11) != 0) {//jarduera da?
-	            			eki = new Ekitaldi(resulteki.getInt(11), resulteki.getString(2), resulteki.getString(3), sqleki, sqleki, 0);
+	            			eki = new Ekitaldi(resulteki.getInt(11), resulteki.getString(2), resulteki.getString(3), resulteki.getString(13), resulteki.getString(14),resulteki.getInt(15));
 	            			
 	            		}else if (resulteki.getInt(25) != 0) {//joan etorrikoa da?
-	            			
+	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getString(3), resulteki.getInt(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21),  resulteki.getInt(26),  resulteki.getString(30),  resulteki.getString(22), resulteki.getString(23), resulteki.getInt(21), 0, resulteki.getInt(29), resulteki.getString(28), resulteki.getString(27));
 	            		}else if(resulteki.getInt(16) != 0){ //joanekoa da?
-	            			
+	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getInt(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21));
 	            		}
             		
             		}            		
@@ -327,26 +327,48 @@ public class metodoak {
         }
 		return ag.getBidaiak();
 	}
+		
+	public static void bidaiGordeDB(Agentzia ag, Bidai bidaia) {
+			
+			try {
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+	            Statement sentencia = conexion.createStatement();
+	            String sql = "insert into bidaiak (izena, deskribapena, hasiera_data, amaiera_data, ez_barne_zerbitzuak, bidaia_mota_kodea, agentzia_kodea, herrialdeak_kodea) values ( '" + bidaia.getIzena()+ "' , '" + bidaia.getDesk() + "' , '" + bidaia.getHasidata() + "' , '" + bidaia.getAmaidata()  + "' , '" + bidaia.getZerbez() + "' , '" + bidaia.getBidmota() + "' , '" + bidaia.getAgkode()+ "' , '" + bidaia.getHerrihelmuga()+ "')";
+				sentencia.executeUpdate(sql);
+	            
+	            sentencia.close();
+	            conexion.close();
 	
-public static void bidaiGordeDB(Agentzia ag, Bidai bidaia) {
+	        } catch (ClassNotFoundException e) {
+	            System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+	        } catch (SQLException e) {
+	            System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+	        }
+			
+		}
+	
+	
+	
+	public static void ostatuaGordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
 		
 		try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
-            Statement sentencia = conexion.createStatement();
-            String sql = "insert into bidaiak (izena, deskribapena, hasiera_data, amaiera_data, ez_barne_zerbitzuak, bidaia_mota_kodea, agentzia_kodea, herrialdeak_kodea) values ( '" + bidaia.getIzena()+ "' , '" + bidaia.getDesk() + "' , '" + bidaia.getHasidata() + "' , '" + bidaia.getAmaidata()  + "' , '" + bidaia.getZerbez() + "' , '" + bidaia.getBidmota() + "' , '" + bidaia.getAgkode()+ "' , '" + bidaia.getHerrihelmuga()+ "')";
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+	        Statement sentencia = conexion.createStatement();
+	        String sql = "insert into ostatua (hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
 			sentencia.executeUpdate(sql);
-            
-            sentencia.close();
-            conexion.close();
-
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
-        } catch (SQLException e) {
-            System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
-        }
+	        
+	        sentencia.close();
+	        conexion.close();
+	
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+	    } catch (SQLException e) {
+	        System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+	    }
 		
 	}
-
 	
+		
 }

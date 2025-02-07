@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import modelo.Agentzia;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -24,12 +27,13 @@ public class ekitaldiaukeratu {
 
 	/**
 	 * Launch the application.
+	 * @param ag 
 	 */
-	public static void pantalla() {
+	public static void pantalla(Agentzia ag) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ekitaldiaukeratu window= new ekitaldiaukeratu();
+					ekitaldiaukeratu window= new ekitaldiaukeratu(ag);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,14 +45,14 @@ public class ekitaldiaukeratu {
 	/**
 	 * Create the application.
 	 */
-	public ekitaldiaukeratu() {
-		initialize();
+	public ekitaldiaukeratu(Agentzia ag) {
+		initialize(ag);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Agentzia ag) {
 
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
@@ -66,14 +70,14 @@ public class ekitaldiaukeratu {
 		btnOstatua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				ostatua.pantalla();
+				ostatua.pantalla(ag);
 			}
 		});
 		JButton btnJoan = new JButton("Joanekoa");
 		btnJoan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				hegaldiJoan.pantalla();
+				hegaldiJoan.pantalla(ag);
 			}
 		});
 		btnJoan.setFont(new Font("Verdana", Font.PLAIN, 18));
@@ -94,7 +98,7 @@ public class ekitaldiaukeratu {
 		btnJoanEtorri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				hegaldiJoanEtorri.pantalla();
+				hegaldiJoanEtorri.pantalla(ag);
 			}
 		});
 		btnJoanEtorri.setFont(new Font("Verdana", Font.PLAIN, 18));
@@ -126,7 +130,7 @@ public class ekitaldiaukeratu {
 		btnJar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				jarduera.pantalla();
+				jarduera.pantalla(ag);
 			}
 		});
 		btnJar.setFont(new Font("Verdana", Font.PLAIN, 23));

@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import modelo.Agentzia;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -35,12 +38,13 @@ public class hegaldiJoanEtorri {
 
 	/**
 	 * Launch the application.
+	 * @param ag 
 	 */
-	public static void pantalla() {
+	public static void pantalla(Agentzia ag) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					hegaldiJoanEtorri window = new hegaldiJoanEtorri();
+					hegaldiJoanEtorri window = new hegaldiJoanEtorri(ag);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,15 +55,17 @@ public class hegaldiJoanEtorri {
 
 	/**
 	 * Create the application.
+	 * @param ag 
 	 */
-	public hegaldiJoanEtorri() {
-		initialize();
+	public hegaldiJoanEtorri(Agentzia ag) {
+		initialize(ag);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @param ag 
 	 */
-	private void initialize() {
+	private void initialize(Agentzia ag) {
 
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
@@ -76,7 +82,7 @@ public class hegaldiJoanEtorri {
 		btnatzera.setHorizontalAlignment(SwingConstants.LEADING);
 		btnatzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ekitaldiaukeratu.pantalla();
+				ekitaldiaukeratu.pantalla(ag);
 				frame.setVisible(false);
 			}
 		});

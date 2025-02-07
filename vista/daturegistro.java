@@ -131,7 +131,7 @@ public class daturegistro {
 		btnekiberri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				ekitaldiaukeratu.pantalla();
+				ekitaldiaukeratu.pantalla(ag);
 			}
 		});
 		btnekiberri.setBounds(840, 403, 135, 30);
@@ -149,6 +149,7 @@ public class daturegistro {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
 	    		btnekiberri.setEnabled(true);
+	    		ag.setSelectedindx(bidaiJTable.getSelectedRow());
 	    	}
 	    });
 		bidaiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
