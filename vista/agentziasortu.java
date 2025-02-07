@@ -19,8 +19,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import controlador.metodoak;
 import modelo.Agentzia;
+import modelo.DAO;
 
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
@@ -176,14 +176,14 @@ public class agentziasortu {
         btnkolorea.setBounds(0, 0, 51, 21);
         panelkolore.add(btnkolorea);
         
-		String[] langarraybox = metodoak.langileKopurua();
+		String[] langarraybox = DAO.langileKopurua();
 		final JComboBox langbox = new JComboBox(langarraybox);
 		langbox.setMaximumRowCount(4);
 		langbox.setBounds(306, 138, 124, 22);
 		panel.add(langbox);
 		
 		
-		String[] motaarraybox = metodoak.agentziaMota();
+		String[] motaarraybox = DAO.agentziaMota();
 		final JComboBox motabox = new JComboBox(motaarraybox);
 		motabox.setMaximumRowCount(3);
 		motabox.setBounds(306, 195, 124, 22);
@@ -235,8 +235,8 @@ public class agentziasortu {
 			public void actionPerformed(ActionEvent e) {
 				 int langindex = langbox.getSelectedIndex();
 				 int motaindex  = motabox.getSelectedIndex();
-				Agentzia ag = new Agentzia( agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(), metodoak.langKopAgentziBilatu(langindex)   ,  metodoak.agentziaMotaBilatu(motaindex) , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
-				metodoak.agentziaberri(ag);
+				Agentzia ag = new Agentzia( agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(), DAO.langKopAgentziBilatu(langindex)   ,  DAO.agentziaMotaBilatu(motaindex) , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
+				DAO.agentziaberri(ag);
 				login.pantalla();
 				frame.setVisible(false);
 			}

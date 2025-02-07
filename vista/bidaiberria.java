@@ -18,9 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
-import controlador.metodoak;
 import modelo.Agentzia;
 import modelo.Bidai;
+import modelo.DAO;
 
 public class bidaiberria {
 
@@ -129,7 +129,7 @@ public class bidaiberria {
 	                frame.setVisible(false);
 	            }
 	        });
-	btnatzera.setBounds(10, 417, 115, 23);
+	        btnatzera.setBounds(10, 417, 115, 23);
 	        btnatzera.setFocusPainted(false);
 	        
 	        btnatzera.setBackground(new Color(240, 240, 240));
@@ -203,8 +203,8 @@ public class bidaiberria {
 	            
 	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(),ag.getKodea(), desktxtf.getText(), zerbEztxtf.getText(), bidmotaarray[bidaiMotaBox.getSelectedIndex()], bidaiHasitxtf.getText(), bidaiAmaitxtf.getText(), herriarray[herrialdeaBox.getSelectedIndex()]);
 	            	ag.sartuBidaia(bidaia); // gorde arraylistean
-	            	metodoak.bidaiGordeDB(ag, bidaia); // gorde DBan
-	            	
+	            	DAO.bidaiGordeDB(ag, bidaia); // gorde DBan
+	            	daturegistro.pantalla(ag);
 	            }
 	        });
 	        btngorde.setBounds(306, 416, 99, 23);

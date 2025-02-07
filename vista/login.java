@@ -9,8 +9,8 @@ import javax.swing.JPasswordField;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
-import controlador.metodoak;
 import modelo.Agentzia;
+import modelo.DAO;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -116,9 +116,9 @@ public class login {
 			public void actionPerformed(ActionEvent e) {
 				String erabiltzaile = erabiltzailetxtf.getText();
 				String pasahitza = pasahitzatxtf.getText();
-				boolean error = metodoak.saioaKonprobatu(erabiltzaile, pasahitza);
+				boolean error = DAO.saioaKonprobatu(erabiltzaile, pasahitza);
 				if(error == false) {
-					Agentzia ag = metodoak.agentziaKargatuBD(erabiltzaile, pasahitza);
+					Agentzia ag = DAO.agentziaKargatuBD(erabiltzaile, pasahitza);
 					daturegistro.pantalla(ag);
 					frame.setVisible(false);
 				}else {

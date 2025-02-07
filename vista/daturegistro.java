@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import controlador.metodoak;
 import modelo.Agentzia;
 import modelo.Bidai;
+import modelo.DAO;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -21,12 +21,17 @@ import javax.swing.JTextPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import controlador.main;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 
 public class daturegistro {
 
@@ -74,7 +79,7 @@ public class daturegistro {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		
-		String hexColor = metodoak.koloreaHartu(ag).trim();
+		String hexColor = DAO.koloreaHartu(ag).trim();
 		try {
 			Color color = Color.decode(hexColor);
 			panel.setBackground(color);
@@ -145,6 +150,7 @@ public class daturegistro {
 	    model.addColumn("Amaireako data");
 	    model.addColumn("Herrialde");
 	    bidaiJTable = new JTable(model);
+	    
 	    bidaiJTable.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
@@ -183,20 +189,22 @@ public class daturegistro {
 		JButton btnNewButton_1_1_1 = new JButton("DESKONEKTATU");
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ongietorri.main(null);
+				main.main(null);
 				frame.setVisible(false);
 			}
 		});
 		btnNewButton_1_1_1.setBounds(1069, 648, 135, 30);
 		panel.add(btnNewButton_1_1_1);
-		metodoak.bidaiKargatuDB(ag);
+		DAO.bidaiKargatuDB(ag);
 		datuakKargatu(bidaiJTable, model, ag);
 	}
 	
 	
 	public void datuakKargatu(JTable bidaiJTable, DefaultTableModel model, Agentzia ag) {
 		model = (DefaultTableModel) bidaiJTable.getModel();
+		
 		ArrayList<Bidai> bidaiak = ag.getBidaiak();
+	
         for(int i = 0; i < bidaiak.size(); i++) {
 		Bidai b = bidaiak.get(i);
 		model.addRow(new Object[]{ b.getIzena() , b.getBidmota() , b.getIraupena() , b.getHasidata() , b.getAmaidata() , b.getHerrihelmuga() });

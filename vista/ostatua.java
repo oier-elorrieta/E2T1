@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
-import controlador.metodoak;
 import modelo.Agentzia;
 import modelo.Bidai;
 import modelo.Ekitaldi;
+import modelo.DAO;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -154,9 +154,9 @@ public class ostatua {
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-			Ekitaldi eki = new Ekitaldi(0, "Ostatua", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), hiriatxtf.getText(), Integer.parseInt(PrezioOstatuatxtf.getText()), ekitaldiIzentxtf.getText(), ostatuSarreraDatatxtf.getText(), ostatuIrteeraDatatxtf.getText(), null);
+			Ekitaldi eki = new Ekitaldi(0, "Ostatua", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), hiriatxtf.getText(), Integer.parseInt(PrezioOstatuatxtf.getText()), ekitaldiIzentxtf.getText(), ostatuSarreraDatatxtf.getText(), ostatuIrteeraDatatxtf.getText(), "DUI");
 			ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki);
-			metodoak.ostatuaGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
+			DAO.ostatuaGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
 			}
 		});
 		btnGorde.setFocusPainted(false);
