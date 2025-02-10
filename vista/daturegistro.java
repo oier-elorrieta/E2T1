@@ -14,6 +14,7 @@ import javax.swing.event.DocumentListener;
 import modelo.Agentzia;
 import modelo.Bidai;
 import modelo.DAO;
+import modelo.Ekitaldi;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -38,6 +39,7 @@ public class daturegistro {
 	private JFrame frame;
 	private JTable ekiJTable;
 	private JTable bidaiJTable;
+	private ArrayList<Bidai> bidaiak;
 
 
 	/**
@@ -156,6 +158,10 @@ public class daturegistro {
 	    	public void mouseClicked(MouseEvent e) {
 	    		btnekiberri.setEnabled(true);
 	    		ag.setSelectedindx(bidaiJTable.getSelectedRow());
+	    		Bidai selectedbidai = bidaiak.get(ag.getSelectedindx());
+	    		ekitaldiakKargatu(ag, modeleki);
+	    		
+	    		
 	    	}
 	    });
 		bidaiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
@@ -196,18 +202,33 @@ public class daturegistro {
 		btnNewButton_1_1_1.setBounds(1069, 648, 135, 30);
 		panel.add(btnNewButton_1_1_1);
 		DAO.bidaiKargatuDB(ag);
-		datuakKargatu(bidaiJTable, model, ag);
+		bidaiak = bidaiakKargatu(bidaiJTable, model,  ag);
 	}
 	
 	
-	public void datuakKargatu(JTable bidaiJTable, DefaultTableModel model, Agentzia ag) {
-		model = (DefaultTableModel) bidaiJTable.getModel();
-		
+	public ArrayList<Bidai> bidaiakKargatu(JTable bidaiJTable, DefaultTableModel model, Agentzia ag) {
 		ArrayList<Bidai> bidaiak = ag.getBidaiak();
 	
         for(int i = 0; i < bidaiak.size(); i++) {
 		Bidai b = bidaiak.get(i);
 		model.addRow(new Object[]{ b.getIzena() , b.getBidmota() , b.getIraupena() , b.getHasidata() , b.getAmaidata() , b.getHerrihelmuga() });
         }
+        return bidaiak;
+	}
+	public void ekitaldiakKargatu(Agentzia ag,  DefaultTableModel modeleki ) {
+		for(int i = 0; i < modeleki.getRowCount(); i++) {
+			System.out.println(modeleki.getRowCount());
+			modeleki.removeRow(i);
+		}
+		
+		ArrayList<Ekitaldi> ekiarray = ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak();
+		for (int x = 0; x < ekiarray.size();x++) {
+			Ekitaldi eki = ekiarray.get(x);
+			if(eki.getIzena().equals("Ostatua")) {//ostatua
+				modeleki.addRow(new Object[]{ eki.getIzena() , eki.getHotizena() , eki.getOssardata() , eki.getOsprezio() });
+			}else if(eki.getIzena().equals("Jarduera")) {
+				modeleki.addRow(new Object[]{ eki.getIzena() , eki.getJardesk() , eki.getJardata() , eki.getJarprezio() });
+			}
+		}
 	}
 }

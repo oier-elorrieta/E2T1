@@ -281,13 +281,12 @@ public class DAO {
             	
             		bidaia = new Bidai(result.getInt(1), result.getString(2), ag.getKodea(), result.getString(3), result.getString(6), result.getString(7), result.getString(4), result.getString(5), result.getString(9));
             		String sqleki = "SELECT * from ekitaldiak eki left outer join ostatua os on eki.id_ekitaldia = os.id_ostatua left outer join Jarduerak jar on eki.id_ekitaldia = jar.id_jarduera left outer join joaneko_hegaldia jo on eki.id_ekitaldia = jo.id_hegaldia left outer join joan_etorriko_hegaldia joet on eki.id_ekitaldia = joet.id_hegaldia where eki.id_bidaia = '" + result.getInt(1)+"';";
-
+            		
             		PreparedStatement preparedStatement = conexion.prepareStatement(sqleki);
     	            resulteki = preparedStatement.executeQuery();
-                 	
-            		
+             
             		while(resulteki.next()) {
-            	      			
+            		
 	            		if(resulteki.getInt(4) != 0) {//ostatua da?
 	            			eki = new Ekitaldi(resulteki.getInt(4), resulteki.getString(2), resulteki.getString(3), resulteki.getString(6), resulteki.getInt(7), resulteki.getString(5), resulteki.getString(8), resulteki.getString(9), resulteki.getString(10));
 	            		}else if(resulteki.getInt(11) != 0) {//jarduera da?
@@ -353,7 +352,35 @@ public class DAO {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
 	        Statement sentencia = conexion.createStatement();
-	        String sql = "insert into ostatua (id_ostatua, hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '" + eki.getEkikode() +"' , '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
+	        String sql = "insert into ekitaldiak values ( '"+ eki.getEkikode() +"' , '" + eki.getIzena() +"' , '" +eki.getBidaikode() + "')";
+			sentencia.executeUpdate(sql);
+			sql = "SELECT max(id_ekitaldia) from ekitaldiak;";
+            ResultSet result = sentencia.executeQuery(sql);
+            while(result.next()) {
+            	sql = "insert into ostatua (id_ostatua, hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '"+result.getInt(1) +"' , '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
+            	sentencia.executeUpdate(sql);
+            }
+			
+	        
+	        sentencia.close();
+	        conexion.close();
+	        result.close();
+	
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+	    } catch (SQLException e) {
+	        System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+	    }
+		
+	}
+	
+	public static void jardueraGordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
+		
+		try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+	        Statement sentencia = conexion.createStatement();
+	        String sql = "insert into jarduera (id_jarduera, hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '" + eki.getEkikode() +"' , '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
 			sentencia.executeUpdate(sql);
 	        
 	        sentencia.close();
@@ -366,6 +393,8 @@ public class DAO {
 	    }
 		
 	}
+	
+	
 	
 		
 }

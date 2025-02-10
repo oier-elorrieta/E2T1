@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import modelo.Agentzia;
+import modelo.DAO;
+import modelo.Ekitaldi;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -127,16 +129,24 @@ public class jarduera {
 		prezioJardueratxtf.setBounds(305, 134, 146, 20);
 		panel.add(prezioJardueratxtf);
 		
-		JButton btnGorde = new JButton("GORDE");
-		btnGorde.setFocusPainted(false);
-		btnGorde.setBackground(UIManager.getColor("Button.background"));
-		btnGorde.setBounds(314, 231, 115, 23);
-		panel.add(btnGorde);
-		
 		deskJardueratxtf = new JTextField();
 		deskJardueratxtf.setColumns(10);
 		deskJardueratxtf.setBounds(305, 42, 225, 80);
 		panel.add(deskJardueratxtf);
 
+		JButton btnGorde = new JButton("GORDE");
+		btnGorde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ekitaldi eki = new Ekitaldi(0,"Jarduera", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), ekitaldiIzentxtf.getText() , jardueraDatatxtf.getText(),Integer.parseInt(prezioJardueratxtf.getText()));
+				ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki); //sartu agentziaren bidaiarraylistean, bidai bateko ekitaldiarray hartu eta ekitaldi bat sartu
+				DAO.jardueraGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
+			}
+		});
+		btnGorde.setFocusPainted(false);
+		btnGorde.setBackground(UIManager.getColor("Button.background"));
+		btnGorde.setBounds(314, 231, 115, 23);
+		panel.add(btnGorde);
+		
+		
 	}
 }
