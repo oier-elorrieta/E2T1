@@ -157,6 +157,7 @@ public class ostatua {
 			Ekitaldi eki = new Ekitaldi(0, "Ostatua", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), hiriatxtf.getText(), Integer.parseInt(PrezioOstatuatxtf.getText()), ekitaldiIzentxtf.getText(), ostatuSarreraDatatxtf.getText(), ostatuIrteeraDatatxtf.getText(), "DUI");
 			ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki);
 			DAO.ostatuaGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
+			daturegistro.pantalla(ag);
 			}
 		});
 		btnGorde.setFocusPainted(false);

@@ -216,15 +216,14 @@ public class daturegistro {
         return bidaiak;
 	}
 	public void ekitaldiakKargatu(Agentzia ag,  DefaultTableModel modeleki ) {
-		for(int i = 0; i < modeleki.getRowCount(); i++) {
-			System.out.println(modeleki.getRowCount());
+		for(int i = modeleki.getRowCount() - 1; i >= 0; i--) {
 			modeleki.removeRow(i);
 		}
 		
 		ArrayList<Ekitaldi> ekiarray = ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak();
 		for (int x = 0; x < ekiarray.size();x++) {
 			Ekitaldi eki = ekiarray.get(x);
-			if(eki.getIzena().equals("Ostatua")) {//ostatua
+			if(eki.getIzena().equals("Ostatua")) {
 				modeleki.addRow(new Object[]{ eki.getIzena() , eki.getHotizena() , eki.getOssardata() , eki.getOsprezio() });
 			}else if(eki.getIzena().equals("Jarduera")) {
 				modeleki.addRow(new Object[]{ eki.getIzena() , eki.getJardesk() , eki.getJardata() , eki.getJarprezio() });

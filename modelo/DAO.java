@@ -347,33 +347,85 @@ public class DAO {
 	
 	
 	public static void ostatuaGordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
-		
+		PreparedStatement sentencia = null ;
+		Connection conexion = null;
+		ResultSet result = null;
 		try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
-	        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
-	        Statement sentencia = conexion.createStatement();
+	        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+	        
 	        String sql = "insert into ekitaldiak values ( '"+ eki.getEkikode() +"' , '" + eki.getIzena() +"' , '" +eki.getBidaikode() + "')";
+			sentencia = conexion.prepareStatement(sql);
 			sentencia.executeUpdate(sql);
 			sql = "SELECT max(id_ekitaldia) from ekitaldiak;";
-            ResultSet result = sentencia.executeQuery(sql);
+            result = sentencia.executeQuery(sql);
+          
             while(result.next()) {
             	sql = "insert into ostatua (id_ostatua, hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '"+result.getInt(1) +"' , '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
-            	sentencia.executeUpdate(sql);
+            	
             }
-			
+			sentencia.executeUpdate(sql);
 	        
-	        sentencia.close();
-	        conexion.close();
-	        result.close();
+	        
 	
 	    } catch (ClassNotFoundException e) {
 	        System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
 	    } catch (SQLException e) {
 	        System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+	    }finally {
+	    	try {
+				sentencia.close();
+				conexion.close();
+				result.close();
+	    }catch (SQLException e) {
+			
+	    } 
+				
 	    }
+	        
 		
 	}
 	
+	
+	public static void GordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
+		PreparedStatement sentencia = null ;
+		Connection conexion = null;
+		ResultSet result = null;
+		try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+	        
+	        String sql = "insert into ekitaldiak values ( '"+ eki.getEkikode() +"' , '" + eki.getIzena() +"' , '" +eki.getBidaikode() + "')";
+			sentencia = conexion.prepareStatement(sql);
+			sentencia.executeUpdate(sql);
+			sql = "SELECT max(id_ekitaldia) from ekitaldiak;";
+            result = sentencia.executeQuery(sql);
+          
+            while(result.next()) {
+            	sql = "insert into ostatua (id_ostatua, hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '"+result.getInt(1) +"' , '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
+            	
+            }
+			sentencia.executeUpdate(sql);
+	        
+	        
+	
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+	    } catch (SQLException e) {
+	        System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+	    }finally {
+	    	try {
+				sentencia.close();
+				conexion.close();
+				result.close();
+	    }catch (SQLException e) {
+			
+	    } 
+				
+	    }
+	        
+		
+	}
 	public static void jardueraGordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
 		
 		try {
@@ -393,8 +445,128 @@ public class DAO {
 	    }
 		
 	}
+	// solo tiens que crear un metodo 
+    public static ArrayList<String> bidaiaMota() {
+        ArrayList<String> bidaiaMota = new ArrayList();
+        try {
+            // Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecemos la conexion con la BD
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+
+            // Preparamos la consultaç
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT deskribapena FROM bidaia_motak";
+            ResultSet result = sentencia.executeQuery(sql);
+
+            // Recorremos el resultado para visualizar cada fla
+            // Se hace un bucle mientras haya registros y se van visualizando
+           
+            while (result.next()) {
+                bidaiaMota.add (result.getString(1));
+            }
+
+            result.close(); // Cerrar ResultSet
+            sentencia.close(); // Cerrar Statement
+            conexion.close(); // Cerrar conexion
+
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bidaiaMota;
+    }
+    
+    public static String bidaiaMotaBilatu(String desk) {
+		String resultado = "";
+		try {
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+           Statement sentencia = conexion.createStatement();
+           String sql = "SELECT kodea from bidaia_motak where deskribapena like '%"+ desk + "';";
+           ResultSet result = sentencia.executeQuery(sql);
+          
+           while(result.next()) {
+           	
+           	resultado = result.getString(1);
+	          
 	
+	            }
+           	
+          
+           result.close();
+           sentencia.close();
+           conexion.close();
+       } catch (ClassNotFoundException e) {
+           System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+       } catch (SQLException e) {
+           System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+       }
+		return resultado;
+	}
+    
+    public static ArrayList<String> herrialdeMota() {
+        ArrayList<String> herrialdeMota = new ArrayList();
+        try {
+            // Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecemos la conexion con la BD
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+
+            // Preparamos la consultaç
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT herrialdeak FROM herrialdeak";
+            ResultSet result = sentencia.executeQuery(sql);
+
+            // Recorremos el resultado para visualizar cada fla
+            // Se hace un bucle mientras haya registros y se van visualizando
+           
+            while (result.next()) {
+                herrialdeMota.add (result.getString(1));
+            }
+
+            result.close(); // Cerrar ResultSet
+            sentencia.close(); // Cerrar Statement
+            conexion.close(); // Cerrar conexion
+
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return herrialdeMota;
+    }
+    
+    public static String herrialdeMotaBilatu() {
+		String resultado = "";
+		try {
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+           Statement sentencia = conexion.createStatement();
+           String sql = "SELECT kode_herrialde from herrialdeak where deskribapena like '%"+ herrialdeak + "';";
+           ResultSet result = sentencia.executeQuery(sql);
+          
+           while(result.next()) {
+           	
+           	resultado = result.getString(1);
+	          
 	
+	            }
+           	
+          
+           result.close();
+           sentencia.close();
+           conexion.close();
+       } catch (ClassNotFoundException e) {
+           System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+       } catch (SQLException e) {
+           System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+       }
+		return resultado;
+	}
 	
 		
 }

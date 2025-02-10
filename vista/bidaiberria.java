@@ -86,7 +86,6 @@ public class bidaiberria {
 	                // Crear una máscara de formato para la fecha
 	                maskFormatter = new MaskFormatter("##/##/####");
 	                maskFormatter.setPlaceholderCharacter('_');  // Caracter de placeholder, si se desea
-
 	            } catch (ParseException e) {
 	                e.printStackTrace();
 	            }
@@ -104,12 +103,7 @@ public class bidaiberria {
 	        bidaiIzentxtf.setBounds(306, 20, 146, 20);
 	        panel.add(bidaiIzentxtf);
 	        bidaiIzentxtf.setColumns(10);
-	      
-	        String[] langarraybox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" };
-	        
-	        
-	        String[] motaarraybox = new String[] { "", "Bidaiak", "Zerbitzuak"};
-	        
+
 	        logotxtf = new JTextField();
 	        logotxtf.setEnabled(false);
 	        logotxtf.setBounds(306, 140, 75, 20);
@@ -140,7 +134,7 @@ public class bidaiberria {
 	        zerbEztxtf.setBounds(306, 285, 225, 80);
 	        panel.add(zerbEztxtf);  
 	        
-	        String[] bidmotaarray = new String[] {"B1", "B2"}; 
+	        String[] bidmotaarray = (String[]) DAO.bidaiaMota().toArray();
 	        JComboBox bidaiMotaBox = new JComboBox(bidmotaarray);
 	        bidaiMotaBox.setMaximumRowCount(4);
 	        bidaiMotaBox.setBounds(306, 48, 124, 22);
@@ -159,9 +153,9 @@ public class bidaiberria {
 	        panel.add(bidaiAmaitxtf);
 	        
 	        
-	        String[] herriarray = new String []{"AR", "AT", "BE"};
-	        
-	        JComboBox herrialdeaBox = new JComboBox(herriarray);
+	       
+	        String[] herrialdeArray = (String[]) DAO.herrialdeMota().toArray();
+	        JComboBox herrialdeaBox = new JComboBox(herrialdeArray);
 	        herrialdeaBox.setMaximumRowCount(4);
 	        herrialdeaBox.setBounds(306, 166, 124, 22);
 	        panel.add(herrialdeaBox);
@@ -200,8 +194,8 @@ public class bidaiberria {
 	        btngorde.setFont(new Font("Tahoma", Font.PLAIN, 12));
 	        btngorde.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	            
-	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(),ag.getKodea(), desktxtf.getText(), zerbEztxtf.getText(), bidmotaarray[bidaiMotaBox.getSelectedIndex()], bidaiHasitxtf.getText(), bidaiAmaitxtf.getText(), herriarray[herrialdeaBox.getSelectedIndex()]);
+	          
+	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(),ag.getKodea(), desktxtf.getText(), zerbEztxtf.getText(), DAO.bidaiaMotaBilatu(bidmotaarray[bidaiMotaBox.getSelectedIndex()]), bidaiHasitxtf.getText(), bidaiAmaitxtf.getText(), DAO.herrialdeMotaBilatu(herrialdeArray[herrialdeaBox.getSelectedIndex()]));
 	            	ag.sartuBidaia(bidaia); // gorde arraylistean
 	            	DAO.bidaiGordeDB(ag, bidaia); // gorde DBan
 	            	daturegistro.pantalla(ag);

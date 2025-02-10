@@ -42,7 +42,7 @@ public class Dao {
 	@Test 
 	void agentziaBerriTTest() { Agentzia ag = new Agentzia("Javi", "foto",
 	"#FFFFFF", "L1", "A1", "xx", "zz"); metodoak.agentziaberri(ag);
-	assertFalse(metodoak.saioaKonprobatu("xx", "zz")); 
+	assertFalse(DAO.saioaKonprobatu("xx", "zz")); 
 	}
 
 	  
