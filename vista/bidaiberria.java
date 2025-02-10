@@ -21,6 +21,7 @@ import javax.swing.text.MaskFormatter;
 import modelo.Agentzia;
 import modelo.Bidai;
 import modelo.DAO;
+import modelo.Herrialde;
 
 public class bidaiberria {
 
@@ -134,7 +135,8 @@ public class bidaiberria {
 	        zerbEztxtf.setBounds(306, 285, 225, 80);
 	        panel.add(zerbEztxtf);  
 	        
-	        String[] bidmotaarray = (String[]) DAO.bidaiaMota().toArray();
+	        String [] bidmotaarray = new String [DAO.bidaiaMota().size()];
+	        DAO.bidaiaMota().toArray(bidmotaarray);
 	        JComboBox bidaiMotaBox = new JComboBox(bidmotaarray);
 	        bidaiMotaBox.setMaximumRowCount(4);
 	        bidaiMotaBox.setBounds(306, 48, 124, 22);
@@ -152,10 +154,14 @@ public class bidaiberria {
 	        bidaiAmaitxtf.setBounds(306, 112, 124, 20);
 	        panel.add(bidaiAmaitxtf);
 	        
-	        
-	       
-	        String[] herrialdeArray = (String[]) DAO.herrialdeMota().toArray();
-	        JComboBox herrialdeaBox = new JComboBox(herrialdeArray);
+	        Herrialde herri = new Herrialde();
+	        String[] herrialdeDesk = new String[herri.getHerrialdearray().size()];
+	       for (int i = 0; i < herri.getHerrialdearray().size(); i++) {
+	    	  herrialdeDesk[i] = herri.getHerrialdearray().get(i)[2];
+		}
+	        String[] herrialdeArray =  new String [DAO.herrialdeMota().size()];
+	        DAO.herrialdeMota().toArray(herrialdeArray);
+	        JComboBox herrialdeaBox = new JComboBox(herrialdeDesk);
 	        herrialdeaBox.setMaximumRowCount(4);
 	        herrialdeaBox.setBounds(306, 166, 124, 22);
 	        panel.add(herrialdeaBox);
@@ -194,7 +200,7 @@ public class bidaiberria {
 	        btngorde.setFont(new Font("Tahoma", Font.PLAIN, 12));
 	        btngorde.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	          
+	            	frame.setVisible(false);
 	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(),ag.getKodea(), desktxtf.getText(), zerbEztxtf.getText(), DAO.bidaiaMotaBilatu(bidmotaarray[bidaiMotaBox.getSelectedIndex()]), bidaiHasitxtf.getText(), bidaiAmaitxtf.getText(), DAO.herrialdeMotaBilatu(herrialdeArray[herrialdeaBox.getSelectedIndex()]));
 	            	ag.sartuBidaia(bidaia); // gorde arraylistean
 	            	DAO.bidaiGordeDB(ag, bidaia); // gorde DBan

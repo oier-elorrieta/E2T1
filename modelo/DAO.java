@@ -540,19 +540,19 @@ public class DAO {
         return herrialdeMota;
     }
     
-    public static String herrialdeMotaBilatu() {
-		String resultado = "";
+    public static ArrayList<String[]> herrialdeMotaBilatu() {
+		ArrayList<String[]> herrialdeak = new ArrayList();
 		try {
            Class.forName("com.mysql.cj.jdbc.Driver");
            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
            Statement sentencia = conexion.createStatement();
-           String sql = "SELECT kode_herrialde from herrialdeak where deskribapena like '%"+ herrialdeak + "';";
+           String sql = "SELECT * from herrialdeak;";
            ResultSet result = sentencia.executeQuery(sql);
           
            while(result.next()) {
            	
-           	resultado = result.getString(1);
-	          
+          String[] infoherri = new String[]{result.getString(1),result.getString(2)};
+	          herrialdeak.add(infoherri);
 	
 	            }
            	
@@ -565,7 +565,11 @@ public class DAO {
        } catch (SQLException e) {
            System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
        }
-		return resultado;
+		Herrialde herri = new Herrialde();
+		
+		herri.setHerrialdearray(herrialdeak);
+		
+		return herrialdeak;
 	}
 	
 		
