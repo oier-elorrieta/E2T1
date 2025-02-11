@@ -78,10 +78,11 @@ public class Ekitaldi {
 	
 
 
-	public Ekitaldi(int ekikode, String izena, int hkode, String airelinea, String jatairportkod,
+	public Ekitaldi(int ekikode, String izena, String bidaikode, int hkode, String airelinea, String jatairportkod,
 			String helairportkod, double iraupena, String irtordu, String irtdata, double hprezio) {
 		this.ekikode = ekikode;
 		this.izena = izena;
+		this.bidaikode= bidaikode;
 		this.hkode = hkode;
 		this.airelinea = airelinea;
 		this.jatairportkod = jatairportkod;

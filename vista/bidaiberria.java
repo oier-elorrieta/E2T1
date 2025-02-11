@@ -159,7 +159,7 @@ public class bidaiberria {
 	        String[] herrialdeDesk = new String[herri.getHerrialdearray().size()];
 	       for (int i = 0; i < herri.getHerrialdearray().size(); i++) {
 	    	  herrialdeDesk[i] = herri.getHerrialdearray().get(i)[1];
-		}
+	       }
 	        
 	        JComboBox herrialdeaBox = new JComboBox(herrialdeDesk);
 	        herrialdeaBox.setMaximumRowCount(4);

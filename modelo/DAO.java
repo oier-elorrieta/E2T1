@@ -287,21 +287,28 @@ public class DAO {
              
             		while(resulteki.next()) {
             		
-	            		if(resulteki.getInt(4) != 0) {//ostatua da?
+	            		if(resulteki.getInt(4) >= 1){//ostatua da?
 	            			eki = new Ekitaldi(resulteki.getInt(4), resulteki.getString(2), resulteki.getString(3), resulteki.getString(6), resulteki.getInt(7), resulteki.getString(5), resulteki.getString(8), resulteki.getString(9), resulteki.getString(10));
-	            		}else if(resulteki.getInt(11) != 0) {//jarduera da?
+	            			bidaia.sartuEkitaldia(eki);
+	            			
+	            		}else if(resulteki.getInt(11) >= 1) {//jarduera da?
 	            			eki = new Ekitaldi(resulteki.getInt(11), resulteki.getString(2), resulteki.getString(3), resulteki.getString(13), resulteki.getString(14),resulteki.getInt(15));
-	            		}else if (resulteki.getInt(25) != 0) {//joan etorrikoa da?
+	            			bidaia.sartuEkitaldia(eki);
+	            			
+	            		}else if (resulteki.getInt(25) >= 1) {//joan etorrikoa da?
 	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getString(3), resulteki.getInt(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21),  resulteki.getInt(26),  resulteki.getString(30),  resulteki.getString(22), resulteki.getString(23), resulteki.getInt(21), 0, resulteki.getInt(29), resulteki.getString(28), resulteki.getString(27));
-	            		}else if(resulteki.getInt(16) != 0){ //joanekoa da?
-	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getInt(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21));
+	            			bidaia.sartuEkitaldia(eki);
+	            			
+	            		}else if(resulteki.getInt(16) >= 1){ //joanekoa da?
+	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getString(3), resulteki.getInt(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21));
+	            			bidaia.sartuEkitaldia(eki);
 	            		}
-	            		bidaia.sartuEkitaldia(eki);
+	            		
             		}            		
             		
             		
             		                    
-                    
+            
             		ag.sartuBidaia(bidaia);
 
            
@@ -387,56 +394,36 @@ public class DAO {
 	}
 	
 	
-	public static void GordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
+	
+	public static void jardueraGordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
 		PreparedStatement sentencia = null ;
 		Connection conexion = null;
 		ResultSet result = null;
 		try {
+		        
+	          
+	            
 	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        
 	        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
 	        
-	        String sql = "insert into ekitaldiak values ( '"+ eki.getEkikode() +"' , '" + eki.getIzena() +"' , '" +eki.getBidaikode() + "')";
-			sentencia = conexion.prepareStatement(sql);
+	        String sql = "insert into ekitaldiak values ( '"+ eki.getEkikode() +"' , '" + eki.getIzena() +"' , '" + eki.getBidaikode() + "')";
+	        sentencia = conexion.prepareStatement(sql);
 			sentencia.executeUpdate(sql);
 			sql = "SELECT max(id_ekitaldia) from ekitaldiak;";
-            result = sentencia.executeQuery(sql);
-          
-            while(result.next()) {
-            	sql = "insert into ostatua (id_ostatua, hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '"+result.getInt(1) +"' , '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
-            	
-            }
-			sentencia.executeUpdate(sql);
+	        result = sentencia.executeQuery(sql);
+	         
+	        while(result.next()) {
+	        	  sql = "insert into jarduerak values ( " + result.getInt(1)+" , '" + eki.getIzena()+"' , '" + eki.getJardesk() + "' , '" + eki.getJardata() + "' , " + eki.getJarprezio()+ ")";
+	        		
 	        
-	        
-	
-	    } catch (ClassNotFoundException e) {
-	        System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
-	    } catch (SQLException e) {
-	        System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
-	    }finally {
-	    	try {
-				sentencia.close();
-				conexion.close();
-				result.close();
-	    }catch (SQLException e) {
-			
-	    } 
-				
-	    }
-	        
-		
-	}
-	public static void jardueraGordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
-		
-		try {
-	        Class.forName("com.mysql.cj.jdbc.Driver");
-	        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
-	        Statement sentencia = conexion.createStatement();
-	        String sql = "insert into jarduera (id_jarduera, hotelaren_izena, hiria, prezioa,sarrera_eguna, irteera_eguna, logela_mota_kodea) values ( '" + eki.getEkikode() +"' , '" + eki.getHotizena() +"' , '" + eki.getHiria() + "' , '" + eki.getOsprezio() + "' , '" + eki.getOssardata()  + "' , '" + eki.getOsirtdata()+ "' , '" + eki.getLogelamotakod() + "')";
-			sentencia.executeUpdate(sql);
-	        
+	            }
+	        sentencia = conexion.prepareStatement(sql);
+	        sentencia.executeUpdate(sql); 
+	        	
 	        sentencia.close();
 	        conexion.close();
+	        result.close();
 	
 	    } catch (ClassNotFoundException e) {
 	        System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
@@ -573,5 +560,35 @@ public class DAO {
 		return herrialdeak;
 	}
 	
+    public static ArrayList<Aireportu> aireportuakKargatuDB() {
+        ArrayList<Aireportu> aireportuak = new ArrayList<Aireportu>();
+        try {
+            // Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecemos la conexion con la BD
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+
+            // Preparamos la consultaç
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT * FROM iata";
+            ResultSet result = sentencia.executeQuery(sql);
+           
+            while (result.next()) {
+            	Aireportu airpt = new Aireportu(result.getString(1), result.getString(2));
+            	aireportuak.add(airpt);
+            }
+
+            result.close(); // Cerrar ResultSet
+            sentencia.close(); // Cerrar Statement
+            conexion.close(); // Cerrar conexion
+
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return aireportuak;
+    }
 		
 }

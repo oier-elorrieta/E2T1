@@ -137,9 +137,12 @@ public class jarduera {
 		JButton btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Ekitaldi eki = new Ekitaldi(0,"Jarduera", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), ekitaldiIzentxtf.getText() , jardueraDatatxtf.getText(),Integer.parseInt(prezioJardueratxtf.getText()));
 				ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki); //sartu agentziaren bidaiarraylistean, bidai bateko ekitaldiarray hartu eta ekitaldi bat sartu
 				DAO.jardueraGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
+				frame.setVisible(false);
+				daturegistro.pantalla(ag);
 			}
 		});
 		btnGorde.setFocusPainted(false);

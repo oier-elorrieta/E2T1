@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import modelo.Agentzia;
+import modelo.Ekitaldi;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -35,6 +36,7 @@ public class hegaldiJoanEtorri {
 	private JTextField airelineaBueltatxtf;
 	private JTextField bueltaOrduatxtf;
 	private JTextField bueltaIraupenatxtf;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -107,16 +109,6 @@ public class hegaldiJoanEtorri {
 		ekitaldiIzentxtf.setBounds(305, 11, 146, 20);
 		panel.add(ekitaldiIzentxtf);
 		ekitaldiIzentxtf.setColumns(10);
-
-		JLabel lblBidaiMota = new JLabel("Bidai Mota");
-		lblBidaiMota.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblBidaiMota.setBounds(10, 42, 225, 20);
-		panel.add(lblBidaiMota);
-		
-		JComboBox bidaiMotaBox = new JComboBox();
-		bidaiMotaBox.setMaximumRowCount(3);
-		bidaiMotaBox.setBounds(305, 44, 124, 22);
-		panel.add(bidaiMotaBox);
 		
 		JLabel lblJatorriAireportu = new JLabel("Jatorrizko Aireportua");
 		lblJatorriAireportu.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -225,7 +217,7 @@ public class hegaldiJoanEtorri {
 		JLabel lblAirelineaBuelta = new JLabel("Airelinea Buelta");
 		lblAirelineaBuelta.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblAirelineaBuelta.setBounds(480, 197, 146, 20);
-		panel.add(lblAirelineaBuelta);
+		panel.add(lblAirelineaBuelta); 
 		
 		airelineaBueltatxtf = new JTextField();
 		airelineaBueltatxtf.setColumns(10);
@@ -253,10 +245,26 @@ public class hegaldiJoanEtorri {
 		panel.add(bueltaIraupenatxtf);
 		
 		JButton btnGorde = new JButton("GORDE");
+		btnGorde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ekitaldi eki = new Ekitaldi(0,"JoanekoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), Integer.parseInt(hegaldiKodeatxtf.getText()), airelintextField.getText() , aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getHiria(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getHiria(),Double.parseDouble(iraupenatxtf.getText()), irteeraOrduatxtf.getText(), joanekoDatatxtf.getText(), Double.parseDouble(prezioHegalditxtf.getText()),resulteki.getInt(26),  resulteki.getString(30),  resulteki.getString(22), resulteki.getString(23), resulteki.getInt(21), 0, resulteki.getInt(29), resulteki.getString(28), resulteki.getString(27));
+
+			}
+		});
 		btnGorde.setFocusPainted(false);
 		btnGorde.setBackground(UIManager.getColor("Button.background"));
 		btnGorde.setBounds(314, 366, 115, 23);
 		panel.add(btnGorde);
+		
+		JLabel lblPrezioTotala_1 = new JLabel("Prezio Totala");
+		lblPrezioTotala_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblPrezioTotala_1.setBounds(480, 321, 146, 20);
+		panel.add(lblPrezioTotala_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(636, 324, 146, 20);
+		panel.add(textField_1);
 
 	}
 }
