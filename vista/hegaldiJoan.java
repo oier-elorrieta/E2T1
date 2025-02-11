@@ -17,13 +17,14 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import modelo.Agentzia;
+import modelo.Ekitaldi;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class hegaldiJoan {
 
-	JFrame frame;
+	JFrame frame; 
 	private JTextField joanekoDatatxtf;
 	private JTextField hegaldiKodeatxtf;
 	private JTextField textField;
@@ -199,6 +200,13 @@ public class hegaldiJoan {
 		panel.add(iraupenatxtf);
 		
 		JButton btnGorde = new JButton("GORDE");
+		btnGorde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Ekitaldi eki = new Ekitaldi(0,"JoanekoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), textField.getText(), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21));
+
+			}
+		});
 		btnGorde.setFocusPainted(false);
 		btnGorde.setBackground(UIManager.getColor("Button.background"));
 		btnGorde.setBounds(314, 354, 115, 23);

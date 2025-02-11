@@ -155,12 +155,12 @@ public class bidaiberria {
 	        panel.add(bidaiAmaitxtf);
 	        
 	        Herrialde herri = new Herrialde();
+	        herri.setHerrialdearray(DAO.herrialdeakKargatu());
 	        String[] herrialdeDesk = new String[herri.getHerrialdearray().size()];
 	       for (int i = 0; i < herri.getHerrialdearray().size(); i++) {
-	    	  herrialdeDesk[i] = herri.getHerrialdearray().get(i)[2];
+	    	  herrialdeDesk[i] = herri.getHerrialdearray().get(i)[1];
 		}
-	        String[] herrialdeArray =  new String [DAO.herrialdeMota().size()];
-	        DAO.herrialdeMota().toArray(herrialdeArray);
+	        
 	        JComboBox herrialdeaBox = new JComboBox(herrialdeDesk);
 	        herrialdeaBox.setMaximumRowCount(4);
 	        herrialdeaBox.setBounds(306, 166, 124, 22);
@@ -201,10 +201,12 @@ public class bidaiberria {
 	        btngorde.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	            	frame.setVisible(false);
-	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(),ag.getKodea(), desktxtf.getText(), zerbEztxtf.getText(), DAO.bidaiaMotaBilatu(bidmotaarray[bidaiMotaBox.getSelectedIndex()]), bidaiHasitxtf.getText(), bidaiAmaitxtf.getText(), DAO.herrialdeMotaBilatu(herrialdeArray[herrialdeaBox.getSelectedIndex()]));
+	            	
+	            	Bidai bidaia = new Bidai(bidaiIzentxtf.getText(),ag.getKodea(), desktxtf.getText(), zerbEztxtf.getText(), DAO.bidaiaMotaBilatu(bidmotaarray[bidaiMotaBox.getSelectedIndex()]), bidaiHasitxtf.getText(), bidaiAmaitxtf.getText(),herri.getHerrialdearray().get(herrialdeaBox.getSelectedIndex())[0]);
 	            	ag.sartuBidaia(bidaia); // gorde arraylistean
 	            	DAO.bidaiGordeDB(ag, bidaia); // gorde DBan
 	            	daturegistro.pantalla(ag);
+	             
 	            }
 	        });
 	        btngorde.setBounds(306, 416, 99, 23);

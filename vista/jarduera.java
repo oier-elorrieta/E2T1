@@ -53,7 +53,7 @@ public class jarduera {
 	 */
 	public jarduera(Agentzia ag) {
 		initialize(ag);
-	}
+	} 
 
 	/**
 	 * Initialize the contents of the frame.

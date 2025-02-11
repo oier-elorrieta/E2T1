@@ -540,7 +540,7 @@ public class DAO {
         return herrialdeMota;
     }
     
-    public static ArrayList<String[]> herrialdeMotaBilatu() {
+    public static ArrayList<String[]>herrialdeakKargatu() {
 		ArrayList<String[]> herrialdeak = new ArrayList();
 		try {
            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -550,11 +550,12 @@ public class DAO {
            ResultSet result = sentencia.executeQuery(sql);
           
            while(result.next()) {
-           	
-          String[] infoherri = new String[]{result.getString(1),result.getString(2)};
+        
+           	String[] infoherri = new String[]{result.getString(1),result.getString(2)};
 	          herrialdeak.add(infoherri);
 	
-	            }
+	           
+           }
            	
           
            result.close();
