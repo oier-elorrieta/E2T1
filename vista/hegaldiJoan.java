@@ -30,7 +30,7 @@ public class hegaldiJoan {
 	JFrame frame; 
 	private JTextField joanekoDatatxtf;
 	private JTextField hegaldiKodeatxtf;
-	private JTextField airelintextField;
+	private JComboBox airelintextField;
 	private JTextField prezioHegalditxtf;
 	private JTextField irteeraOrduatxtf;
 	private JTextField iraupenatxtf;
@@ -163,8 +163,13 @@ public class hegaldiJoan {
 		lblAirelinea.setBounds(10, 166, 225, 20);
 		panel.add(lblAirelinea);
 		
-		airelintextField = new JTextField();
-		airelintextField.setColumns(10);
+		
+		ArrayList<String[]> airelineak = DAO.airelineakKargatuDB();
+		String[] airelineakizenak = new String[airelineak.size()];
+		for (int i = 0; i < airelineak.size(); i++) {
+			airelineakizenak[i] = airelineak.get(i)[1];
+	       }
+		airelintextField = new JComboBox(airelineakizenak);
 		airelintextField.setBounds(305, 169, 146, 20);
 		panel.add(airelintextField);
 		
@@ -202,7 +207,7 @@ public class hegaldiJoan {
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Ekitaldi eki = new Ekitaldi(0,"JoanekoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), Integer.parseInt(hegaldiKodeatxtf.getText()), airelintextField.getText() , aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getAireportu_kod(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getAireportu_kod(),Double.parseDouble(iraupenatxtf.getText()), irteeraOrduatxtf.getText(), joanekoDatatxtf.getText(), Double.parseDouble(prezioHegalditxtf.getText()));
+				Ekitaldi eki = new Ekitaldi(0,"JoanekoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), hegaldiKodeatxtf.getText(), airelineak.get(airelintextField.getSelectedIndex())[1]  , aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getAireportu_kod(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getAireportu_kod(),iraupenatxtf.getText(), irteeraOrduatxtf.getText(), joanekoDatatxtf.getText(), Double.parseDouble(prezioHegalditxtf.getText()));
 				ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki); //sartu agentziaren bidaiarraylistean, bidai bateko ekitaldiarray hartu eta ekitaldi bat sartu
 				DAO.joanekoaGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
 				frame.setVisible(false);

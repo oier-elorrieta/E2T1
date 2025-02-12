@@ -299,11 +299,11 @@ public class DAO {
 	            			bidaia.sartuEkitaldia(eki);
 	            			
 	            		}else if (resulteki.getInt(25) >= 1) {//joan etorrikoa da?
-	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getString(3), resulteki.getInt(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21),  resulteki.getInt(26),  resulteki.getString(30),  resulteki.getString(22), resulteki.getString(23), resulteki.getInt(21), 0, resulteki.getInt(29), resulteki.getString(28), resulteki.getString(27));
+	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getString(3), resulteki.getString(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getString(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21),  resulteki.getInt(26),  resulteki.getString(30),  resulteki.getString(22), resulteki.getString(23), resulteki.getInt(21), 0, resulteki.getString(29), resulteki.getString(28), resulteki.getString(27));
 	            			bidaia.sartuEkitaldia(eki);
 	            			
 	            		}else if(resulteki.getInt(16) >= 1){ //joanekoa da?
-	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getString(3), resulteki.getInt(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getInt(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21));
+	            			eki = new Ekitaldi(resulteki.getInt(16), resulteki.getString(2), resulteki.getString(3), resulteki.getString(17),  resulteki.getString(24), resulteki.getString(22), resulteki.getString(23), resulteki.getString(20), resulteki.getString(19), resulteki.getString(18),  resulteki.getInt(21));
 	            			bidaia.sartuEkitaldia(eki);
 	            		}
 	            		
@@ -629,6 +629,37 @@ public class DAO {
             e.printStackTrace();
         }
         return aireportuak;
+    }
+    public static ArrayList<String[]> airelineakKargatuDB() {
+        ArrayList<String[]> airelineak = new ArrayList<String[]>();
+        try {
+            // Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecemos la conexion con la BD
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+
+            // Preparamos la consultaç
+            Statement sentencia = conexion.createStatement();
+            String sql = "SELECT * FROM airelineak";
+            ResultSet result = sentencia.executeQuery(sql);
+           
+            while (result.next()) {
+            	
+                String[] aireinfo= new String[] {result.getString(1),result.getString(2)};            	
+            	airelineak.add(aireinfo);
+            }
+
+            result.close(); // Cerrar ResultSet
+            sentencia.close(); // Cerrar Statement
+            conexion.close(); // Cerrar conexion
+
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return airelineak;
     }
 		
 }

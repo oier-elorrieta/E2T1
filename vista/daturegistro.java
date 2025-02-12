@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URI;
+import java.net.URL;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 
@@ -39,8 +41,10 @@ public class daturegistro {
 	private JFrame frame;
 	private JTable ekiJTable;
 	private JTable bidaiJTable;
+	private JLabel imgLabel;
+	private JPanel panel;
+	
 	private ArrayList<Bidai> bidaiak;
-
 
 	/**
 	 * Launch the application.
@@ -67,72 +71,68 @@ public class daturegistro {
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @param ag 
+	 * 
+	 * @param ag
 	 */
 	private void initialize(Agentzia ag) {
-		
+
 		frame = new JFrame();
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(100, 100, 1250, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JPanel panel = new JPanel();
+
+		panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		
+
 		String hexColor = DAO.koloreaHartu(ag).trim();
 		try {
 			Color color = Color.decode(hexColor);
 			panel.setBackground(color);
-		} catch (NumberFormatException ex) {            
+		} catch (NumberFormatException ex) {
 			panel.setBackground(Color.WHITE);
-        }
-                
-        
-		
+		}
+
 		panel.setBounds(10, 11, 1214, 689);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
-	
-		
-		JLabel imgLabel = new JLabel(new ImageIcon("C:/Users/in1dm3-d/Desktop/Erronka%202/Prog/Erronka2TalDe1/src/vista/pasaporte.jpg"));
+
+		imgLabel = new JLabel();
 		imgLabel.setBounds(1034, 11, 170, 148);
 		panel.add(imgLabel);
-		
+
 		JLabel lblBidaiak = new JLabel("BIDAIAK");
 		lblBidaiak.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBidaiak.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblBidaiak.setBounds(50, 11, 159, 48);
 		panel.add(lblBidaiak);
-		
+
 		JLabel lblEkitaldi = new JLabel("EKITALDIAK");
 		lblEkitaldi.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEkitaldi.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblEkitaldi.setBounds(50, 342, 211, 48);
 		panel.add(lblEkitaldi);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(50, 400, 780, 250);
 		panel.add(scrollPane);
-		
-		
+
 		DefaultTableModel modeleki = new DefaultTableModel();
 		modeleki.addColumn("Ekitaldiaren Izena");
 		modeleki.addColumn("Ekitaldi Mota");
-	    modeleki.addColumn("Data");
-	    modeleki.addColumn("Prezioa €");
-	    ekiJTable = new JTable(modeleki);
-	    ekiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
+		modeleki.addColumn("Data");
+		modeleki.addColumn("Prezioa €");
+		ekiJTable = new JTable(modeleki);
+		ekiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
 		ekiJTable.getColumnModel().getColumn(3).setPreferredWidth(94);
 		ekiJTable.getColumnModel().getColumn(0).setPreferredWidth(112);
 		scrollPane.setViewportView(ekiJTable);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(50, 68, 780, 250);
 		panel.add(scrollPane_1);
-		
+
 		JButton btnekiberri = new JButton("EKITALDI BERRIA");
 		btnekiberri.setEnabled(false);
 		btnekiberri.addActionListener(new ActionListener() {
@@ -143,34 +143,33 @@ public class daturegistro {
 		});
 		btnekiberri.setBounds(840, 403, 135, 30);
 		panel.add(btnekiberri);
-		
+
 		DefaultTableModel model = new DefaultTableModel();
-	    model.addColumn("Bidaiak");
-	    model.addColumn("Mota");
-	    model.addColumn("Egunak");
-	    model.addColumn("Hasierako data");
-	    model.addColumn("Amaireako data");
-	    model.addColumn("Herrialde");
-	    bidaiJTable = new JTable(model);
-	    
-	    bidaiJTable.addMouseListener(new MouseAdapter() {
-	    	@Override
-	    	public void mouseClicked(MouseEvent e) {
-	    		btnekiberri.setEnabled(true);
-	    		ag.setSelectedindx(bidaiJTable.getSelectedRow());
-	    		Bidai selectedbidai = bidaiak.get(ag.getSelectedindx());
-	    		ekitaldiakKargatu(ag, modeleki);
-	    		
-	    		
-	    	}
-	    });
+		model.addColumn("Bidaiak");
+		model.addColumn("Mota");
+		model.addColumn("Egunak");
+		model.addColumn("Hasierako data");
+		model.addColumn("Amaireako data");
+		model.addColumn("Herrialde");
+		bidaiJTable = new JTable(model);
+
+		bidaiJTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnekiberri.setEnabled(true);
+				ag.setSelectedindx(bidaiJTable.getSelectedRow());
+				Bidai selectedbidai = bidaiak.get(ag.getSelectedindx());
+				ekitaldiakKargatu(ag, modeleki);
+
+			}
+		});
 		bidaiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
 		bidaiJTable.getColumnModel().getColumn(4).setPreferredWidth(94);
 		bidaiJTable.getCellSelectionEnabled();
 		bidaiJTable.getRowSelectionAllowed();
-		
+
 		scrollPane_1.setViewportView(bidaiJTable);
-		
+
 		JButton btnBidaiBerri = new JButton("BIDAIA BERRIA");
 		btnBidaiBerri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -180,10 +179,7 @@ public class daturegistro {
 		});
 		btnBidaiBerri.setBounds(840, 67, 135, 30);
 		panel.add(btnBidaiBerri);
-		
-		
-		
-		
+
 		JButton btnNewButton_1_1 = new JButton("ESKAINTZA SORTU");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,7 +187,7 @@ public class daturegistro {
 		});
 		btnNewButton_1_1.setBounds(840, 648, 135, 30);
 		panel.add(btnNewButton_1_1);
-		
+
 		JButton btnNewButton_1_1_1 = new JButton("DESKONEKTATU");
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -202,31 +198,78 @@ public class daturegistro {
 		btnNewButton_1_1_1.setBounds(1069, 648, 135, 30);
 		panel.add(btnNewButton_1_1_1);
 		DAO.bidaiKargatuDB(ag);
-		bidaiak = bidaiakKargatu(bidaiJTable, model,  ag);
+		bidaiak = bidaiakKargatu(bidaiJTable, model, ag);
+
+		logoKargatu(ag);
 	}
-	
-	
+
+	private void logoKargatu(Agentzia ag) {
+
+		try {
+			// Obtener la URL del logo de la caché (acceso estático)
+
+			String logoUrl = ag.getLogo();// Accedemos al logo desde Cache
+
+			if (logoUrl != null && !logoUrl.isEmpty()) {
+				// Convertir la URL a URI y luego a URL
+				URI uri = new URI(logoUrl);
+				URL url = uri.toURL(); // Convertimos URI a URL
+
+				// Crear un ImageIcon con la URL
+				ImageIcon imageIcon1 = new ImageIcon(url);
+
+				// Crear el JLabel
+				imgLabel = new JLabel();
+
+				// Establecer el tamaño del JLabel según el layout o manualmente
+				imgLabel.setBounds(1034, 11, 170, 148); // Establecemos el tamaño fijo (puedes ajustarlo según lo
+														// necesites)
+
+				// Escalar la imagen al tamaño del JLabel (con el mismo enfoque que en el botón)
+				Image image1 = imageIcon1.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(),
+						Image.SCALE_SMOOTH);
+				imageIcon1.setImage(image1);
+
+				// Establecer el icono redimensionado en el JLabel
+				imgLabel.setIcon(imageIcon1);
+
+				panel.add(imgLabel);
+
+			} else {
+
+				System.out.println("Logotipoaren URLa ez da baliozkoa edo ez dago erabilgarri.");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public ArrayList<Bidai> bidaiakKargatu(JTable bidaiJTable, DefaultTableModel model, Agentzia ag) {
 		ArrayList<Bidai> bidaiak = ag.getBidaiak();
-	
-        for(int i = 0; i < bidaiak.size(); i++) {
-		Bidai b = bidaiak.get(i);
-		model.addRow(new Object[]{ b.getIzena() , b.getBidmota() , b.getIraupena() , b.getHasidata() , b.getAmaidata() , b.getHerrihelmuga() });
-        }
-        return bidaiak;
+
+		for (int i = 0; i < bidaiak.size(); i++) {
+			Bidai b = bidaiak.get(i);
+			model.addRow(new Object[] { b.getIzena(), b.getBidmota(), b.getIraupena(), b.getHasidata(), b.getAmaidata(),
+					b.getHerrihelmuga() });
+		}
+		return bidaiak;
 	}
-	public void ekitaldiakKargatu(Agentzia ag,  DefaultTableModel modeleki ) {
-		for(int i = modeleki.getRowCount() - 1; i >= 0; i--) {
+
+	public void ekitaldiakKargatu(Agentzia ag, DefaultTableModel modeleki) {
+		for (int i = modeleki.getRowCount() - 1; i >= 0; i--) {
 			modeleki.removeRow(i);
 		}
-		
+
 		ArrayList<Ekitaldi> ekiarray = ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak();
-		for (int x = 0; x < ekiarray.size();x++) {
+		for (int x = 0; x < ekiarray.size(); x++) {
 			Ekitaldi eki = ekiarray.get(x);
-			if(eki.getIzena().equals("Ostatua")) {
-				modeleki.addRow(new Object[]{ eki.getIzena() , eki.getHotizena() , eki.getOssardata() , eki.getOsprezio() });
-			}else if(eki.getIzena().equals("Jarduera")) {
-				modeleki.addRow(new Object[]{ eki.getIzena() , eki.getJardesk() , eki.getJardata() , eki.getJarprezio() });
+			if (eki.getIzena().equals("Ostatua")) {
+				modeleki.addRow(
+						new Object[] { eki.getIzena(), eki.getHotizena(), eki.getOssardata(), eki.getOsprezio() });
+			} else if (eki.getIzena().equals("Jarduera")) {
+				modeleki.addRow(
+						new Object[] { eki.getIzena(), eki.getJardesk(), eki.getJardata(), eki.getJarprezio() });
 			}
 		}
 	}
