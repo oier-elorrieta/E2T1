@@ -79,8 +79,11 @@ public class DAO {
         return deskboxarray;
     }
     
+	
     
     public static String[] agentziaMota() {
+        
+    	
         String[] deskboxarray = new String[4];
         try {
             // Cargar el driver
@@ -432,8 +435,48 @@ public class DAO {
 	    }
 		
 	}
-	// solo tiens que crear un metodo 
-    public static ArrayList<String> bidaiaMota() {
+	
+	public static void joanekoaGordeDB(Agentzia ag, Bidai bidaia, Ekitaldi eki) {
+
+		PreparedStatement sentencia = null ;
+		Connection conexion = null;
+		ResultSet result = null;
+		ArrayList<Aireportu> airarray = aireportuakKargatuDB();
+		try {
+		        
+	          
+	            
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        
+	        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_bidaiaagentzia", "root","");
+	        
+	        String sql = "insert into ekitaldiak values ( '"+ eki.getEkikode() +"' , '" + eki.getIzena() +"' , '" + eki.getBidaikode() + "')";
+	        sentencia = conexion.prepareStatement(sql);
+			sentencia.executeUpdate(sql);
+			sql = "SELECT max(id_ekitaldia) from ekitaldiak;";
+	        result = sentencia.executeQuery(sql);
+	         
+	        while(result.next()) {
+	        	  sql = "insert into joaneko_hegaldia values ( " + result.getInt(1)+" , '" + eki.getHkode()+"' , '" + eki.getIrtdata() + "' , '" + eki.getIrtordu() + "' , '" + eki.getIraupena()+ "' , '" + eki.getHprezio()+ "' , '" + eki.getJatairportkod()+ "' , '" + eki.getHelairportkod()+ "' , " + eki.getAirelinea()+")";
+	        		
+	        
+	            }
+	        sentencia = conexion.prepareStatement(sql);
+	        sentencia.executeUpdate(sql); 
+	        	
+	        sentencia.close();
+	        conexion.close();
+	        result.close();
+	
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver JDBC: " + e.getMessage());
+	    } catch (SQLException e) {
+	        System.out.println("Error en la conexión a la base de datos: " + e.getMessage());
+	    }
+		
+	}
+    
+	public static ArrayList<String> bidaiaMota() {
         ArrayList<String> bidaiaMota = new ArrayList();
         try {
             // Cargar el driver
@@ -446,9 +489,6 @@ public class DAO {
             Statement sentencia = conexion.createStatement();
             String sql = "SELECT deskribapena FROM bidaia_motak";
             ResultSet result = sentencia.executeQuery(sql);
-
-            // Recorremos el resultado para visualizar cada fla
-            // Se hace un bucle mientras haya registros y se van visualizando
            
             while (result.next()) {
                 bidaiaMota.add (result.getString(1));

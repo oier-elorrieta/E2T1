@@ -202,8 +202,11 @@ public class hegaldiJoan {
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Ekitaldi eki = new Ekitaldi(0,"JoanekoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), Integer.parseInt(hegaldiKodeatxtf.getText()), airelintextField.getText() , aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getHiria(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getHiria(),Double.parseDouble(iraupenatxtf.getText()), irteeraOrduatxtf.getText(), joanekoDatatxtf.getText(), Double.parseDouble(prezioHegalditxtf.getText()));
-
+				Ekitaldi eki = new Ekitaldi(0,"JoanekoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), Integer.parseInt(hegaldiKodeatxtf.getText()), airelintextField.getText() , aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getAireportu_kod(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getAireportu_kod(),Double.parseDouble(iraupenatxtf.getText()), irteeraOrduatxtf.getText(), joanekoDatatxtf.getText(), Double.parseDouble(prezioHegalditxtf.getText()));
+				ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki); //sartu agentziaren bidaiarraylistean, bidai bateko ekitaldiarray hartu eta ekitaldi bat sartu
+				DAO.joanekoaGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
+				frame.setVisible(false);
+				daturegistro.pantalla(ag);
 			}
 		});
 		btnGorde.setFocusPainted(false);
