@@ -4,14 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import konexioa.BD_Konexioa;
 import vista.ongietorri;
 
 public class main {
 
-
-	private JFrame frame;
+private JFrame frame;
 
 	public static void main(String[] args) {
+
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

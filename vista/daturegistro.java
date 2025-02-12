@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileWriter;
 import java.net.URI;
 import java.net.URL;
 import java.awt.event.ContainerAdapter;
@@ -38,11 +40,14 @@ import java.awt.event.ContainerEvent;
 
 public class daturegistro {
 
+	private JButton btnEsk;
 	private JFrame frame;
 	private JTable ekiJTable;
 	private JTable bidaiJTable;
 	private JLabel imgLabel;
 	private JPanel panel;
+	private JButton btnBidaiEzb;
+	private JButton btnEkiEzb;
 	
 	private ArrayList<Bidai> bidaiak;
 
@@ -120,10 +125,19 @@ public class daturegistro {
 
 		DefaultTableModel modeleki = new DefaultTableModel();
 		modeleki.addColumn("Ekitaldiaren Izena");
-		modeleki.addColumn("Ekitaldi Mota");
+		modeleki.addColumn("Deskribapena");
 		modeleki.addColumn("Data");
 		modeleki.addColumn("Prezioa €");
 		ekiJTable = new JTable(modeleki);
+		ekiJTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnBidaiEzb.setEnabled(false);
+				btnEkiEzb.setEnabled(true);
+				bidaiak.get(ag.getSelectedindx()).setSelectedindx(ekiJTable.getSelectedRow());
+			}
+		
+		});
 		ekiJTable.getColumnModel().getColumn(3).setPreferredWidth(104);
 		ekiJTable.getColumnModel().getColumn(3).setPreferredWidth(94);
 		ekiJTable.getColumnModel().getColumn(0).setPreferredWidth(112);
@@ -141,7 +155,7 @@ public class daturegistro {
 				ekitaldiaukeratu.pantalla(ag);
 			}
 		});
-		btnekiberri.setBounds(840, 403, 135, 30);
+		btnekiberri.setBounds(840, 403, 145, 30);
 		panel.add(btnekiberri);
 
 		DefaultTableModel model = new DefaultTableModel();
@@ -157,9 +171,13 @@ public class daturegistro {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btnekiberri.setEnabled(true);
+				btnEsk.setEnabled(true);
+				btnBidaiEzb.setEnabled(true);
+				btnEkiEzb.setEnabled(false);
 				ag.setSelectedindx(bidaiJTable.getSelectedRow());
-				Bidai selectedbidai = bidaiak.get(ag.getSelectedindx());
+				
 				ekitaldiakKargatu(ag, modeleki);
+				
 
 			}
 		});
@@ -177,16 +195,16 @@ public class daturegistro {
 				bidaiberria.pantalla(ag);
 			}
 		});
-		btnBidaiBerri.setBounds(840, 67, 135, 30);
+		btnBidaiBerri.setBounds(840, 67, 145, 30);
 		panel.add(btnBidaiBerri);
-
-		JButton btnNewButton_1_1 = new JButton("ESKAINTZA SORTU");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
+		 btnEsk = new JButton("ESKAINTZA SORTU");
+		btnEsk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				eskaintzaSortu(ag);
 			}
 		});
-		btnNewButton_1_1.setBounds(840, 648, 135, 30);
-		panel.add(btnNewButton_1_1);
+		btnEsk.setBounds(840, 648, 135, 30);
+		panel.add(btnEsk);
 
 		JButton btnNewButton_1_1_1 = new JButton("DESKONEKTATU");
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
@@ -199,6 +217,40 @@ public class daturegistro {
 		panel.add(btnNewButton_1_1_1);
 		DAO.bidaiKargatuDB(ag);
 		bidaiak = bidaiakKargatu(bidaiJTable, model, ag);
+		
+		btnBidaiEzb = new JButton("X");
+		btnBidaiEzb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0 ; i < bidaiak.size(); i++) {
+					if(bidaiak.get(i).getKode() == bidaiak.get(ag.getSelectedindx()).getKode()) {
+						bidaiak.remove(i);
+					}
+				}
+				DAO.ezabatuBidaia(ag);
+
+			}
+		});
+		btnBidaiEzb.setBounds(840, 107, 56, 21);
+		btnBidaiEzb.setEnabled(false); 
+		panel.add(btnBidaiEzb);
+		
+		btnEkiEzb = new JButton("X");
+		btnEkiEzb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Ekitaldi> ekitaldiak = bidaiak.get(ag.getSelectedindx()).getEkitaldiak();
+				for (int i = 0 ; i < ekitaldiak.size(); i++) {
+					if(ekitaldiak.get(i).getEkikode() == ekitaldiak.get(ag.getSelectedindx()).getEkikode()) {
+						ekitaldiak.remove(i);
+						
+					}
+				}
+				DAO.ezabatuEkitaldi(ag);
+				ekitaldiakKargatu(ag, modeleki);
+			}
+		});
+		btnEkiEzb.setBounds(840, 443, 56, 21);
+		btnEkiEzb.setEnabled(false); 
+		panel.add(btnEkiEzb);
 
 		logoKargatu(ag);
 	}
@@ -265,12 +317,42 @@ public class daturegistro {
 		for (int x = 0; x < ekiarray.size(); x++) {
 			Ekitaldi eki = ekiarray.get(x);
 			if (eki.getIzena().equals("Ostatua")) {
-				modeleki.addRow(
-						new Object[] { eki.getIzena(), eki.getHotizena(), eki.getOssardata(), eki.getOsprezio() });
-			} else if (eki.getIzena().equals("Jarduera")) {
-				modeleki.addRow(
-						new Object[] { eki.getIzena(), eki.getJardesk(), eki.getJardata(), eki.getJarprezio() });
+				modeleki.addRow(new Object[] { "Ostatua", eki.getHotizena(), eki.getOssardata(), eki.getOsprezio() });
 			}
-		}
+			if (eki.getIzena().equals("Jarduera")) {
+				modeleki.addRow(new Object[] { "Jarduera", eki.getJardesk(), eki.getJardata(), eki.getJarprezio() });
+			
+			}if (eki.getIzena().equals("JoanekoHegaldia")) {
+				modeleki.addRow(new Object[] { "JoanekoHegaldia", eki.getIrtordu(), eki.getIrtdata(), eki.getHprezio() });
+			}
+			
+			if (eki.getBkode() > 0) {
+				modeleki.addRow(new Object[] { "JoanEtorrikoHegaldia", eki.getBirtordu(), eki.getBirtdata(), eki.getBprezio() });
+			}
+			
+			
 	}
+	}
+    public static boolean eskaintzaSortu(Agentzia ag){
+        boolean sent = false;
+    	try {
+    	
+    	File f = new File("C:\\Users\\unaic\\OneDrive\\Escritorio\\Erronka 2 HDP\\Erronka2\\src\\Eskaintza.txt");
+    	FileWriter wf = new FileWriter(f);
+    	Bidai selectedbidaia = ag.getBidaiak().get(ag.getSelectedindx());
+    	ArrayList<Ekitaldi> ekitaldiaktxt = selectedbidaia.getEkitaldiak();
+        String txt = ag.getIzena()+ ": \n" + selectedbidaia.getIzena() + ", "+ selectedbidaia.getDesk()+ ", "+ selectedbidaia.getHasidata()+ ", "+ selectedbidaia.getZerbez()+ ". \n" ;
+        for(int i = 0; i < ekitaldiaktxt.size(); i++) {
+        	txt = txt + ekitaldiaktxt.get(i).getIzena() + "\n";
+        }
+        
+        wf.write(txt);
+    
+        sent = true;
+        wf.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return sent;
+    }
 }

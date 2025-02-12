@@ -98,10 +98,10 @@ public class Ekitaldi {
 	public Ekitaldi(int ekikode, String izena, String bidaikode, String hkode, String airelinea,
 			String jatairportkod, String helairportkod, String iraupena, String irtordu, String irtdata, double hprezio,
 			int bkode, String bairelinea, String bhasiairportkod, String bamaiairportkod, double bprezio,
-			double preziototala, String biraupena, String birtordu, String birtdata) {
+			 String biraupena, String birtordu, String birtdata) {
 		this.ekikode = ekikode;
 		this.izena = izena;
-		this.bidaikode = bidaikode;
+		this.bidaikode= bidaikode;
 		this.hkode = hkode;
 		this.airelinea = airelinea;
 		this.jatairportkod = jatairportkod;
@@ -110,12 +110,12 @@ public class Ekitaldi {
 		this.irtordu = irtordu;
 		this.irtdata = irtdata;
 		this.hprezio = hprezio;
+		
 		this.bkode = bkode;
 		this.bairelinea = bairelinea;
 		this.bhasiairportkod = bhasiairportkod;
 		this.bamaiairportkod = bamaiairportkod;
 		this.bprezio = bprezio;
-		this.preziototala = preziototala;
 		this.biraupena = biraupena;
 		this.birtordu = birtordu;
 		this.birtdata = birtdata;

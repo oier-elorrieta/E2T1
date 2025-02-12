@@ -17,6 +17,7 @@ public class Bidai {
 	private String amaidata;
 	private int iraupena;
 	private String herrihelmuga;
+	private int selectedindx;
 	private ArrayList<Ekitaldi> ekitaldiak = new ArrayList();
 	
 	
@@ -85,6 +86,18 @@ public class Bidai {
 	
 	
 	
+	public int getSelectedindx() {
+		return selectedindx;
+	}
+
+	public void setSelectedindx(int selectedindx) {
+		this.selectedindx = selectedindx;
+	}
+
+	public void setEkitaldiak(ArrayList<Ekitaldi> ekitaldiak) {
+		this.ekitaldiak = ekitaldiak;
+	}
+
 	public String getZerbez() {
 		return zerbez;
 	}

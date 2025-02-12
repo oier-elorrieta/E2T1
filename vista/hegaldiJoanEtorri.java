@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +18,8 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import modelo.Agentzia;
+import modelo.Aireportu;
+import modelo.DAO;
 import modelo.Ekitaldi;
 
 import javax.swing.JTextField;
@@ -27,16 +30,16 @@ public class hegaldiJoanEtorri {
 	JFrame frame;
 	private JTextField joanekoDatatxtf;
 	private JTextField hegaldiKodeJoantxtf;
-	private JTextField textField;
-	private JTextField prezioTotalatxtf;
+	private JComboBox textField;
+	private JTextField preziobueltatxtf;
 	private JTextField irteeraOrduatxtf;
 	private JTextField iraupenatxtf;
 	private JTextField etorriDatatxtf;
 	private JTextField hegaldiKodeEtorritxtf;
-	private JTextField airelineaBueltatxtf;
+	private JComboBox airelineaBueltatxtf;
 	private JTextField bueltaOrduatxtf;
 	private JTextField bueltaIraupenatxtf;
-	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -115,7 +118,13 @@ public class hegaldiJoanEtorri {
 		lblJatorriAireportu.setBounds(10, 73, 225, 20);
 		panel.add(lblJatorriAireportu);
 		
-		JComboBox jatorriAirportuBox = new JComboBox();
+		ArrayList<Aireportu> aireportuak = DAO.aireportuakKargatuDB();
+		String[] aireportuizenak = new String[aireportuak.size()];
+		for (int i = 0; i < aireportuak.size(); i++) {
+	    	  aireportuizenak[i] = aireportuak.get(i).getHiria();
+	       }
+		
+		JComboBox jatorriAirportuBox = new JComboBox(aireportuizenak);
 		jatorriAirportuBox.setMaximumRowCount(3);
 		jatorriAirportuBox.setBounds(305, 75, 124, 22);
 		panel.add(jatorriAirportuBox);
@@ -125,7 +134,7 @@ public class hegaldiJoanEtorri {
 		lblHelmugaAireportu.setBounds(10, 104, 225, 20);
 		panel.add(lblHelmugaAireportu);
 		
-		JComboBox helmugaAireportuBox = new JComboBox();
+		JComboBox helmugaAireportuBox = new JComboBox(aireportuizenak);
 		helmugaAireportuBox.setMaximumRowCount(3);
 		helmugaAireportuBox.setBounds(305, 106, 124, 22);
 		panel.add(helmugaAireportuBox);
@@ -159,20 +168,25 @@ public class hegaldiJoanEtorri {
 		lblAirelinea.setBounds(10, 197, 225, 20);
 		panel.add(lblAirelinea);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		
+		ArrayList<String[]> airelineak = DAO.airelineakKargatuDB();
+		String[] airelineakizenak = new String[airelineak.size()];
+		for (int i = 0; i < airelineak.size(); i++) {
+			airelineakizenak[i] = airelineak.get(i)[1];
+	       }
+		textField = new JComboBox(airelineakizenak);
 		textField.setBounds(305, 200, 146, 20);
 		panel.add(textField);
 		
-		JLabel lblPrezioTotala = new JLabel("Prezio Totala");
+		JLabel lblPrezioTotala = new JLabel("Prezio Buelta");
 		lblPrezioTotala.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblPrezioTotala.setBounds(480, 228, 146, 20);
 		panel.add(lblPrezioTotala);
 		
-		prezioTotalatxtf = new JTextField();
-		prezioTotalatxtf.setColumns(10);
-		prezioTotalatxtf.setBounds(636, 231, 146, 20);
-		panel.add(prezioTotalatxtf);
+		preziobueltatxtf = new JTextField();
+		preziobueltatxtf.setColumns(10);
+		preziobueltatxtf.setBounds(636, 231, 146, 20);
+		panel.add(preziobueltatxtf);
 		
 		JLabel lblIrteeraOrdua = new JLabel("Irteera Ordua");
 		lblIrteeraOrdua.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -219,8 +233,7 @@ public class hegaldiJoanEtorri {
 		lblAirelineaBuelta.setBounds(480, 197, 146, 20);
 		panel.add(lblAirelineaBuelta); 
 		
-		airelineaBueltatxtf = new JTextField();
-		airelineaBueltatxtf.setColumns(10);
+		airelineaBueltatxtf = new JComboBox(airelineakizenak);
 		airelineaBueltatxtf.setBounds(636, 200, 146, 20);
 		panel.add(airelineaBueltatxtf);
 		
@@ -244,27 +257,31 @@ public class hegaldiJoanEtorri {
 		bueltaIraupenatxtf.setBounds(636, 293, 146, 20);
 		panel.add(bueltaIraupenatxtf);
 		
+		JLabel lblPrezio = new JLabel("Prezioa");
+		lblPrezio.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblPrezio.setBounds(10, 228, 146, 20);
+		panel.add(lblPrezio);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(305, 230, 146, 20);
+		panel.add(textField_2);
+		
+		
 		JButton btnGorde = new JButton("GORDE");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ekitaldi eki = new Ekitaldi(0,"JoanekoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), hegaldiKodeatxtf.getText(), airelintextField.getText() , aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getHiria(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getHiria(),Double.parseDouble(iraupenatxtf.getText()), irteeraOrduatxtf.getText(), joanekoDatatxtf.getText(), Double.parseDouble(prezioHegalditxtf.getText()),resulteki.getInt(26),  resulteki.getString(30),  resulteki.getString(22), resulteki.getString(23), resulteki.getInt(21), 0, resulteki.getInt(29), resulteki.getString(28), resulteki.getString(27));
-
+				Ekitaldi eki = new Ekitaldi(0,"JoanEtorrikoHegaldia", String.valueOf(ag.getBidaiak().get(ag.getSelectedindx()).getKode()), hegaldiKodeJoantxtf.getText(), airelineak.get(textField.getSelectedIndex())[0]   , aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getAireportu_kod(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getAireportu_kod(),iraupenatxtf.getText(), irteeraOrduatxtf.getText(), joanekoDatatxtf.getText(), Double.parseDouble(textField_2.getText()),Integer.parseInt(hegaldiKodeEtorritxtf.getText()),  airelineak.get(airelineaBueltatxtf.getSelectedIndex())[0],  aireportuak.get(jatorriAirportuBox.getSelectedIndex()).getHiria(), aireportuak.get(helmugaAireportuBox.getSelectedIndex()).getHiria(), Double.parseDouble(preziobueltatxtf.getText()) , bueltaIraupenatxtf.getText(), bueltaOrduatxtf.getText(), etorriDatatxtf.getText());
+				ag.getBidaiak().get(ag.getSelectedindx()).getEkitaldiak().add(eki); //sartu agentziaren bidaiarraylistean, bidai bateko ekitaldiarray hartu eta ekitaldi bat sartu
+				DAO.joanEtorrikoaGordeDB(ag, ag.getBidaiak().get(ag.getSelectedindx()), eki);
+				frame.setVisible(false);
+				daturegistro.pantalla(ag);
 			}
 		});
 		btnGorde.setFocusPainted(false);
 		btnGorde.setBackground(UIManager.getColor("Button.background"));
 		btnGorde.setBounds(314, 366, 115, 23);
 		panel.add(btnGorde);
-		
-		JLabel lblPrezioTotala_1 = new JLabel("Prezio Totala");
-		lblPrezioTotala_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPrezioTotala_1.setBounds(480, 321, 146, 20);
-		panel.add(lblPrezioTotala_1);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(636, 324, 146, 20);
-		panel.add(textField_1);
 
 	}
 }
