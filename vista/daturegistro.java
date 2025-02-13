@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Image;
 
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -47,7 +48,8 @@ public class daturegistro {
 	private JLabel imgLabel;
 	private JPanel panel;
 	private JButton btnBidaiEzb;
-	private JButton btnEkiEzb;
+	private JButton btnEkiEzb; 
+
 	
 	private ArrayList<Bidai> bidaiak;
 
@@ -221,13 +223,15 @@ public class daturegistro {
 		btnBidaiEzb = new JButton("X");
 		btnBidaiEzb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DAO.ezabatuBidaia(ag);
 				for (int i = 0 ; i < bidaiak.size(); i++) {
 					if(bidaiak.get(i).getKode() == bidaiak.get(ag.getSelectedindx()).getKode()) {
 						bidaiak.remove(i);
 					}
 				}
-				DAO.ezabatuBidaia(ag);
-
+			
+				frame.setVisible(false);
+				pantalla(ag);
 			}
 		});
 		btnBidaiEzb.setBounds(840, 107, 56, 21);
@@ -237,6 +241,7 @@ public class daturegistro {
 		btnEkiEzb = new JButton("X");
 		btnEkiEzb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DAO.ezabatuEkitaldi(ag);
 				ArrayList<Ekitaldi> ekitaldiak = bidaiak.get(ag.getSelectedindx()).getEkitaldiak();
 				for (int i = 0 ; i < ekitaldiak.size(); i++) {
 					if(ekitaldiak.get(i).getEkikode() == ekitaldiak.get(ag.getSelectedindx()).getEkikode()) {
@@ -244,13 +249,14 @@ public class daturegistro {
 						
 					}
 				}
-				DAO.ezabatuEkitaldi(ag);
+				
 				ekitaldiakKargatu(ag, modeleki);
 			}
 		});
 		btnEkiEzb.setBounds(840, 443, 56, 21);
 		btnEkiEzb.setEnabled(false); 
 		panel.add(btnEkiEzb);
+		
 
 		logoKargatu(ag);
 	}
@@ -337,7 +343,7 @@ public class daturegistro {
         boolean sent = false;
     	try {
     	
-    	File f = new File("C:\\Users\\unaic\\OneDrive\\Escritorio\\Erronka 2 HDP\\Erronka2\\src\\Eskaintza.txt");
+    	File f = new File("C:\\Users\\in1dm3-d\\Desktop\\Erronka 2\\Prog\\Erronka2TalDe1\\src\\Eskaintza.txt");
     	FileWriter wf = new FileWriter(f);
     	Bidai selectedbidaia = ag.getBidaiak().get(ag.getSelectedindx());
     	ArrayList<Ekitaldi> ekitaldiaktxt = selectedbidaia.getEkitaldiak();

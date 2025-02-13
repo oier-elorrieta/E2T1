@@ -1,8 +1,6 @@
 package modelo;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 public class Bidai {
@@ -18,7 +16,7 @@ public class Bidai {
 	private int iraupena;
 	private String herrihelmuga;
 	private int selectedindx;
-	private ArrayList<Ekitaldi> ekitaldiak = new ArrayList();
+	private ArrayList<Ekitaldi> ekitaldiak = new ArrayList<Ekitaldi>();
 	
 	
 	public void sartuEkitaldia(Ekitaldi ekiberri) {
@@ -38,19 +36,6 @@ public class Bidai {
 		this.amaidata = amaidata;
 		this.herrihelmuga = helmugakode;
 		
-		/*
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-		long daysBetween = 0;
-
-		try {
-		    LocalDate hasidatakalk = LocalDate.parse(hasidata, dtf);
-		    LocalDate amaidatakalk = LocalDate.parse(amaidata, dtf);
-		    daysBetween = Duration.between(hasidatakalk, amaidatakalk).toDays();
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		this.iraupena = (int) daysBetween;
-		*/
 	
 	}
 	
@@ -67,19 +52,6 @@ public class Bidai {
 		this.amaidata = amaidata;
 		this.herrihelmuga = helmugakode;
 		
-		/*
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-		long daysBetween = 0;
-
-		try {
-		    LocalDate hasidatakalk = LocalDate.parse(hasidata, dtf);
-		    LocalDate amaidatakalk = LocalDate.parse(amaidata, dtf);
-		    daysBetween = Duration.between(hasidatakalk, amaidatakalk).toDays();
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		this.iraupena = (int) daysBetween;
-		*/
 	
 	}
 	
@@ -177,7 +149,11 @@ public class Bidai {
 	public int getIraupena() {
 		return iraupena;
 	}
+	
 
+	public void setIraupena(int iraupena) {
+		this.iraupena = iraupena;
+	}
 
 	@Override
 	public String toString() {

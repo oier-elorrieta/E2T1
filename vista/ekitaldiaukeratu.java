@@ -88,6 +88,8 @@ public class ekitaldiaukeratu {
 		btnJoan.setBounds(426, 288, 183, 68);
 		frame.getContentPane().add(btnJoan);
 		
+
+		
 		btnOstatua.setFont(new Font("Verdana", Font.PLAIN, 23));
 		btnOstatua.setFocusPainted(false);
 		btnOstatua.setBorderPainted(false);
@@ -140,7 +142,17 @@ public class ekitaldiaukeratu {
 		btnJar.setBounds(426, 446, 364, 68);
 		frame.getContentPane().add(btnJar);
 		
+		JButton btnNewButton = new JButton("<<< ATZERA");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				daturegistro.pantalla(ag);
+				frame.setVisible(false);
+			}
+		});
+		btnNewButton.setBounds(550, 525, 115, 23);
+		frame.getContentPane().add(btnNewButton);
 		
+
 		
 		
 		

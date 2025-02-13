@@ -31,7 +31,7 @@ public class ongietorri {
 		
 		
 
-		JButton OGbtn = new JButton("Ongi Etori!!!");
+		JButton OGbtn = new JButton("Ongi Etorri!!!");
 		OGbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						login.pantalla();	

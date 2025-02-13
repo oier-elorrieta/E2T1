@@ -1,18 +1,13 @@
 package JUnitTest;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import modelo.Ekitaldi;
 
 public class EkitaldiPojoTest {
-
-	// EKITALDI---------------------------------------------------------------------------
-
 	@Test
 	public void setTestEkikod() {
-		Ekitaldi eki = new Ekitaldi(0, "", "", 0, "", "", "", 0, "", "", 0, 0, "", "", "", 0, 0, 0, "", "");
+		Ekitaldi eki = new Ekitaldi(0, "", "", "", 0, "", "", "", "");
 		eki.setEkikode(2);
 		assertEquals(2, eki.getEkikode());
 	}
@@ -97,8 +92,8 @@ public class EkitaldiPojoTest {
 	@Test
 	public void setTestEkihkod() {
 		Ekitaldi eki = new Ekitaldi(0, "", "", "", 0, "", "", "", "");
-		eki.setHkode(1);
-		assertEquals(1, eki.getHkode());
+		eki.setHkode("1");
+		assertEquals("1", eki.getHkode());
 	}
 
 	@Test
@@ -125,8 +120,8 @@ public class EkitaldiPojoTest {
 	@Test
 	public void setTestEkiiraupena() {
 		Ekitaldi eki = new Ekitaldi(0, "", "", "", 0, "", "", "", "");
-		eki.setIraupena(1.1);
-		assertEquals(1.1, eki.getIraupena(), 2);
+		eki.setIraupena("1.1");
+		assertEquals("1.1", eki.getIraupena());
 	}
 
 	@Test
@@ -188,8 +183,8 @@ public class EkitaldiPojoTest {
 	@Test
 	public void setTestEkibiraupena() {
 		Ekitaldi eki = new Ekitaldi(0, "", "", "", 0, "", "", "", "");
-		eki.setBiraupena(1.1);
-		assertEquals(1.1, eki.getBiraupena(), 2);
+		eki.setBiraupena("1.1");
+		assertEquals("1.1", eki.getBiraupena());
 	}
 
 	@Test
@@ -204,13 +199,11 @@ public class EkitaldiPojoTest {
 		Ekitaldi eki = new Ekitaldi(0, "", "", "", 0, "", "", "", "");
 		eki.setBirtdata("a");
 		assertEquals("a", eki.getBirtdata());
-
 	}
 
 	@Test
 	public void toStringTestEkiOst() {
 		Ekitaldi eki = new Ekitaldi(0, "", "", "", 0, "", "", "", "");
-
 		assertEquals("Ekitaldi [ekikode=" + 0 + ", izena=" + "" + ", bidaikode=" + "" + ", hotizena=" + "" + ", hiria="
 				+ "" + ", osprezio=" + 0.0 + ", ossardata=" + "" + ", osirtdata=" + "" + "]", eki.toStringOstatua());
 	}
@@ -224,23 +217,20 @@ public class EkitaldiPojoTest {
 
 	@Test
 	public void toStringTestEkiJoan() {
-		Ekitaldi eki = new Ekitaldi(0, "", null, 0, "", "", "", 0, "", "", 0);
-		assertEquals("Ekitaldi [ekikode=" + 0 + ", izena=" + "" + ", bidaikode=" + null + ", hkode=" + 0
-				+ ", airelinea=" + "" + ", jatairportkod=" + "" + ", helairportkod=" + "" + ", iraupena=" + 0.0
-				+ ", irtordu=" + "" + ", irtdata=" + "" + ", hprezio=" + 0.0 + "]", eki.toStringJoan());
+		Ekitaldi eki = new Ekitaldi(0, "", "", "", "", "", "", "", "", "", 0);
+		assertEquals("Ekitaldi [ekikode=" + 0 + ", izena=" + "" + ", bidaikode=" + "" + ", hkode=" + "" + ", airelinea="
+				+ "" + ", jatairportkod=" + "" + ", helairportkod=" + "" + ", iraupena=" + "" + ", irtordu=" + ""
+				+ ", irtdata=" + "" + ", hprezio=" + 0 + "]", eki.toStringJoan());
 	}
 
 	@Test
 	public void toStringTestEkiJoanEtorri() {
-		Ekitaldi eki = new Ekitaldi(0, "", "", 0, "", "", "", 0, "", "", 0, 0, "", "", "", 0, 0, 0, "", "");
-		
-		assertEquals(
-				"Ekitaldi [ekikode=" + 0 + ", izena=" + "" + ", bidaikode=" + "" + ", hkode=" + 0 + ", airelinea=" + ""
-						+ ", jatairportkod=" + "" + ", helairportkod=" + "" + ", iraupena=" + 0.0 + ", irtordu=" + ""
-						+ ", irtdata=" + "" + ", hprezio=" + 0.0 + ", bkode=" + 0 + ", bairelinea=" + ""
-						+ ", bhasiairportkod=" + "" + ", bamaiairportkod=" + "" + ", bprezio=" + 0.0 + ", preziototala="
-						+ 0.0 + ", biraupena=" + 0.0 + ", birtordu=" + "" + ", birtdata=" + "" + "]",
-				eki.toStringJoanEtorri());
-	}
+		Ekitaldi eki = new Ekitaldi(0, "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0, "", "", "");
 
+		assertEquals("Ekitaldi [ekikode=" + 0 + ", izena=" + "" + ", bidaikode=" + "" + ", hkode=" + "" + ", airelinea="
+				+ "" + ", jatairportkod=" + "" + ", helairportkod=" + "" + ", iraupena=" + "" + ", irtordu=" + ""
+				+ ", irtdata=" + "" + ", hprezio=" + 0 + ", bkode=" + 0 + ", bairelinea=" + "" + ", bhasiairportkod="
+				+ "" + ", bamaiairportkod=" + "" + ", bprezio=" + 0 + ", biraupena=" + "" + ", birtordu=" + ""
+				+ ", birtdata=" + "" + "]", eki.toStringJoanEtorri());
+	}
 }

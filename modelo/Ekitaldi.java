@@ -312,15 +312,18 @@ public class Ekitaldi {
 				+ ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata=" + irtdata + ", hprezio=" + hprezio
 				+ "]";
 	}
-	
+
+
 	public String toStringJoanEtorri() {
 		return "Ekitaldi [ekikode=" + ekikode + ", izena=" + izena + ", bidaikode=" + bidaikode + ", hkode=" + hkode
 				+ ", airelinea=" + airelinea + ", jatairportkod=" + jatairportkod + ", helairportkod=" + helairportkod
 				+ ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata=" + irtdata + ", hprezio=" + hprezio
 				+ ", bkode=" + bkode + ", bairelinea=" + bairelinea + ", bhasiairportkod=" + bhasiairportkod
-				+ ", bamaiairportkod=" + bamaiairportkod + ", bprezio=" + bprezio + ", preziototala=" + preziototala
-				+ ", biraupena=" + biraupena + ", birtordu=" + birtordu + ", birtdata=" + birtdata + "]";
+				+ ", bamaiairportkod=" + bamaiairportkod + ", bprezio=" + bprezio + ", biraupena=" + biraupena
+				+ ", birtordu=" + birtordu + ", birtdata=" + birtdata + "]";
 	}
+	
+	
 	
 	
 	
