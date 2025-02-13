@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,10 +20,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import modelo.Agentzia;
+import modelo.DAO;
 
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JSeparator;
 import javax.swing.JProgressBar;
 import javax.swing.JSlider;
@@ -111,6 +115,10 @@ public class agentziasortu {
 		panel.add(koloretxtf);
 		
 		
+		
+		JButton btnkolorea = new JButton("");
+		
+		
 		JPanel panelkolore = new JPanel();
 		panelkolore.setBackground(Color.decode(koloretxtf.getText()));
 		panelkolore.setBounds(480, 78, 51, 21);
@@ -133,6 +141,7 @@ public class agentziasortu {
                     Color color = Color.decode(hexColor);
                     // Establecer el color de fondo del txtColorPicker
                     panelkolore.setBackground(color);
+                    btnkolorea.setBackground(color);
                 } catch (NumberFormatException ex) {
                     
                     panelkolore.setBackground(Color.WHITE);
@@ -141,14 +150,40 @@ public class agentziasortu {
         });
 		
 		
-		String[] langarraybox = new String[] { "", "1 - 5", "5 - 10", "10 - 20" }; // select kode from langilekop where izena = langarraypbox[langindex] ----- select kode from langilekop where kode = L + langindex
+		btnkolorea.setBackground(new Color(255, 255, 255));
+		
+        btnkolorea.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Abrir el selector de color
+                Color color = JColorChooser.showDialog(panelkolore, "Hautatu kolore bat", Color.WHITE);
+
+                // Si el usuario selecciona un color (no presiona Cancelar)
+                if (color != null) {
+                    // Convertir el color seleccionado a hexadecimal
+                    String hexColor = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+                    
+                    koloretxtf.setText(hexColor);
+                    btnkolorea.setBackground(Color.decode(koloretxtf.getText()));
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Ez duzu hautau kolorea", "Errorea",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        panelkolore.setLayout(null);
+        btnkolorea.setBorderPainted(false);
+        btnkolorea.setBounds(0, 0, 51, 21);
+        panelkolore.add(btnkolorea);
+        
+		String[] langarraybox = DAO.langileKopurua();
 		final JComboBox langbox = new JComboBox(langarraybox);
 		langbox.setMaximumRowCount(4);
 		langbox.setBounds(306, 138, 124, 22);
 		panel.add(langbox);
 		
 		
-		String[] motaarraybox = new String[] { "", "Bidaiak", "Zerbitzuak"};
+		String[] motaarraybox = DAO.agentziaMota();
 		final JComboBox motabox = new JComboBox(motaarraybox);
 		motabox.setMaximumRowCount(3);
 		motabox.setBounds(306, 195, 124, 22);
@@ -200,11 +235,8 @@ public class agentziasortu {
 			public void actionPerformed(ActionEvent e) {
 				 int langindex = langbox.getSelectedIndex();
 				 int motaindex  = motabox.getSelectedIndex();
-				//kodeakBilatuAgentzia(langarraypbox[langindex]);
-				//kodeakBilatuAgentzia(motaarraybox[motaindex]);
-				//egin metodoak klasean;
-				Agentzia ag = new Agentzia(0, agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(), ""   ,  ""  , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
-				//System.out.println(ag.toString());
+				Agentzia ag = new Agentzia( agizntxtf.getText(), logotxtf.getText(), koloretxtf.getText(), DAO.langKopAgentziBilatu(langindex)   ,  DAO.agentziaMotaBilatu(motaindex) , erabiltzailetxtf.getText(), pasahitzatxtf.getText());
+				DAO.agentziaberri(ag);
 				login.pantalla();
 				frame.setVisible(false);
 			}
@@ -229,7 +261,4 @@ public class agentziasortu {
 	}
 	
 	
-	public static String koloreHartu() {
-		return koloretxtf.getText();
-	}
 }

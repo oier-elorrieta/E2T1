@@ -2,23 +2,23 @@ package modelo;
 
 public class Aireportu {
 
-    private int aireportukod;
+    private String aireportukod;
     private String hiria;
     
     
     public Aireportu() {
-        this.aireportukod = 0;
+        this.aireportukod = "";
         this.hiria = "";
     }
     
-    public Aireportu(int aireportu_kod, String hiria) {
+    public Aireportu(String aireportu_kod, String hiria) {
         this.aireportukod = aireportu_kod;
         this.hiria = hiria;
     }
-    public int getAireportu_kod() {
+    public String getAireportu_kod() {
         return aireportukod;
     }
-    public void setAireportu_kod(int aireportu_kod) {
+    public void setAireportu_kod(String aireportu_kod) {
         this.aireportukod = aireportu_kod;
     }
     public String getHiria() {

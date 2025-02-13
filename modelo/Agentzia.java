@@ -13,7 +13,7 @@ public class Agentzia {
 	private String langkop;
 	private String agmota;
 	private ArrayList<Bidai> bidaiak = new ArrayList<Bidai>();
-	
+	private int selectedindx;
 	
 	public Agentzia() {
 		this.agkode = 0;
@@ -26,8 +26,7 @@ public class Agentzia {
 		this.pasahitz="";
 	}
 	
-	public Agentzia(int kodea, String izena, String logo, String markakolore, String langkop, String agmota, String erabiltzaile, String pasahitz) {
-		this.agkode = kodea;
+	public Agentzia( String izena, String logo, String markakolore, String langkop, String agmota, String erabiltzaile, String pasahitz) {
 		this.izena = izena;
 		this.logo = logo;
 		this.markakolore = markakolore;
@@ -37,19 +36,15 @@ public class Agentzia {
 		this.pasahitz=pasahitz;
 	}
 	
-	public boolean login(String erabiltzaile, String pasahitz) {
-		boolean error;
-		if (erabiltzaile == this.erabiltzaile && pasahitz == this.pasahitz) {
-			error = false;
-		}else {
-			error = true;
-		}
-		return error;
+	
+	public int getSelectedindx() {
+		return selectedindx;
 	}
-	
-	
-	
-	
+
+	public void setSelectedindx(int selectedindx) {
+		this.selectedindx = selectedindx;
+	}
+
 	public String getErabiltzaile() {
 		return erabiltzaile;
 	}
@@ -66,12 +61,17 @@ public class Agentzia {
 		this.pasahitz = pasahitz;
 	}
 
+		
+	public void setBidaiak(ArrayList<Bidai> bidaiak) {
+		this.bidaiak = bidaiak;
+	}
+
 	public ArrayList<Bidai> getBidaiak() {
 		return bidaiak;
 	}
 
-	public void sartuBidaia(Bidai bidaiberria) {
-		bidaiak.add(bidaiberria);
+	public void sartuBidaia(Bidai bidaia) {
+		bidaiak.add(bidaia);
 	}
 
 	public int getKodea() {

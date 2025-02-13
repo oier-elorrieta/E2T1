@@ -4,10 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
-import controlador.metodoak;
+import modelo.Agentzia;
+import modelo.DAO;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -73,10 +76,6 @@ public class login {
 		frame.getContentPane().setLayout(null);
 		
 		
-		
-		
-		
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(325, 200, 600, 250);
 		frame.getContentPane().add(panel);
@@ -98,21 +97,32 @@ public class login {
 		panel.add(erabiltzailetxtf);
 		erabiltzailetxtf.setColumns(10);
 		
-		pasahitzatxtf = new JTextField();
+		pasahitzatxtf = new JPasswordField();
 		pasahitzatxtf.setColumns(10);
 		pasahitzatxtf.setBounds(345, 117, 151, 20);
 		panel.add(pasahitzatxtf);
+		
+		JLabel lblErrorLogin = new JLabel("Ez dira aurkitu sartu dituzun datuak, mesedez saiatu berriro.");
+		lblErrorLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblErrorLogin.setVisible(false);
+		lblErrorLogin.setForeground(new Color(255, 0, 0));
+		lblErrorLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErrorLogin.setBounds(325, 461, 600, 14);
+		frame.getContentPane().add(lblErrorLogin);
+		
 		
 		btnsaiohasi = new JButton("Saioa Hasi");
 		btnsaiohasi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String erabiltzaile = erabiltzailetxtf.getText();
 				String pasahitza = pasahitzatxtf.getText();
-				boolean error = metodoak.saioaKonprobatu(erabiltzaile, pasahitza);
+				boolean error = DAO.saioaKonprobatu(erabiltzaile, pasahitza);
 				if(error == false) {
-					daturegistro.pantalla();
+					Agentzia ag = DAO.agentziaKargatuBD(erabiltzaile, pasahitza);
+					daturegistro.pantalla(ag);
+					frame.setVisible(false);
 				}else {
-					
+					lblErrorLogin.setVisible(true);
 				}
 			}
 		});
@@ -140,6 +150,7 @@ public class login {
 		lblLogIn.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblLogIn.setBounds(325, 136, 600, 53);
 		frame.getContentPane().add(lblLogIn);
+		
 		
 	
 	}

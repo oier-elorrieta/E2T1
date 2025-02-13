@@ -24,11 +24,11 @@ public class Ekitaldi {
 	
 	
 //--------JOANEKO--HEGALDIA----
-	private int hkode;
+	private String hkode;
 	private String airelinea;
 	private String jatairportkod;
 	private String helairportkod;
-	private double iraupena;
+	private String iraupena;
 	private String irtordu;
 	private String irtdata;
 	private double hprezio;
@@ -43,7 +43,7 @@ public class Ekitaldi {
 	private String bamaiairportkod;
 	private double bprezio;
 	private double preziototala = hprezio + bprezio;
-	private double biraupena;
+	private String biraupena;
 	private String birtordu;
 	private String birtdata;
 	
@@ -78,10 +78,11 @@ public class Ekitaldi {
 	
 
 
-	public Ekitaldi(int ekikode, String izena, int hkode, String airelinea, String jatairportkod,
-			String helairportkod, double iraupena, String irtordu, String irtdata, double hprezio) {
+	public Ekitaldi(int ekikode, String izena, String bidaikode, String hkode, String airelinea, String jatairportkod,
+			String helairportkod, String iraupena, String irtordu, String irtdata, double hprezio) {
 		this.ekikode = ekikode;
 		this.izena = izena;
+		this.bidaikode= bidaikode;
 		this.hkode = hkode;
 		this.airelinea = airelinea;
 		this.jatairportkod = jatairportkod;
@@ -94,13 +95,13 @@ public class Ekitaldi {
 	
 
 
-	public Ekitaldi(int ekikode, String izena, String bidaikode, int hkode, String airelinea,
-			String jatairportkod, String helairportkod, double iraupena, String irtordu, String irtdata, double hprezio,
+	public Ekitaldi(int ekikode, String izena, String bidaikode, String hkode, String airelinea,
+			String jatairportkod, String helairportkod, String iraupena, String irtordu, String irtdata, double hprezio,
 			int bkode, String bairelinea, String bhasiairportkod, String bamaiairportkod, double bprezio,
-			double preziototala, double biraupena, String birtordu, String birtdata) {
+			 String biraupena, String birtordu, String birtdata) {
 		this.ekikode = ekikode;
 		this.izena = izena;
-		this.bidaikode = bidaikode;
+		this.bidaikode= bidaikode;
 		this.hkode = hkode;
 		this.airelinea = airelinea;
 		this.jatairportkod = jatairportkod;
@@ -109,12 +110,12 @@ public class Ekitaldi {
 		this.irtordu = irtordu;
 		this.irtdata = irtdata;
 		this.hprezio = hprezio;
+		
 		this.bkode = bkode;
 		this.bairelinea = bairelinea;
 		this.bhasiairportkod = bhasiairportkod;
 		this.bamaiairportkod = bamaiairportkod;
 		this.bprezio = bprezio;
-		this.preziototala = preziototala;
 		this.biraupena = biraupena;
 		this.birtordu = birtordu;
 		this.birtdata = birtdata;
@@ -193,10 +194,10 @@ public class Ekitaldi {
 	public void setJarprezio(double jarprezio) {
 		this.jarprezio = jarprezio;
 	}
-	public int getHkode() {
+	public String getHkode() {
 		return hkode;
 	}
-	public void setHkode(int hkode) {
+	public void setHkode(String hkode) {
 		this.hkode = hkode;
 	}
 	public String getAirelinea() {
@@ -217,10 +218,10 @@ public class Ekitaldi {
 	public void setHelairportkod(String helairportkod) {
 		this.helairportkod = helairportkod;
 	}
-	public double getIraupena() {
+	public String getIraupena() {
 		return iraupena;
 	}
-	public void setIraupena(double iraupena) {
+	public void setIraupena(String iraupena) {
 		this.iraupena = iraupena;
 	}
 	public String getIrtordu() {
@@ -274,13 +275,10 @@ public class Ekitaldi {
 	public double getPreziototala() {
 		return preziototala;
 	}
-	public void setPreziototala(double preziototala) {
-		this.preziototala = preziototala;
-	}
-	public double getBiraupena() {
+	public String getBiraupena() {
 		return biraupena;
 	}
-	public void setBiraupena(double biraupena) {
+	public void setBiraupena(String biraupena) {
 		this.biraupena = biraupena;
 	}
 	public String getBirtordu() {
@@ -314,15 +312,18 @@ public class Ekitaldi {
 				+ ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata=" + irtdata + ", hprezio=" + hprezio
 				+ "]";
 	}
-	
+
+
 	public String toStringJoanEtorri() {
 		return "Ekitaldi [ekikode=" + ekikode + ", izena=" + izena + ", bidaikode=" + bidaikode + ", hkode=" + hkode
 				+ ", airelinea=" + airelinea + ", jatairportkod=" + jatairportkod + ", helairportkod=" + helairportkod
 				+ ", iraupena=" + iraupena + ", irtordu=" + irtordu + ", irtdata=" + irtdata + ", hprezio=" + hprezio
 				+ ", bkode=" + bkode + ", bairelinea=" + bairelinea + ", bhasiairportkod=" + bhasiairportkod
-				+ ", bamaiairportkod=" + bamaiairportkod + ", bprezio=" + bprezio + ", preziototala=" + preziototala
-				+ ", biraupena=" + biraupena + ", birtordu=" + birtordu + ", birtdata=" + birtdata + "]";
+				+ ", bamaiairportkod=" + bamaiairportkod + ", bprezio=" + bprezio + ", biraupena=" + biraupena
+				+ ", birtordu=" + birtordu + ", birtdata=" + birtdata + "]";
 	}
+	
+	
 	
 	
 	

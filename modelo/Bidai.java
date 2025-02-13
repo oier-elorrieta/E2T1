@@ -1,15 +1,13 @@
 package modelo;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 public class Bidai {
 
 	private int kode;
 	private String izena;
-	private String agkode;
+	private int agkode;
 	private String desk;
 	private String zerbez;
 	private String bidmota;
@@ -17,43 +15,61 @@ public class Bidai {
 	private String amaidata;
 	private int iraupena;
 	private String herrihelmuga;
-	private ArrayList<Ekitaldi> ekitaldiak;
+	private int selectedindx;
+	private ArrayList<Ekitaldi> ekitaldiak = new ArrayList<Ekitaldi>();
 	
 	
 	public void sartuEkitaldia(Ekitaldi ekiberri) {
 		ekitaldiak.add(ekiberri);
 	}
 	
-	
-	
-	public Bidai(int kode, String izena, String agkode, String desk, String bidmota, String hasidata, String amaidata,
-			int iraupena, String helmugakode) {
+	public Bidai(int kode, String izena, int agkode, String desk, String zerbez, String bidmota, String hasidata, String amaidata,
+			String helmugakode) {
 		
 		this.kode = kode;
 		this.izena = izena;
 		this.agkode = agkode;
 		this.desk = desk;
+		this.zerbez = zerbez;
 		this.bidmota = bidmota;
 		this.hasidata = hasidata;
 		this.amaidata = amaidata;
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-		long daysBetween = 0;
-
-		try {
-		    LocalDate hasidatakalk = LocalDate.parse(hasidata, dtf);
-		    LocalDate amaidatakalk = LocalDate.parse(amaidata, dtf);
-		    daysBetween = Duration.between(hasidatakalk, amaidatakalk).toDays();
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		this.iraupena = (int) daysBetween;
-		
 		this.herrihelmuga = helmugakode;
+		
+	
+	}
+	
+	public Bidai(String izena, int agkode, String desk, String zerbez, String bidmota, String hasidata, String amaidata,
+			String helmugakode) {
+		
+		this.kode = 0;
+		this.izena = izena;
+		this.agkode = agkode;
+		this.desk = desk;
+		this.zerbez = zerbez;
+		this.bidmota = bidmota;
+		this.hasidata = hasidata;
+		this.amaidata = amaidata;
+		this.herrihelmuga = helmugakode;
+		
+	
 	}
 	
 	
 	
 	
+	public int getSelectedindx() {
+		return selectedindx;
+	}
+
+	public void setSelectedindx(int selectedindx) {
+		this.selectedindx = selectedindx;
+	}
+
+	public void setEkitaldiak(ArrayList<Ekitaldi> ekitaldiak) {
+		this.ekitaldiak = ekitaldiak;
+	}
+
 	public String getZerbez() {
 		return zerbez;
 	}
@@ -111,10 +127,10 @@ public class Bidai {
 	public void setIzena(String izena) {
 		this.izena = izena;
 	}
-	public String getAgkode() {
+	public int getAgkode() {
 		return agkode;
 	}
-	public void setAgkode(String agkode) {
+	public void setAgkode(int agkode) {
 		this.agkode = agkode;
 	}
 	public String getDesk() {
@@ -129,31 +145,16 @@ public class Bidai {
 	public void setBidmota(String bidmota) {
 		this.bidmota = bidmota;
 	}
-	public String getHdata() {
-		return hasidata;
-	}
-	public void setHdata(String hdata) {
-		this.hasidata = hdata;
-	}
-	public String getAdata() {
-		return amaidata;
-	}
-	public void setAdata(String adata) {
-		this.amaidata = adata;
-	}
+	
 	public int getIraupena() {
 		return iraupena;
 	}
+	
+
 	public void setIraupena(int iraupena) {
 		this.iraupena = iraupena;
 	}
-	public String getHelmugakode() {
-		return herrihelmuga;
-	}
-	public void setHelmugakode(String helmugakode) {
-		this.herrihelmuga = helmugakode;
-	}
-	
+
 	@Override
 	public String toString() {
 		return "Bidaia [kode=" + kode + ", izena=" + izena + ", agkode=" + agkode + ", desk=" + desk + ", bidmota="
